@@ -2,7 +2,6 @@ import { setGetContractType } from "@/store/slices/GlobalSlice";
 import { AppDispatch, RootState } from "@/store/store";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
 
 const AllContractsSwitcher = () => {
   const { getContractType } = useSelector((state: RootState) => state.GlobalReducer);

@@ -6,6 +6,10 @@ import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import ContractCurrentFiles from "./EstateCurrentFiles";
 import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { AddContractFileApi } from "@/api/file/AddContractFileApi";
+import { Button } from "@/componentsShadcn/ui/button";
+import LoadingSpinner from "@/common/LoadingSpinner";
 
 export const  CreateEstateFiles= ()=> {
 

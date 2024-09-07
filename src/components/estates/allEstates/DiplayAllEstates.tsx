@@ -11,7 +11,7 @@ const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:str
   const { refreshONDeleteContracts} = useSelector(
     (state: RootState) => state.GlobalReducer
   );
-
+  // @ts-ignore
   const [loading, setLoading] = useState<boolean>(false);
   const [totalRows, setTotalRows] = useState<number>(10);
   const [page, setPage] = useState<number>(1);
@@ -31,6 +31,7 @@ const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:str
   const columns = [
     {
       name: "رقم العقار",
+      // @ts-ignore
       selector: (row: AllEstatesTypes, index: number) => index + 1,
     },
     {

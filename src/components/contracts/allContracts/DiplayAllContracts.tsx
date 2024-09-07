@@ -11,7 +11,7 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
   const { getContractType ,refreshONDeleteContracts} = useSelector(
     (state: RootState) => state.GlobalReducer
   );
-
+  // @ts-ignore
   const [loading, setLoading] = useState<boolean>(false);
   const [totalRows, setTotalRows] = useState<number>(10);
   const [page, setPage] = useState<number>(1);
@@ -31,17 +31,18 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
   const columns = [
     {
       name: "رقم العقد",
+      // @ts-ignore
       selector: (row: AllContractTypes, index: number) => index + 1,
     },{
       name: " الاسم",
-      selector: (row: AllContractTypes, index: number) => row?.Name,
+      selector: (row: AllContractTypes) => row?.Name,
     },
     {
       name: "رقم الجوال",
-      selector: (row: AllContractTypes, index: number) => row?.Phone,
+      selector: (row: AllContractTypes) => row?.Phone,
     },{
       name: "الهويه",
-      selector: (row: AllContractTypes, index: number) => row?.Identity,
+      selector: (row: AllContractTypes) => row?.Identity,
     },
     {
       name: " صفه",

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import AllContractsSwitcher from "./AllContractsSwitcher";
 import DiplayAllContracts from "./DiplayAllContracts";
 import FilterContracts from "./FilterContracts";

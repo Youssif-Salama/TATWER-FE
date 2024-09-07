@@ -87,6 +87,7 @@ const UpdateContractSystemDialog = ({
                 label="قيمه الايجار"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                // @ts-ignore
                 value={formik.values.RentValue}
                 error={null}
               />
@@ -99,6 +100,7 @@ const UpdateContractSystemDialog = ({
                 label="  القيمه الثابته"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                // @ts-ignore
                 value={formik.values.FixedPrice}
                 error={null}
               />

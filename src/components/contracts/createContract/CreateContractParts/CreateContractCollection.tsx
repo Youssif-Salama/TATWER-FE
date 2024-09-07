@@ -50,7 +50,7 @@ const CreateContractCollection = () => {
       Times: 1,
     },
     validationSchema: CreateContractValidationSchema,
-    onSubmit: async (values, { resetForm }: any) => {
+    onSubmit: async (values) => {
       setLoading(true);
       if (contractId) {
         const result: any = await UpdateContractApi(values,contractId);

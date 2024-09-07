@@ -51,6 +51,7 @@ const AddContractSystemByOne = () => {
                 label="قيمه الايجار"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                // @ts-ignore
                 value={formik.values.RentValue}
                 error={null}
               />
@@ -66,6 +67,7 @@ const AddContractSystemByOne = () => {
                 label="  القيمه الثابته"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                // @ts-ignore
                 value={formik.values.FixedPrice}
                 error={null}
               />
@@ -149,6 +151,7 @@ const AddContractSystemByOne = () => {
               placeholder="ادخل تاريخ البدء هنا"
               formik={formik}
               onBlur={formik.handleBlur}
+              // @ts-ignore
               value={formik.values.CurrentReleaseDate}
               error={null}
             />)

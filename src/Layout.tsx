@@ -8,7 +8,7 @@ const Layout = () => {
     const [loading, setLoading] = useState<boolean>(true);
 
 
-    const [hideSidebar, setHideSidebar] = useState<boolean>(false);
+    const [hideSidebar] = useState<boolean>(false);
 
 
 

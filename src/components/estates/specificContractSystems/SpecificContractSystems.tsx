@@ -46,6 +46,7 @@ const SpecificContractSystems = () => {
   const columns = [
     {
       name: "الرقم",
+      // @ts-ignore
       selector: (row: SpecificContractSystemTypes, index: number) => index + 1,
     },
     {
