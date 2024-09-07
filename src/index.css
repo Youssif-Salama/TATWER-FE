@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.rdt_TableCol,
+.fXCAyl {
+   background-color: #0077bc !important;
+   color: #fff !important;
+ }
