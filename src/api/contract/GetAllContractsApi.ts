@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export const GetAllContractsApi = async (setLoading:any,contractsType:any,page:any,showWay:any,searchKeyWord:any,searchValue:any,startDate:any,endDate:any) => {
   let queries=`?page=${page}`;
@@ -11,7 +12,12 @@ export const GetAllContractsApi = async (setLoading:any,contractsType:any,page:a
   try {
     setLoading(true);
     const response = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}contract/${contractsType}${queries}`
+      `${import.meta.env.VITE_BASE_URL}contract/${contractsType}/${contractsType}${queries}`,
+      {
+        headers: {
+          token:Cookies.get("token")
+        }
+      }
     );
     response&&setLoading(false);
     return response;
@@ -19,3 +25,30 @@ export const GetAllContractsApi = async (setLoading:any,contractsType:any,page:a
     setLoading(false)
   }
 };
+
+
+
+export const GetAllContractsApiForUnite = async (page:any,contractsType:any,setLoading:any,searchKeyWord:any,searchValue:any,type:string) => {
+  let queries=`?page=${page}`;
+  searchKeyWord ? (queries+=`&keyWord=${searchKeyWord}`):(queries+=`&keyWord=Name`);
+  searchValue && (queries+=`&value=${searchValue}`);
+
+
+  try {
+    setLoading(true);
+    const response = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}contract/${contractsType}/${type}${queries}`,
+      {
+        headers: {
+          token:Cookies.get("token")
+        }
+      }
+    );
+    response&&setLoading(false);
+    return response;
+  } catch (error: any) {
+    setLoading(false)
+  }
+};
+
+

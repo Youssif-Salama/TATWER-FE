@@ -8,7 +8,12 @@ export const AddContractFileApi = async (setLoading:any,data: any) => {
     setLoading(true);
     const response = await axios.post(
       `${import.meta.env.VITE_BASE_URL}file`,
-      data
+      data,
+      {
+        headers: {
+          token: Cookies.get("token"),
+        },
+      }
     );
     response &&  setLoading(false);
     response && successToaster(response?.data?.message);

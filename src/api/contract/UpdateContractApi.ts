@@ -1,12 +1,18 @@
 import { CreateContractCollectionTypes } from "@/types/CreateContractCollection.types";
 import { errorToaster } from "@/utils/ReactToatify";
 import axios from "axios";
+import Cookies from "js-cookie";
 
-export const UpdateContractApi = async (data: CreateContractCollectionTypes,id:any) => {
+export const UpdateContractApi = async (data: CreateContractCollectionTypes,id:any,type:string) => {
   try {
     const response = await axios.put(
-      `${import.meta.env.VITE_BASE_URL}contract/${id}`,
-      data
+      `${import.meta.env.VITE_BASE_URL}contract/${id}/${type}`,
+      data,
+      {
+        headers: {
+          token: Cookies.get("token"),
+        },
+      }
     );
     return response;
   } catch (error: any) {

@@ -77,9 +77,9 @@ const CreateEstateAddress = () => {
         <>
             <div className={`flex items-center justify-center min-h-screen ${estateId ? "hidden" : ""} border-2 border-gray-300`}>
                 <div className="font-bold">
-                    <p className="text-[#0077bc]">لا يمكنك اضافه عنوان قبل اضافه العقد</p>
-                    <Link to="/contracts/create" className='my-6 w-full bg-[#0077bc] rounded-none hover:bg-[#0078bdc7] transition ease-in-out duration-300 transform flex items-center justify-center p-2 text-white'>
-                        الرجوع لاضافه عقد
+                    <p className="text-[#0077bc]">لا يمكنك اضافه عنوان قبل اضافه العقار</p>
+                    <Link to="/estates/create" className='my-6 w-full bg-[#0077bc] rounded-none hover:bg-[#0078bdc7] transition ease-in-out duration-300 transform flex items-center justify-center p-2 text-white'>
+                        الرجوع لاضافه عقار
                     </Link>
                 </div>
             </div>

@@ -12,20 +12,30 @@ import { IoClose } from "react-icons/io5";
 import { useState } from "react";
 import LoadingSpinner from "@/common/LoadingSpinner";
 import { AddSystemMessageApi } from "@/api/systems/AddSystemMessageApi";
-import { AppDispatch } from "@/store/store";
 import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store/store";
+import { ApplyContractSystemApi } from "@/api/systems/ApplyContractSystemApi";
 import { setRefreshOnApplyOrSetSystemMessage } from "@/store/slices/GlobalSlice";
 
 
-const AddSystemMessageDialog = ({system}:any) => {
+const AddSystemMessageDialog = ({system,setDropdownOpen}:any) => {
 
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
+
   const dispatch:AppDispatch=useDispatch();
+  const applyContractSystem = async () => {
+    const data = { Applied: true };
+    const result: any = await ApplyContractSystemApi(data, setLoading, system?._id);
+    if (result) {
+      dispatch(setRefreshOnApplyOrSetSystemMessage(Math.random()));
+    }
+  };
   const AddSystemMessage=async()=>{
     const data={message}
     const result=await AddSystemMessageApi(data,setLoading,system?._id);
-    result && dispatch(setRefreshOnApplyOrSetSystemMessage(Math.random()));
+    result && applyContractSystem();
+    result && setDropdownOpen(false);
   }
   return (
     <Dialog>
@@ -33,7 +43,7 @@ const AddSystemMessageDialog = ({system}:any) => {
         <button
           className="p-0 m-0 border-0 outline-none"
         >
-          ترك رساله
+          تأكيد
         </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]" dir="rtl">
@@ -57,7 +67,7 @@ const AddSystemMessageDialog = ({system}:any) => {
           onClick={AddSystemMessage}
           className="text-white bg-[#0077bc] rounded-lg hover:bg-[#0078bdc7] w-full"
         >
-          {loading ? <LoadingSpinner color="text-white" /> : "اضافه"}
+          {loading ? <LoadingSpinner color="text-white" /> : "تأكيد مع اضافة الرسالة"}
         </Button>
       </DialogContent>
     </Dialog>

@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom"
 const Settings = () => {
   return (
     <div>
-      <Helmet title="شركه النور | صفحه الاعدادات" />
+      <Helmet title="شركه تطوير البوادي | صفحه الاعدادات" />
       <Outlet/>
     </div>
   )

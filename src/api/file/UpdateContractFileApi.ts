@@ -1,5 +1,6 @@
 import { errorToaster, successToaster } from "@/utils/ReactToatify";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export const UpdateContractFileApi = async (setLoading:any,data: any,fileId:any) => {
 
@@ -7,7 +8,12 @@ export const UpdateContractFileApi = async (setLoading:any,data: any,fileId:any)
     setLoading(true);
     const response = await axios.put(
       `${import.meta.env.VITE_BASE_URL}file/${fileId}`,
-      data
+      data,
+      {
+        headers: {
+          token: Cookies.get("token"),
+        },
+      }
     );
     response &&  setLoading(false);
     response && successToaster(response?.data?.message);

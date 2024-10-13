@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 const Create2 = () => {
     return (
         <div>
-            <Helmet title="شركه النور | صفحه العقود| تسجيل عقد" />
+            <Helmet title="شركه تطوير البوادي | صفحه العقود| تسجيل عقد" />
             <div className="flex flex-col gap-4">
                 <div className="w-full">
                     <EstateNavbar />

@@ -12,7 +12,7 @@ const SystemsPagination = ({totalRows,setPage,page}:{totalRows:number,setPage:an
           if(page<totalPages)setPage(page+1)
         }
       }
-      className={`bg-[#0077bc] text-white rounded-full hover:scale-110 transition transform ease duration-150 text-[19px]`}
+      className={`bg-[#0077bc] text-white rounded-full hover:scale-110 transition transform ease duration-150 text-[15px]`}
       ><MdKeyboardArrowRight/></button>
       <div className="font-bold text-sm text-[#0077bc]">{page}/{totalPages}</div>
       <button
@@ -21,7 +21,7 @@ const SystemsPagination = ({totalRows,setPage,page}:{totalRows:number,setPage:an
           if(page>1)setPage(page-1)
         }
       }
-      className={`bg-[#0077bc] text-white rounded-full hover:scale-110 transition transform ease duration-150 text-[19px]`}
+      className={`bg-[#0077bc] text-white rounded-full hover:scale-110 transition transform ease duration-150 text-[15px]`}
       ><MdKeyboardArrowLeft/></button>
     </div>
   )

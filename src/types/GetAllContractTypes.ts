@@ -34,4 +34,5 @@ export interface AllContractTypes {
   ContractReleaseDateH: string
   ContractEndDateH: string
   id: string
+  IsRuning: boolean
 }

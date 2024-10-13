@@ -1,6 +1,6 @@
-import { DeleteContractFileApi } from "@/api/file/DeleteContractFileApi";
-import { GetContractFileApi } from "@/api/file/GetContractFileApi";
-import { UpdateContractFileApi } from "@/api/file/UpdateContractFileApi";
+import { DeleteEstateFileApi } from "@/api/estateFile/DeleteEstateFileApi";
+import { GetEstateFileApi } from "@/api/estateFile/GetEstateFileApi";
+import { UpdateEstateFileApi } from "@/api/estateFile/UpdateEstateFileApi";
 import LoadingSpinner from "@/common/LoadingSpinner";
 import { Button } from "@/componentsShadcn/ui/button";
 import { Input } from "@/componentsShadcn/ui/input";
@@ -38,12 +38,12 @@ const EstateCurrentFiles = ({
   const [FixedFiles, setFixedFiles] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingOnDelete, setLoadingOnDelete] = useState<boolean>(false);
-  const fileId = Cookies.get("fileId");
+  const estateFileId = Cookies.get("estateFileId");
 
   const [currentNames, setCurrentNames] = useState<string[]>([]);
 
-  const getContractCurrentFiles = async (id: any) => {
-    const result = await GetContractFileApi(id);
+  const GetEstateFileApiNow = async (id: any) => {
+    const result = await GetEstateFileApi(id);
     setFiles(result?.data?.data[0].Files);
     result?.data?.data[0]?.Files.forEach((file: any) => {
       setCurrentNames([...currentNames, file.name]);
@@ -52,7 +52,7 @@ const EstateCurrentFiles = ({
 
   useEffect(() => {
     if (estateId) {
-      getContractCurrentFiles(estateId);
+      GetEstateFileApiNow(estateId);
     }
   }, [estateId, refreshEstateFiles]);
 
@@ -63,7 +63,7 @@ const EstateCurrentFiles = ({
   }, [files, names, refreshEstateFiles, allFiles]);
 
   const updateContractFiles = async (data: any, id: any) => {
-    const result = await UpdateContractFileApi(setLoading, data, id);
+    const result = await UpdateEstateFileApi(setLoading, data, id);
     if (result) {
       catchAllFiles([]);
       catchAllNames([]);
@@ -109,9 +109,9 @@ const EstateCurrentFiles = ({
                   <button
                     className="p-1 px-2 text-white bg-[#0077bc]"
                     onClick={() => {
-                      // window.open(`http://localhost:10000${file.path}`, "_blank");
+                      // window.open(`http://localhost:3000${file.path}`, "_blank");
                       setSelectedFileToShow(
-                        `http://localhost:10000${file.path}`
+                        `${import.meta.env.VITE_BE_Domain}${file.path}`
                       );
                     }}
                   >
@@ -121,7 +121,7 @@ const EstateCurrentFiles = ({
                     className="p-1 px-2 text-white bg-red-500"
                     onClick={() => {
                       if (
-                        `http://localhost:10000${file.path}` ===
+                        `${import.meta.env.VITE_BE_Domain}${file.path}` ===
                         selectedFileToShow
                       ) {
                         setSelectedFileToShow(null);
@@ -160,7 +160,7 @@ const EstateCurrentFiles = ({
                   <button
                     className="p-1 px-2 text-white bg-[#0077bc]"
                     onClick={() => {
-                      // window.open(`http://localhost:10000${file.path}`, "_blank");
+                      // window.open(`http://localhost:3000${file.path}`, "_blank");
                       setSelectedFileToShow(file);
                     }}
                   >
@@ -202,11 +202,11 @@ const EstateCurrentFiles = ({
             catchAllFiles([]);
             catchAllNames([]);
             setSelectedFileToShow(null);
-            const result = await DeleteContractFileApi(
+            const result = await DeleteEstateFileApi(
               setLoadingOnDelete,
               estateId
             );
-            result && Cookies.remove("fileId");
+            result && Cookies.remove("estateFileId");
             result && dispatch(setRefreshEstateFiles(Math.random()));
           }}
         >
@@ -226,7 +226,7 @@ const EstateCurrentFiles = ({
             newFiles.forEach((file: any) => {
               formData.append("File", file);
             });
-            updateContractFiles(formData, fileId);
+            updateContractFiles(formData, estateFileId);
           }}
         >
           {loading ? <LoadingSpinner color="text-white" /> : "تأكيد التعديلات"}

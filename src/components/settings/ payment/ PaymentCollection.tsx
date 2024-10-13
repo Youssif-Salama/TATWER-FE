@@ -1,12 +1,10 @@
 import { Helmet } from "react-helmet"
-import PaymentForm from "./ PaymentForm"
 import PaymentTable from "./PaymentTable"
 
 const PaymentCollection = () => {
   return (
     <div>
-      <Helmet title="شركه النور | صفحه الاعدادات | طرق الدفع" />
-      <PaymentForm/>
+      <Helmet title="شركه تطوير البوادي | صفحه الاعدادات | طرق الدفع" />
       <PaymentTable/>
     </div>
   )

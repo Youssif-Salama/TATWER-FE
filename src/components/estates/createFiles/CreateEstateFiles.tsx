@@ -7,22 +7,22 @@ import { Link } from "react-router-dom";
 import ContractCurrentFiles from "./EstateCurrentFiles";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { AddContractFileApi } from "@/api/file/AddContractFileApi";
 import { Button } from "@/componentsShadcn/ui/button";
 import LoadingSpinner from "@/common/LoadingSpinner";
+import { AddEstateFileApi } from "@/api/estateFile/AddEstateFileApi";
 
 export const  CreateEstateFiles= ()=> {
 
-  const {refreshContractFiles}=useSelector((state:RootState)=>state.GlobalReducer);
+  const {refreshEstateFiles}=useSelector((state:RootState)=>state.GlobalReducer);
 
   const [allFiles, setAllFiles] = useState<object[]>([]);
   const [names, setNames] = useState<string[]>([]);
   const [selectedFileToShow, setSelectedFileToShow] = useState<any>(null);
 
   const estateId = Cookies.get("estateId");
-  const fileId = Cookies.get("fileId");
+  const estateFileId = Cookies.get("estateFileId");
   const [loading, setLoading] = useState<boolean>(false);
-  const addContractFile = async () => {
+  const addEstateFile = async () => {
     let formData: any = new FormData();
     formData.append("estateId", estateId);
     formData.append("Names", JSON.stringify(names));
@@ -30,7 +30,7 @@ export const  CreateEstateFiles= ()=> {
       formData.append("File", file);
     });
 
-    const result = await AddContractFileApi(setLoading, formData);
+    const result = await AddEstateFileApi(setLoading, formData);
     result && setAllFiles([]);
     result && setNames([]);
   };
@@ -38,7 +38,7 @@ export const  CreateEstateFiles= ()=> {
 
 
   useEffect(() => {
-  }, [refreshContractFiles]);
+  }, [refreshEstateFiles]);
 
   return (
     <>
@@ -51,13 +51,13 @@ export const  CreateEstateFiles= ()=> {
           >
             <div className="font-bold">
               <p className="text-[#0077bc]">
-                لا يمكنك اضافه ملفات قبل اضافه العقد
+                لا يمكنك اضافه ملفات قبل اضافه العقار
               </p>
               <Link
                 to="/contracts/create"
                 className="my-6 w-full bg-[#0077bc] rounded-none hover:bg-[#0078bdc7] transition ease-in-out duration-300 transform flex items-center justify-center p-2 text-white"
               >
-                الرجوع لاضافه عقد
+                الرجوع لاضافه عقار
               </Link>
             </div>
           </div>
@@ -70,7 +70,7 @@ export const  CreateEstateFiles= ()=> {
             />
             <div className="flex items-start gap-4 mt-6 max-md:flex-col w-full">
               <div className="flex justify-center p-4 border-2 border-[#0077bc] w-[50%] max-md:w-full shadow-md">
-                {estateId && fileId ? (
+                {estateId && estateFileId ? (
                   <ContractCurrentFiles
                     allFiles={allFiles}
                     names={names}
@@ -93,7 +93,7 @@ export const  CreateEstateFiles= ()=> {
                 )}
               </div>
               <div className="flex justify-center p-4 border-2 border-[#0077bc] w-[50%] max-md:w-full shadow-md">
-                {(allFiles.length == 0 && !fileId) ? (
+                {(allFiles.length == 0 && !estateFileId) ? (
                   <p className="opacity-75 text-sm">لا يوجد ملفات لعرضها</p>
                 ) : (
                   <ShowFile file={selectedFileToShow} />
@@ -101,19 +101,19 @@ export const  CreateEstateFiles= ()=> {
               </div>
             </div>
           </div>
-          {!fileId && (
+          {!estateFileId && (
             <Button
               disabled={!(allFiles.length > 0)}
               type="button"
               onClick={() => {
-                addContractFile();
+                addEstateFile();
               }}
               className="my-6 w-full bg-[#0077bc] rounded-none hover:bg-[#0078bdc7] transition ease-in-out duration-300 transform flex items-center justify-center"
             >
               {loading ? (
                 <LoadingSpinner color="text-[#fff]" />
               ) : (
-                "تسجيل ملغات العقد"
+                "تسجيل ملغات العقار"
               )}
             </Button>
           )}

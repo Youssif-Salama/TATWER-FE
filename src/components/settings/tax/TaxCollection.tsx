@@ -1,12 +1,10 @@
 import { Helmet } from "react-helmet"
-import TaxForm from "./TaxForm"
 import TaxTable from "./TaxTable"
 
 const TaxCollection = () => {
   return (
     <div>
-      <Helmet title="شركه النور | صفحه الاعدادات |  الضرائب" />
-      <TaxForm/>
+      <Helmet title="شركه تطوير البوادي | صفحه الاعدادات |  الضرائب" />
       <TaxTable/>
     </div>
   )

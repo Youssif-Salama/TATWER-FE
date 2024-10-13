@@ -1,12 +1,18 @@
 import { CreateContractAddressTypes } from "@/types/CreateContractAddressTypes";
 import { errorToaster } from "@/utils/ReactToatify";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export const UpdateEstateAddressApi = async (data: CreateContractAddressTypes,id:any) => {
   try {
     const response = await axios.put(
       `${import.meta.env.VITE_BASE_URL}estate-address/${id}`,
-      data
+      data,
+      {
+        headers: {
+          token: Cookies.get("token"),
+        },
+      }
     );
     return response;
   } catch (error: any) {

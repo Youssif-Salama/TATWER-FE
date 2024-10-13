@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet'
 const Systems = () => {
   return (
     <div>
-      <Helmet title="شركه النور | صفحه الدفعات" />
+      <Helmet title="شركه تطوير البوادي | صفحه الدفعات" />
       <SystemsCollection/>
     </div>
   )

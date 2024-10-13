@@ -97,8 +97,8 @@ const EstateForm = ({ formik }: { formik: any }) => {
             required
             id="Notes"
             name="Notes"
-            placeholder="ادخل ملاحظات  هنا"
-            label=" ملاحظات"
+            placeholder="ادخل رقم الحساب البنكي  هنا"
+            label=" الحساب البنكي"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.Notes}
@@ -108,6 +108,20 @@ const EstateForm = ({ formik }: { formik: any }) => {
               formik.errors.Notes
             }
           />
+        </div>
+        <div className="w-[30%] max-md:w-[45%] max-sm:w-full flex items-center gap-4">
+        <label htmlFor="Situation" className="text-[#0077bc] text-[14px]">حاله العقار</label>
+        <div className="w-full">
+          <select
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.Situation}
+          name="Situation" id="Situation" className="bg-white w-full p-3 border-2 border-slate-200 text-[#1f1f1f] text-[12px]">
+            <option>حدد حاله العقار</option>
+            <option value="active">مكتمل</option>
+            <option value="inactive">غير مكتمل</option>
+          </select>
+        </div>
         </div>
       </div>
     </div>

@@ -7,6 +7,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaTrash } from "react-icons/fa";
 import { DeleteTaxApi } from "@/api/tax/DeleteTaxApi";
+import AddTaxDialog from "@/componentsShadcn/dialogs/AddTaxDialog";
+import { decodeToken } from "@/methods/GlobalMethods";
+import Cookies from "js-cookie";
+ // @ts-ignore
+import NotAllowedLayer from "@/common/NotAllowedLayer";
+import { checkAuth } from "@/methods/PageConditions";
 
 const TaxTable = () => {
   const [allTaxes, setAllTaxes] = useState<any[]>([]);
@@ -33,32 +39,66 @@ const TaxTable = () => {
     result && getAllTaxes();
   };
 
+
+  const token = Cookies.get("token");
+  const [decodedToken, setDecodedToken] = useState<any>(null);
+
+  useEffect(() => {
+    if (token) {
+      const tokenData = decodeToken(token);
+      setDecodedToken(tokenData);
+    }
+  }, [token]);
+
   return (
+    <>
     <div dir="rtl" className="w-full mt-6 p-4 text-[12px]">
-      <h2 className="text-md font-bold mb-4 text-[#0077bc]">الضرائب</h2>
+      <h2 className="text-md font-bold mb-4 text-[#fff] bg-[#0077bc] w-full text-center p-2">الضرائب</h2>
       {loading ? (
         <div className="flex items-center justify-center min-h-[70vh]">
           <LoadingSpinner />
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {allTaxes.length > 0 ? (
+        <div className="w-full mt-6">
+          <div className={`my-2 ${checkAuth(decodedToken,"post",["settings","taxes"]) ? "" : "hidden"}`}>
+          <AddTaxDialog/>
+          </div>
+        <div className=" w-full grid grid-cols-2 gap-2 mt-4">
+          {allTaxes.length > 0 && (
             allTaxes.map((tax: any) => (
               <div
                 key={tax._id}
-                className="bg-white border-2 border-[#0077bc] p-4 rounded-lg relative shadow-md"
+                className="bg-gray-100 mb-2 border px-1 py-2 w-full rounded-lg relative shadow-md flex items-start justify-between gap-4 flex-wrap"
               >
+                <div className="absolute -top-3 p-1 text-[8px] rounded-md right-2 text-white bg-[#0077bc] border">
+                  {tax.Choosed ? "مختار" : "غير مختار"}
+                </div>
                 <div
-                  className="absolute top-2 right-2 text-red-500 cursor-pointer"
+                  className={`absolute top-3 right-2 text-red-500 cursor-pointer ${
+                    checkAuth(decodedToken,"delete",["settings","taxes"]) ? "" : "hidden"
+                  }`}
                   onClick={() => handleDeleteTax(tax._id)}
                 >
-                  <FaTrash className="text-[19px] border border-[#0077bc] p-1 bg-white rounded-full" />
+                  <FaTrash className="text-[19px] border border-[#0077bc] p-1 bg-gray-100 rounded-full" />
                 </div>
-                <div className="text-lg font-semibold text-center text-[#0077bc]">
-                  {tax.TaxValue}
+                <div className={`flex items-center justify-between px-8 text-[12px] gap-4
+                  ${checkAuth(decodedToken,"delete",["settings","taxes"]) ? "" : "w-full"}
+                  `}>
+                  <div>
+                    <p>الاسم</p>
+                    <p>{tax.Name}</p>
+                  </div>
+                  <div className="text-[#0077bc]">
+                    <p>القيمة</p>
+                    <p>{tax.TaxValue}%</p>
+                  </div>
+                  <div>
+                    <p>الرمز</p>
+                    <p>{tax.Symbol}</p>
+                  </div>
                 </div>
-                <div className="mt-4 flex justify-center">
-                  <label className="inline-flex items-center cursor-pointer">
+                <div className="flex my-auto justify-center">
+                  <label className={`${checkAuth(decodedToken,"delete",["settings","taxes"]) ? "" : "hidden"} inline-flex items-center cursor-pointer`}>
                     <input
                       type="checkbox"
                       value=""
@@ -71,12 +111,18 @@ const TaxTable = () => {
                 </div>
               </div>
             ))
-          ) : (
-            <div className="text-center py-4">لا يوجد ضرائب</div>
-          )}
+          )
+          }
+        </div>
+        {
+          allTaxes.length === 0 && (
+            <div className="w-full flex items-center justify-center py-4 border bg-gray-100">لا يوجد ضرائب</div>
+          )
+        }
         </div>
       )}
     </div>
+    </>
   );
 };
 

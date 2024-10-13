@@ -25,4 +25,5 @@ export interface CreateContractCollectionTypes {
   Price:number;
   FixedPrice:number;
   Times:number
+  BankAccount:string
 }

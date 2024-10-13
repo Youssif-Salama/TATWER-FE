@@ -7,7 +7,12 @@ export const DeleteContractFileApi = async (setLoading:any,contractId:any) => {
   try {
     setLoading(true);
     const response = await axios.delete(
-      `${import.meta.env.VITE_BASE_URL}contract/${contractId}/files`    );
+      `${import.meta.env.VITE_BASE_URL}contract/${contractId}/files` ,
+      {
+        headers: {
+          token: Cookies.get("token"),
+        },
+      });
     response &&  setLoading(false);
     response && successToaster(response?.data?.message);
     response&& Cookies.set("fileId",response?.data?.FileId)

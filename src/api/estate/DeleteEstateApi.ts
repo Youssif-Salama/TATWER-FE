@@ -1,11 +1,18 @@
 import { errorToaster, successToaster } from "@/utils/ReactToatify";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export const DeleteEstateApi = async (id: string,setLoading:any) => {
   try {
     setLoading(true);
     const response = await axios.delete(
       `${import.meta.env.VITE_BASE_URL}estate/${id}`
+    ,
+    {
+      headers: {
+      token: Cookies.get("token")
+      }
+    }
     );
     response && successToaster(response?.data?.message);
     response&&setLoading(false);

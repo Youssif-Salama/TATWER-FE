@@ -23,4 +23,5 @@ export const CreateEstateValidationSchema = Yup.object().shape({
   Notes: Yup.string()
     .max(200, "يجب ألا تزيد الملاحظات عن 200 حرف")
     .required("الملاحظات مطلوبة"),
+  Situation: Yup.string().required("الحاله مطلوبة"),
 });

@@ -37,7 +37,7 @@ const DeleteContracts = ({row,setCatchSelectedRows}:{row:any,setCatchSelectedRow
       <DialogContent className="sm:max-w-[425px]" dir="rtl">
         <DialogHeader>
           <DialogTitle className="relative">
-          <DialogClose className="text-lg absolute left-0 -top-7" asChild>
+          <DialogClose className="text-lg absolute left-0 -top-2" asChild>
               <button className="ml-auto mr-0 bg-transparent cursor-pointer">
               <IoClose className="text-[#0077bc]" />
               </button>

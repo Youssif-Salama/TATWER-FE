@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { MdPayments } from "react-icons/md";
+import { MdEmail, MdOutlinePermIdentity, MdPayments } from "react-icons/md";
+import { RiProfileLine } from "react-icons/ri";
 
 
 interface asideRoutesTypes {
@@ -14,6 +15,21 @@ const nestedRoutes: asideRoutesTypes[] = [
     name: "طرق الدفع",
     path: ["/settings/payment"],
     icon: MdPayments,
+  },
+  {
+    name: " الكيانات ",
+    path: ["/settings/objects"],
+    icon: MdOutlinePermIdentity,
+  },
+  {
+    name: " الملف الشحصي ",
+    path: ["/settings/profile"],
+    icon: RiProfileLine,
+  },
+  {
+    name:"التذكيرات",
+    path: ["/settings/remindings"],
+    icon: MdEmail,
   }
 ];
 

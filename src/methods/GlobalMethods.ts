@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode";
 
 //that method to catch one file change on file upload input
 export const handleOneFileChange = (e:any,catchONeFile:any)=>{
@@ -63,4 +64,37 @@ export const countResetDaysAndColors = (date: any) => {
       situation: "لم تستحق بعد"
     };
   }
+};
+
+
+
+
+
+export const decodeToken = (token: any) => {
+  try {
+    return jwtDecode(token);
+  } catch (error) {
+    return null;
+  }
+}
+
+
+export const reverseObjectKeys = (obj: any) => {
+  const reversedObj = {};
+
+  Object.keys(obj).forEach(key => {
+    // Split the key into words, reverse them, and join back
+    const reversedKey = key
+      .replace(/([A-Z])/g, ' $1')  // Add spaces before capital letters
+      .split(' ')                  // Split by spaces
+      .reverse()                   // Reverse the words
+      .join(' ')                    // Join without spaces
+      .trim();                     // Trim any extra spaces
+
+    // Assign the value to the new reversed key
+    // @ts-ignore
+    reversedObj[reversedKey] = obj[key];
+  });
+
+  return reversedObj;
 };

@@ -11,4 +11,5 @@ export interface SpecificContractSystemTypes {
     createdAt: string
     updatedAt: string
     __v: number
+    IsRuning: boolean
   }

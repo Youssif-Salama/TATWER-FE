@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export const GetAllEstatesApi = async (setLoading:any,page:any,showWay:any,searchKeyWord:any,searchValue:any) => {
   let queries=`?page=${page}`;
@@ -9,7 +10,12 @@ export const GetAllEstatesApi = async (setLoading:any,page:any,showWay:any,searc
   try {
     setLoading(true);
     const response = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}estate${queries}`
+      `${import.meta.env.VITE_BASE_URL}estate${queries}`,
+      {
+        headers: {
+          token:Cookies.get("token")
+        }
+      }
     );
     response&&setLoading(false);
     return response;

@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { useSelector } from "react-redux";
 import NestedTableFeatures from "./NestedTableFeatures";
+import { StopContractApi } from "@/api/contract/StopContractApi";
 
 const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate}:{searchKeyWord:string |null,searchValue:string|null,showWay:string|null,startDate:string|null,endDate:string|null}) => {
+  
   const { getContractType ,refreshONDeleteContracts} = useSelector(
     (state: RootState) => state.GlobalReducer
   );
@@ -22,11 +24,15 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
     const result = await GetAllContractsApi(setLoading, getContractType, page,showWay,searchKeyWord,searchValue,startDate,endDate);
     result && setTotalRows(result?.data?.meta?.numberOfRows);
     result && setAllContracts(result?.data?.data);
+    !result && setAllContracts([]);
+    !result && setTotalRows(0);
   };
-
   useEffect(() => {
     getAllContractsDependingOnType();
   }, [getContractType, page,searchKeyWord,searchValue,showWay,startDate,endDate,refreshONDeleteContracts]);
+
+
+
 
   const columns = [
     {
@@ -100,6 +106,27 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
       name: "تاريخ  الانتهاء الهجري",
       selector: (row: AllContractTypes) => row?.ContractEndDateH?.split("T")[0],
     },
+    {
+      name: "الحاله",
+      selector: (row: AllContractTypes) =>{
+        return <div>
+          {
+            row?.IsRuning ? <p
+            onClick={async()=>{
+              await StopContractApi(row?._id,{IsRuning:!row?.IsRuning})
+              getAllContractsDependingOnType()
+            }}
+            className="bg-green-500 px-2 py-1 rounded-md text-white text-[12px] cursor-pointer">مفعل</p>
+            :<p
+            onClick={async()=>{
+              await StopContractApi(row?._id,{IsRuning:!row?.IsRuning})
+              getAllContractsDependingOnType()
+            }}
+            className="bg-red-500 px-2 py-1 rounded-md text-white text-[12px] cursor-pointer">غير مفعل</p>
+          }
+        </div>
+      },
+    },
   ];
 
 
@@ -110,9 +137,16 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
   return (
     <div className="py-4 text-[12px]">
       {
-        catchSelectedRows.length > 0 && <NestedTableFeatures selectedRows={catchSelectedRows} setCatchSelectedRows={setCatchSelectedRows} />
-      }
-      <DataTable
+        false ? (
+          <div>Access Denied</div>
+        ) : (
+          <>
+            {
+              catchSelectedRows.length > 0 && (
+                <NestedTableFeatures selectedRows={catchSelectedRows} setCatchSelectedRows={setCatchSelectedRows} />
+              )
+            }
+             <DataTable
         // @ts-ignore
         columns={columns}
         data={allContracts}
@@ -128,8 +162,12 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
         customStyles={customStyles}
         noDataComponent="لا يوجد بيانات"
       />
+          </>
+        )
+      }
     </div>
   );
+
 };
 
 export default DiplayAllContracts;

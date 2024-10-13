@@ -13,24 +13,42 @@ import {
   setResetForm,
 } from "@/store/slices/GlobalSlice";
 import SpecificContractSystems from "../specificContractSystems/SpecificContractSystems";
+import { decodeToken } from "@/methods/GlobalMethods";
+import NotAllowedLayer from "@/common/NotAllowedLayer";
 
 const CreateContract = () => {
   const [loading, setLoading] = useState(false);
   const [contractId, setContractId] = useState<any>(null);
-  const { catchContractIdChange } = useSelector(
+  const [contractType, setContractType] = useState<any>(null);
+  const { catchContractIdChange ,contractType:catchContractType} = useSelector(
     (state: RootState) => state.GlobalReducer
   );
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     setContractId(Cookies.get("contractId"));
+    setContractType(Cookies.get("contractType"));
   }, [catchContractIdChange]);
+
+  const token=Cookies.get("token");
+
+  const [decodedToken, setDecodedToken] = useState<any>(null);
+
+  useEffect(() => {
+    if (token) {
+      const tokenData = decodeToken(token);
+      setDecodedToken(tokenData);
+    }
+  },[token])
 
   return (
     <div>
       <div className="min-h-[70vh] mb-6">
         <div>
-          <CreateContractCollection />
+          {
+            ( decodedToken?.Role=="super_admin" || decodedToken?.Pages["contracts"][`${catchContractType}s`].post ==true) ?
+            <CreateContractCollection />:<NotAllowedLayer/>
+          }
         </div>
         <div
           className={`
@@ -43,7 +61,7 @@ const CreateContract = () => {
           <div className="flex gap-4">
             <Button
               onClick={async () => {
-                const result = await DeleteContractApi(contractId,setLoading);
+                const result = await DeleteContractApi(contractId,setLoading,contractType);
                 result && Cookies.remove("contractId");
                 result && Cookies.remove("addressId");
                 result && dispatch(setCatchContractIdChange(Math.random()));

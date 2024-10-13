@@ -26,6 +26,7 @@ const CreateEstateCollection = () => {
       PieceNumber: "",
       PlanNumber: "",
       Notes: "",
+      Situation:"active"
     },
     validationSchema:   CreateEstateValidationSchema,
     onSubmit: async (values) => {

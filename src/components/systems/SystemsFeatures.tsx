@@ -1,6 +1,7 @@
 import NormalDateComponent from "@/common/NormalDateComponent";
 import { Input } from "@/componentsShadcn/ui/input";
 import { IoReload } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 
 
@@ -13,9 +14,13 @@ interface SystemsFeaturesProps {
   searchKeyWord: string | null;
   startDate: string | null;
   endDate: string | null;
+  no: number;
+  setNo: (value: number) => void;
 }
 
 const SystemsFeatures: React.FC<SystemsFeaturesProps> = ({
+  setNo,
+  no,
   setSearchKeyWord,
   setSearchValue,
   searchKeyWord,
@@ -25,6 +30,38 @@ const SystemsFeatures: React.FC<SystemsFeaturesProps> = ({
   startDate,
   endDate,
 }) => {
+  const cases=[
+    {
+      case:1,
+      show:"متبقي له 40 يوم او اقل",
+      no
+    },
+    {
+      case:2,
+      show:"متبقي له 15 يوم او اقل",
+      no
+    },
+    {
+      case:3,
+      show:"متبقي له 5 ايام او اقل",
+      no
+    },
+    {
+      case:4,
+      show:"مرجو سداده اليوم",
+      no
+    },
+    {
+      case:5,
+      show:" تخطي السداد",
+      no
+    },
+    {
+      case:6,
+      show:" الكل",
+      no
+    },
+  ]
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center bg-[#0077bc]">
@@ -96,6 +133,25 @@ const SystemsFeatures: React.FC<SystemsFeaturesProps> = ({
             </div>
           </div>
         </div>
+      </div>
+      <div className="flex flex-col gap-4 text-[12px]">
+        <p className="text-[#0077bc] flex items-center gap-2 justify-between">
+          <p> اختر مجموعه</p>
+          <p>    <Link to="/systems/print" className="bg-[#0077bc] text-[12px] text-white p-1 mb-4">طباعه</Link></p>
+        </p>
+        <p className=" grid grid-cols-6 gap-1 max-sm:grid-cols-3">
+            {
+              cases.map((item,index)=>{
+                return <span
+                className={`cursor-pointer ${no==item?.case? "text-[#0077bc]":"text-[#1f1f1f]"} cursor-pointer hover:text-[#005fa3] transition-colors duration-300`}
+                key={index}
+                onClick={() => setNo(item.case)}
+              >
+                 *{item.show}
+              </span>
+              })
+            }
+        </p>
       </div>
     </div>
   );

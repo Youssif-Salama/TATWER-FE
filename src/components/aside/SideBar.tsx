@@ -9,7 +9,14 @@ import { Button } from '@/componentsShadcn/ui/button';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import SideBarDropDown3 from './SideBarDropDown3';
 import SideBarDropDown4 from './SideBarDropDown4';
+
 import SideBarDropDown5 from './SideBarDropDown5';
+import { FaUserCircle } from "react-icons/fa";
+import Cookies from 'js-cookie';
+import { FaTasks } from "react-icons/fa";
+import { decodeToken } from '@/methods/GlobalMethods';
+import { TbReport } from "react-icons/tb";
+import { IoSettings } from 'react-icons/io5';
 
 
 interface AsideRoute {
@@ -21,11 +28,31 @@ interface AsideRoute {
   arrow?: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
 }
 
-const routes: AsideRoute[] = [
+let routes: AsideRoute[] = [
   {
     name: 'الصفحه الرئيسيه',
     path: ['/'],
     icon: MdFormatAlignCenter,
+  },
+  {
+    name:'التقارير',
+    path: ['/reports'],
+    icon: TbReport,
+  },
+  {
+    name: 'الموظفين',
+    path: ['/emp'],
+    icon: FaUserCircle     ,
+  },
+  {
+    name: 'المهمات',
+    path: ['/todo','/todo/add','/todo/tasks'],
+    icon: FaTasks     ,
+  },
+  {
+    name: 'المهمات',
+    path: ['/tasks'],
+    icon: FaTasks     ,
   },
   {
     name: 'الدفعات',
@@ -50,8 +77,8 @@ const routes: AsideRoute[] = [
     },
     {
     name: 'الاعدادات',
-    path: ['/settings', '/settings/payment'],
-    icon: SiGoogleforms,
+    path: ['/settings', '/settings/payment', '/settings/objects', '/settings/profile', '/settings/remindings'],
+    icon: IoSettings,
     haveDropDown: true,
     id:4 ,
     arrow: RiArrowDownSFill,
@@ -89,6 +116,46 @@ export default function Sidebar({ hide }: { hide: boolean }) {
     if (id === 5) setOpendSideDrop5(prev => !prev);
   };
 
+
+interface DecodedToken {
+  Role?: string;
+}
+
+  const [role, setRole] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      try {
+        const decodedToken = decodeToken(token) as DecodedToken;
+        setRole(decodedToken?.Role || null);
+      } catch (error) {
+        setRole(null);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if(!loading && role){
+      routes=routes.filter((item)=>{
+        if(role=='super_admin'){
+          return item.path[0] !=='/tasks'
+        }
+        else if(role !=='super_admin'){
+          return item.path[0] !== '/emp' && item.path[0] !== '/todo'
+        }
+        else{
+          return item
+        }
+      })
+    }
+  }, [role, loading]);
+
   return (
     <div className={`relative z-[1000] ${hide ? 'hidden' : ''}`}>
       <button
@@ -106,14 +173,14 @@ export default function Sidebar({ hide }: { hide: boolean }) {
         ref={asideRef}
         className={`fixed top-0 right-0 h-full w-64 bg-[#0077b6] p-5 transition-transform duration-300 ease-in-out transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} flex flex-col justify-between`}
       >
-        <nav className="mt-8">
+        <nav className="mt-8 max-h-[90vh] overflow-auto sideBarNav">
           <ul className="space-y-2 text-white">
-            {routes.map((item) => {
+            {routes.map((item,index) => {
               const isActive = item.path.includes(pathname);
               const isOpenDropdown = item.id === currentOpened;
 
               return (
-                <li key={item.id}>
+                <li key={index}>
                   <Link
                     to={item.path[0]}
                     className={`flex items-center justify-between uppercase font-semibold p-2 rounded-md
@@ -146,7 +213,9 @@ export default function Sidebar({ hide }: { hide: boolean }) {
         <div className="mt-auto">
           <Button
             className='w-full bg-white text-[#0077b6] flex items-center gap-1 hover:bg-white hover:scale-95 transform transition-all ease-in-out duration-300'
-            onClick={() => window.location.reload()}
+            onClick={() => {
+              Cookies.remove("token");
+              window.location.reload()}}
           >
             <span>تسجيل الخروج</span>
             <FiLogOut />

@@ -1,12 +1,18 @@
 import { CreateEstateTypes } from "@/types/CreateEstateTypes";
 import { errorToaster } from "@/utils/ReactToatify";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export const UpdateEstateApi = async (data: CreateEstateTypes,id:any) => {
   try {
     const response = await axios.put(
       `${import.meta.env.VITE_BASE_URL}estate/${id}`,
-      data
+      data,
+      {
+        headers: {
+          token: Cookies.get("token"),
+        },
+      }
     );
     return response;
   } catch (error: any) {

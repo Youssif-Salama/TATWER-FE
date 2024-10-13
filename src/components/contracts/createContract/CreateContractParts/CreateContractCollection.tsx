@@ -12,7 +12,7 @@ import { AppDispatch, RootState } from "@/store/store";
 import { successToaster } from "@/utils/ReactToatify";
 import LoadingSpinner from "@/common/LoadingSpinner";
 import Cookies from "js-cookie";
-import { setCatchContractIdChange, setRefreshOnAddNewContractSystem } from "@/store/slices/GlobalSlice";
+import { setCatchContractIdChange, setContractType, setRefreshOnAddNewContractSystem } from "@/store/slices/GlobalSlice";
 import CreateContractPayments from "../CreateContractPayments/CreateContractPayments";
 import { UpdateContractApi } from "@/api/contract/UpdateContractApi";
 import { GetSpecifiContractApi } from "@/api/contract/GetSpecificContractApi";
@@ -48,20 +48,22 @@ const CreateContractCollection = () => {
       Price: 1,
       FixedPrice: 1,
       Times: 1,
+      BankAccount:"",
     },
     validationSchema: CreateContractValidationSchema,
     onSubmit: async (values) => {
       setLoading(true);
       if (contractId) {
-        const result: any = await UpdateContractApi(values,contractId);
+        const result: any = await UpdateContractApi(values,contractId,values?.Type);
         result && successToaster(result?.data?.message);
         result && setLoading(false);
         !result && setLoading(false);
         result && dispatch(setRefreshOnAddNewContractSystem(Math.random()))
       } else {
-        const result: any = await AddContractApi(values);
+        const result: any = await AddContractApi(values,values?.Type);
         result && successToaster(result?.data?.message);
         result && Cookies.set("contractId", result?.data?.contractId);
+        result && Cookies.set("contractType", result?.data?.Type);
         result && dispatch(setCatchContractIdChange(Math.random()));
         result && dispatch(setRefreshOnAddNewContractSystem(Math.random()))
         result && setLoading(false);
@@ -81,7 +83,7 @@ const CreateContractCollection = () => {
   const getOneContract = async (id: any) => {
     const result = await GetSpecifiContractApi(id);
     result?.data?.data.length>0 && formik.setValues(result?.data?.data[0]);
-
+    dispatch(setContractType(result?.data?.data[0]?.Type));
   };
 
   useEffect(()=>{

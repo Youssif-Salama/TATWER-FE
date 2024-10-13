@@ -1,3 +1,4 @@
+import { GetAllPaymentWaysApi } from "@/api/paymentWay/GetAllPaymentWaysApi";
 import { AddContractMultipleSystemsAPi } from "@/api/systems/AddContractMultipleSystemsAPi";
 import InputCommon from "@/common/InputCommon";
 import InputDateCommon from "@/common/InputDateCommon";
@@ -17,6 +18,18 @@ const AddContractSystemMultiple = () => {
   const dispatch: AppDispatch = useDispatch();
   const contractId = Cookies.get("contractId");
   const [takeDate, setTakeDate] = useState<boolean>(false);
+
+
+  const [loading1,setLoading1]=useState(false);
+  const [payments,setPayments]=useState([]);
+  const getPaymentWays=async()=>{
+    const result=await GetAllPaymentWaysApi(setLoading1);
+    result && setPayments(result?.data?.data);
+  }
+
+  useEffect(()=>{
+    getPaymentWays();
+  },[])
 
 
   const formik = useFormik<UpdateContractMultipleSystemDialogProps>({
@@ -95,18 +108,21 @@ const AddContractSystemMultiple = () => {
               />
             </div>
             <div className="w-[45%] max-md:w-[45%] max-sm:w-full">
-              <div className="flex items-center gap-3" dir="rtl">
-                <div className="w-[13%]">
-                  <div className=" mb-1 h-[15px]" />
-                  <label
-                    htmlFor="PaymentWay"
-                    className="text-[#0077bc] text-[12px] text-sm w-[16%]"
-                  >
-                    طريقه الدفع
-                  </label>
-                </div>
+            <div className="flex items-center gap-3 w-full" dir="rtl">
+              <div >
+                <div className=" mb-1 h-[15px]" />
+                <label
+                  htmlFor="PaymentWay"
+                  className="text-[#0077bc] text-[12px] text-sm w-[16%]"
+                >
+                  طريقه الدفع
+                </label>
+              </div>
 
-                <div className="w-[84%]">
+              {loading1 ? (
+                "حاري التحميل.."
+              ) : (
+                <div className="w-full">
                   {
                     <div className="text-red-500 text-[10px] mb-1 h-[15px]">
                       {formik.errors &&
@@ -127,13 +143,15 @@ const AddContractSystemMultiple = () => {
                     className="bg-[#fff] rounded-none w-full mx-auto placeholder:text-gray-400 text-[14px] px-2 py-[11px] border-2 border-slate-200"
                   >
                     <option>اختر طريقه الدفع</option>
-                    <option value="1">شهري</option>
-                    <option value="3">ربع سنوي</option>
-                    <option value="6">نصف سنوي</option>
-                    <option value="12">سنوي</option>
+                    {payments?.map((payment: any) => (
+                      <option key={payment.id} value={payment.Way}>
+                        {payment.Way}شهرا
+                      </option>
+                    ))}
                   </select>
                 </div>
-              </div>
+              )}
+            </div>
             </div>
           </div>
 

@@ -41,9 +41,9 @@ export const CreateContractValidationSchema = Yup.object().shape({
   ContractReleaseDate: Yup.date().required("تاريخ إصدار العقد مطلوب"),
   ContractDate: Yup.date().required("تاريخ العقد مطلوب"),
   PaymentWay: Yup.string()
-    .oneOf(["1", "3", "6", "12"], "طريقة الدفع غير صالحة")
     .required("طريقة الدفع مطلوبة"),
   Price: Yup.number().required("السعر مطلوب"),
   FixedPrice: Yup.number().required("السعر الثابت مطلوب"),
   Times: Yup.number().required("عدد مرات الدفع مطلوب"),
+  BankAccount: Yup.string().optional(),
 });

@@ -1,5 +1,6 @@
 import { errorToaster, successToaster } from "@/utils/ReactToatify";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export const DeleteMultipleContractSystemsApi = async (systemId: any, contractId: any,setLoading:any) => {
   try {
@@ -9,7 +10,12 @@ export const DeleteMultipleContractSystemsApi = async (systemId: any, contractId
       response=await axios.delete(
         `${
           import.meta.env.VITE_BASE_URL
-          }contract/${contractId}/systems/${item._id}`
+          }contract/${contractId}/systems/${item._id}`,
+        {
+          headers: {
+            token: Cookies.get("token"),
+          },
+        }
         );
         response&&setLoading(false);
       });

@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import AddNewContractSystem from "./AddNewContractSystem";
 import {  customStylesSystems } from "@/common/TableRowStyle";
 import NestedTableFeatures from "./NestedTableFeatures";
+import { StopSystemsApi } from "@/api/systems/StopSystemsApi";
 
 const SpecificContractSystems = () => {
   const [contractSystems, setContractSystems] = useState<
@@ -21,11 +22,12 @@ const SpecificContractSystems = () => {
   );
 
   const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
 
   const [catchSelectedRows, setCatchSelectedRows] = useState<any[]>([]);
 
   const getSpecificContractSystems = async () => {
-    const result = await GetContractSystemsApi(contractId,page);
+    const result = await GetContractSystemsApi(contractId,page,limit);
     result && setTotalRows(result?.data?.meta?.numberOfRows);
     result && setContractSystems(result?.data?.data);
     !result && setContractSystems(null);
@@ -41,7 +43,8 @@ const SpecificContractSystems = () => {
 
   useEffect(()=>{
     getSpecificContractSystems();
-  },[page,refreshOnAddNewContractSystem])
+  },[page,refreshOnAddNewContractSystem,limit])
+  const today=new Date();
 
   const columns = [
     {
@@ -62,6 +65,19 @@ const SpecificContractSystems = () => {
       selector: (row: SpecificContractSystemTypes) => row.FixedPrice,
     },
     {
+      name: "الحاله",
+      selector: (row: SpecificContractSystemTypes) => <div>
+        {
+          // @ts-ignore
+          ((new Date(row?.DueDate)-today) && !row?.Applied)<0?<span className="text-red-500">متأحره</span>:<span className="text-[#0077bc]">قادم</span>
+        }
+        {
+          // @ts-ignore
+          row?.Applied && <span className="text-[#0077bc]">تم الدفع</span>
+        }
+      </div>,
+    },
+    {
       name: " تاريخ البدأ",
       selector: (row: SpecificContractSystemTypes) =>
         row.ReleaseDate.split("T")[0],
@@ -80,6 +96,24 @@ const SpecificContractSystems = () => {
 
       selector: (row: SpecificContractSystemTypes) =>
         row.DueDateH.split("T")[0],
+    },
+    {
+      name:"الحاله",
+      selector: (row: SpecificContractSystemTypes) => <div>
+        {
+          (row?.IsRuning)?<p
+          onClick={async()=>{
+            await StopSystemsApi(row?._id)
+            getSpecificContractSystems()
+          }}
+          className="text-[12px] rounded-md px-2 py-1  cursor-pointer text-white bg-green-500">مفعل</p>:<p
+          onClick={async()=>{
+            await StopSystemsApi(row?._id)
+            getSpecificContractSystems()
+          }}
+          className="text-[12px] rounded-md px-2 py-1  cursor-pointer text-white bg-red-500">غير مفعل</p>
+        }
+      </div>
     }
   ];
 
@@ -118,6 +152,9 @@ const SpecificContractSystems = () => {
               // @ts-ignore
               customStyles={customStylesSystems}
               noDataComponent="لا يوجد بيانات"
+              onChangeRowsPerPage={(value:number)=>{
+                setLimit(value)
+              }}
             />
             </div>
           }

@@ -1,6 +1,6 @@
 import DeleteContracts from "@/componentsShadcn/dialogs/DeleteContracts";
 import Cookies from "js-cookie"
-import { FaEye } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 
 
 
@@ -21,10 +21,10 @@ const NestedTableFeatures = ({selectedRows,setCatchSelectedRows}:{selectedRows:a
           {
             selectedRows.length >=2 ?null:<button className="bg-green-500 border-0 outline-0 rounded-md p-2 text-sm text-white"
             onClick={()=>{
-              Cookies.set("contractId",selectedRows[0]?._id)
-              window.location.href = "/contracts/create"
+              Cookies.set("estateId",selectedRows[0]?._id)
+              window.location.href = "/estates/create"
             }}
-            ><FaEye  className=" text-white" />
+            ><FaEdit  className=" text-white" />
 </button>
           }
         </div>

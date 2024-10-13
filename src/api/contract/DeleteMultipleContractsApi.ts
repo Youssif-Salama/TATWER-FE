@@ -1,13 +1,18 @@
 import { errorToaster } from "@/utils/ReactToatify";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export const DeleteMultipleContractsApi = async (row: any,setLoading:any) => {
   try {
     setLoading(true);
     let response:any ;
     row.forEach(async(item:any) => {
+      let type=item?.Type;
       response=await axios.delete(
-        `${import.meta.env.VITE_BASE_URL}contract/${item._id}`
+        `${import.meta.env.VITE_BASE_URL}contract/${item._id}/${type}`,
+        {headers:{
+          token:Cookies.get("token")
+        }}
       );
       response&&setLoading(false);
     });

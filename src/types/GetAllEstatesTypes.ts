@@ -10,4 +10,5 @@ export interface AllEstatesTypes {
   updatedAt: string
   __v: number
   AddressId: string
+  Situation: string
 }

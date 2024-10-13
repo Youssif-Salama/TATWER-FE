@@ -109,9 +109,9 @@ const ContractCurrentFiles = ({
                   <button
                     className="p-1 px-2 text-white bg-[#0077bc]"
                     onClick={() => {
-                      // window.open(`http://localhost:10000${file.path}`, "_blank");
+                      // window.open(`http://localhost:3000${file.path}`, "_blank");
                       setSelectedFileToShow(
-                        `http://localhost:10000${file.path}`
+                        `${import.meta.env.VITE_BE_Domain}${file.path}`
                       );
                     }}
                   >
@@ -121,7 +121,7 @@ const ContractCurrentFiles = ({
                     className="p-1 px-2 text-white bg-red-500"
                     onClick={() => {
                       if (
-                        `http://localhost:10000${file.path}` ===
+                        `${import.meta.env.VITE_BE_Domain}${file.path}` ===
                         selectedFileToShow
                       ) {
                         setSelectedFileToShow(null);
@@ -160,7 +160,7 @@ const ContractCurrentFiles = ({
                   <button
                     className="p-1 px-2 text-white bg-[#0077bc]"
                     onClick={() => {
-                      // window.open(`http://localhost:10000${file.path}`, "_blank");
+                      // window.open(`http://localhost:3000${file.path}`, "_blank");
                       setSelectedFileToShow(file);
                     }}
                   >

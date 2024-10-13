@@ -1,3 +1,4 @@
+import { GetAllPaymentWaysApi } from "@/api/paymentWay/GetAllPaymentWaysApi";
 import { AddContractSystemApi } from "@/api/systems/AddContractSystemApi";
 import InputCommon from "@/common/InputCommon";
 import InputDateCommon from "@/common/InputDateCommon";
@@ -18,6 +19,18 @@ const AddContractSystemByOne = () => {
   const contractId = Cookies.get("contractId");
   const [takeDate, setTakeDate] = useState<boolean>(false);
 
+
+  const [loading1,setLoading1]=useState(false);
+  const [payments,setPayments]=useState([]);
+  const getPaymentWays=async()=>{
+    const result=await GetAllPaymentWaysApi(setLoading1);
+    result && setPayments(result?.data?.data);
+  }
+
+  useEffect(()=>{
+    getPaymentWays();
+  },[])
+
   const formik = useFormik<UpdateContractSystemDialogProps>({
     initialValues: {
       RentValue: "",
@@ -35,7 +48,7 @@ const AddContractSystemByOne = () => {
     if (!takeDate) {
       formik.setFieldValue("CurrentReleaseDate", null);
     }
-  },[takeDate]);
+  }, [takeDate]);
   return (
     <DialogFooter>
       <form onSubmit={formik.handleSubmit}>
@@ -75,19 +88,21 @@ const AddContractSystemByOne = () => {
           </div>
 
           <div className="flex items-center flex-wrap w-full gap-4 justify-between">
-            <div className="w-full max-sm:w-full">
-              <div className="flex items-center gap-3" dir="rtl">
-                <div className="w-[13%]">
-                  <div className=" mb-1 h-[15px]" />
-                  <label
-                    htmlFor="CurrentPaymentWay"
-                    className="text-[#0077bc] text-[12px] text-sm w-[16%]"
-                  >
-                    طريقه الدفع
-                  </label>
-                </div>
+            <div className="flex items-center gap-3 w-full" dir="rtl">
+              <div >
+                <div className=" mb-1 h-[15px]" />
+                <label
+                  htmlFor="PaymentWay"
+                  className="text-[#0077bc] text-[12px] text-sm w-[16%]"
+                >
+                  طريقه الدفع
+                </label>
+              </div>
 
-                <div className="w-[84%]">
+              {loading1 ? (
+                "حاري التحميل.."
+              ) : (
+                <div className="w-full">
                   {
                     <div className="text-red-500 text-[10px] mb-1 h-[15px]">
                       {formik.errors &&
@@ -98,9 +113,9 @@ const AddContractSystemByOne = () => {
 
                   {/* @ts-ignore */}
                   <select
-                    name="CurrentPaymentWay"
+                    name="PaymentWay"
                     //@ts-ignore
-                    id="CurrentPaymentWay"
+                    id="PaymentWay"
                     dir="rtl"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -108,13 +123,14 @@ const AddContractSystemByOne = () => {
                     className="bg-[#fff] rounded-none w-full mx-auto placeholder:text-gray-400 text-[14px] px-2 py-[11px] border-2 border-slate-200"
                   >
                     <option>اختر طريقه الدفع</option>
-                    <option value="1">شهري</option>
-                    <option value="3">ربع سنوي</option>
-                    <option value="6">نصف سنوي</option>
-                    <option value="12">سنوي</option>
+                    {payments?.map((payment: any) => (
+                      <option key={payment.id} value={payment.Way}>
+                        {payment.Way}شهرا
+                      </option>
+                    ))}
                   </select>
                 </div>
-              </div>
+              )}
             </div>
           </div>
 
@@ -142,8 +158,8 @@ const AddContractSystemByOne = () => {
             </div>
           </div>
 
-          {
-            takeDate && (<InputDateCommon
+          {takeDate && (
+            <InputDateCommon
               required={true}
               id="CurrentReleaseDate"
               name="CurrentReleaseDate"
@@ -154,8 +170,8 @@ const AddContractSystemByOne = () => {
               // @ts-ignore
               value={formik.values.CurrentReleaseDate}
               error={null}
-            />)
-          }
+            />
+          )}
         </div>
         <Button
           type="submit"

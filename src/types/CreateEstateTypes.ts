@@ -5,4 +5,5 @@ export interface CreateEstateTypes {
   PieceNumber: string
   PlanNumber: string
   Notes: string
+  Situation:string
 }

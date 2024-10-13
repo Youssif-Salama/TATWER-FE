@@ -10,6 +10,7 @@ const SystemsTable = ({allSystems}:{allSystems:any}) => {
       لا يوجد بيانات
      </div>
 :(
+  <>
   <div className="w-full flex items-center flex-col gap-4">
  { allSystems.map((system:any)=>{
     return (
@@ -17,6 +18,7 @@ const SystemsTable = ({allSystems}:{allSystems:any}) => {
     )
   })}
   </div>
+  </>
 )
      }
     </div>

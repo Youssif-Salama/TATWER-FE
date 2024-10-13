@@ -26,5 +26,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src", "src/components/systems/SystemPrintMain.tsx", "src/methods/vfs_fonts.ts"]
 }

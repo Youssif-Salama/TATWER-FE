@@ -8,3 +8,16 @@
    background-color: #0077bc !important;
    color: #fff !important;
  }
+
+ .sideBarNav::-webkit-scrollbar{
+   display: none;
+ }
+
+
+ .print::-webkit-scrollbar{
+  display: none;
+}
+
+body{
+  font-family: 'Cairo, sans-serif'
+}

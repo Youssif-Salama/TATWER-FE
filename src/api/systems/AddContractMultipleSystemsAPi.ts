@@ -1,5 +1,6 @@
 import { errorToaster, successToaster } from "@/utils/ReactToatify";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export const AddContractMultipleSystemsAPi = async (data:any,setLoading:any) => {
   try {
@@ -11,7 +12,12 @@ export const AddContractMultipleSystemsAPi = async (data:any,setLoading:any) => 
     setLoading(true);
     const response = await axios.post(
       `${import.meta.env.VITE_BASE_URL}contract`,
-      data
+      data,
+      {
+        headers: {
+          token: Cookies.get("token"),
+        },
+      }
     );
     response && successToaster(response?.data?.message);
     response && setLoading(false);

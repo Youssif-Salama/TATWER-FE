@@ -14,7 +14,26 @@ interface InitialState {
   refreshTax:any,
   paymentWay:any,
   catchEstateIdChange: any;
-  refreshEstateFiles: any
+  refreshEstateFiles: any;
+  refrehEstateUnites:any;
+  uniteAddonsLength:any;
+  resetUniteAddons:any;
+  refreshOnDeleteUnite:any;
+  refreshTenantUnites:any;
+  refreshLandlordUnites:any;
+  refreshOnDeleteContractUnites:any;
+  refreshONDeleteEmployee:any;
+  refreshOnUpdateEmployee:any;
+  refreshFileUploaderInSendMessage:any;
+  refreshOnChangeMessages:any;
+  refreshonAddNewLanlordFiles:any;
+  refreshonAddNewTenantFiles:any;
+  resfreshObjects:any,
+  refreshProfile:any,
+  refreshRemindings:any
+  refreshonDeleteMessage:any,
+  currentEstateTenantId:any
+  currentEstateLandlordId:any
 }
 
 const initialState: InitialState = {
@@ -31,7 +50,26 @@ const initialState: InitialState = {
   refreshTax:null,
   paymentWay:null,
   catchEstateIdChange: null,
-  refreshEstateFiles: null
+  refreshEstateFiles: null,
+  refrehEstateUnites:null,
+  uniteAddonsLength:0,
+  resetUniteAddons:null,
+  refreshOnDeleteUnite:null,
+  refreshTenantUnites:null,
+  refreshLandlordUnites:null,
+  refreshOnDeleteContractUnites:null,
+  refreshONDeleteEmployee:null,
+  refreshOnUpdateEmployee:null,
+  refreshFileUploaderInSendMessage:null,
+  refreshOnChangeMessages:null,
+  refreshonAddNewLanlordFiles:null,
+  refreshonAddNewTenantFiles:null,
+  resfreshObjects:null,
+  refreshProfile:null,
+  refreshRemindings:null,
+  refreshonDeleteMessage:null,
+  currentEstateTenantId:null,
+  currentEstateLandlordId:null
 };
 
 const GlobalReducer = createSlice({
@@ -80,6 +118,63 @@ const GlobalReducer = createSlice({
     setRefreshEstateFiles: (state, action) => {
       state.refreshEstateFiles = action.payload;
     },
+    setRefrehEstateUnites:(state,action)=>{
+      state.refrehEstateUnites=action.payload
+    },
+    setUniteAddonsLength:(state,action)=>{
+      state.uniteAddonsLength=action.payload
+    },
+    setResetUniteAddons:(state,action)=>{
+      state.resetUniteAddons=action.payload
+    },
+    setRefreshOnDeleteUnite:(state,action)=>{
+      state.refreshOnDeleteUnite=action.payload
+    },
+    setRefreshTenantUnites:(state,action)=>{
+      state.refreshTenantUnites=action.payload
+    },
+    setRefreshLandlordunites:(state,action)=>{
+      state.refreshLandlordUnites=action.payload
+    },
+    setRefreshOnDeleteContractUnites:(state,action)=>{
+      state.refreshOnDeleteContractUnites=action.payload
+    },
+    setRefreshONDeleteEmployee:(state,action)=>{
+      state.refreshONDeleteEmployee=action.payload
+    },
+    setRefreshOnUpdateEmployee:(state,action)=>{
+      state.refreshOnUpdateEmployee=action.payload
+    },
+    setRefreshFileUploaderInSendMessage:(state,action)=>{
+      state.refreshFileUploaderInSendMessage=action.payload
+    },
+    setRefreshOnChangeMessages:(state,action)=>{
+      state.refreshOnChangeMessages=action.payload
+    },
+    setRefreshonAddNewLanlordFiles:(state,action)=>{
+      state.refreshonAddNewLanlordFiles=action.payload
+    },
+    setRefreshonAddNewTenantFiles:(state,action)=>{
+      state.refreshonAddNewTenantFiles=action.payload
+    },
+    setResfreshObjects:(state,action)=>{
+      state.resfreshObjects=action.payload
+    },
+    setRefreshProfile:(state,action)=>{
+      state.refreshProfile=action.payload
+    },
+    setRefreshRemindings:(state,action)=>{
+      state.refreshRemindings=action.payload
+    },
+    setRefreshOnDeleteMessage:(state,action)=>{
+      state.refreshonDeleteMessage=action.payload
+    },
+    setCurrentEstateTenantId:(state,action)=>{
+      state.currentEstateTenantId=action.payload
+    },
+    setCurrentEstateLandlordId:(state,action)=>{
+      state.currentEstateLandlordId=action.payload
+    },
   },
 });
 
@@ -97,7 +192,26 @@ export const {
   setRefreshOnApplyOrSetSystemMessage,
   setRefrehTax,
   setRefrehPaymentWay,
-  setCatchEstateIdChange
+  setCatchEstateIdChange,
+  setRefrehEstateUnites,
+  setUniteAddonsLength,
+  setResetUniteAddons,
+  setRefreshOnDeleteUnite,
+  setRefreshTenantUnites,
+  setRefreshLandlordunites,
+  setRefreshOnDeleteContractUnites,
+  setRefreshONDeleteEmployee,
+  setRefreshOnUpdateEmployee,
+  setRefreshFileUploaderInSendMessage,
+  setRefreshOnChangeMessages,
+  setRefreshonAddNewLanlordFiles,
+  setRefreshonAddNewTenantFiles,
+  setResfreshObjects,
+  setRefreshProfile,
+  setRefreshRemindings,
+  setRefreshOnDeleteMessage,
+  setCurrentEstateTenantId,
+  setCurrentEstateLandlordId
 } = GlobalReducer.actions;
 
 export default GlobalReducer.reducer;
