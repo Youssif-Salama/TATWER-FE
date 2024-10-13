@@ -1,9 +1,9 @@
 import { GetAllSystemsForPrintingApi } from "@/api/systems/GetAllSystemsForPrintingApi";
 import LoadingSpinner from "@/common/LoadingSpinner";
 import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { useEffect, useRef, useState } from "react";
-import * as XLSX from "xlsx"; // استيراد مكتبة xlsx
+import * as XLSX from "xlsx";
 
 // Register the fonts
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
