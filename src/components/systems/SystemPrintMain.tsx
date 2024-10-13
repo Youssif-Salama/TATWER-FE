@@ -1,12 +1,12 @@
 import { GetAllSystemsForPrintingApi } from "@/api/systems/GetAllSystemsForPrintingApi";
 import LoadingSpinner from "@/common/LoadingSpinner";
 import pdfMake from "pdfmake/build/pdfmake";
-import * as pdfFonts from "pdfmake/build/vfs_fonts";
+import pdfFonts from "../../../vfs_fontes";
 import { useEffect, useRef, useState } from "react";
 import * as XLSX from "xlsx";
 
 // Register the fonts
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+pdfMake.vfs = pdfFonts.vfs;
 pdfMake.fonts = {
   Amiri: {
     normal: 'https://raw.githubusercontent.com/Youssif-Salama/amiri-font/main/Amiri-Regular.ttf',
@@ -21,6 +21,7 @@ const SystemPrintMain = ({ applied }: { applied: any }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [meta, setMeta] = useState<any>(null);
+
 
   const handleGeneratePdf = () => {
     const docDefinition = {

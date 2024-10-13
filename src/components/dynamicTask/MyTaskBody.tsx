@@ -11,16 +11,16 @@ const MyTaskBody = () => {
   const [allMessages, setAllMessages] = useState<any>([]);
   const {id:taskId}=useParams();
   const {refreshOnChangeMessages,refreshFileUploaderInSendMessage,refreshonDeleteMessage}=useSelector((state:any)=>state.GlobalReducer);
-  const [page,setPage]=useState<any>(1);
+  // const [page,setPage]=useState<any>(1);
 
     const getAllMessagesPerTask=async()=>{
-await GetMyTaskMessagesApi(taskId,allMessages,setAllMessages,page,setPage);
+await GetMyTaskMessagesApi(taskId,setAllMessages);
     }
 
 
     useEffect(() => {
       getAllMessagesPerTask();
-    }, [refreshOnChangeMessages,page,refreshFileUploaderInSendMessage,refreshonDeleteMessage]);
+    }, [refreshOnChangeMessages,refreshFileUploaderInSendMessage,refreshonDeleteMessage]);
 
 
     socket.on("refreshData",(data)=>{

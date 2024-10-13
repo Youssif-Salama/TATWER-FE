@@ -1,19 +1,19 @@
-import pdfMake from "pdfmake/build/pdfmake";
-import * as pdfFonts from "pdfmake/build/vfs_fonts";
 
-// Register the fonts
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-pdfMake.fonts = {
-  Amiri: {
-    normal: 'https://raw.githubusercontent.com/Youssif-Salama/amiri-font/main/Amiri-Regular.ttf',
-    bold: "https://raw.githubusercontent.com/Youssif-Salama/amiri-font/main/Amiri-Bold.ttf"
-  }
-};
-
-export const generatePdfFromArray = (systems: any,headers: string[], keys: string[],pageType:string,pdfName:string,extraContent?:any) => {
+export const generatePdfFromArray = async(systems: any,headers: string[], keys: string[],pageType:string,pdfName:string,extraContent?:any) => {
   let headRow: any = [];
   let width:any=[];
 
+  const pdfMake = (await import("pdfmake/build/pdfmake")).default;
+  const pdfFonts = (await import("../../../../../vfs_fontes")).default;
+
+  // Register the fonts
+  pdfMake.vfs = pdfFonts.vfs;
+  pdfMake.fonts = {
+    Amiri: {
+      normal: 'https://raw.githubusercontent.com/Youssif-Salama/amiri-font/main/Amiri-Regular.ttf',
+      bold: "https://raw.githubusercontent.com/Youssif-Salama/amiri-font/main/Amiri-Bold.ttf"
+    }
+  };
 
   headers?.forEach((header: string) => {
     const reversedHeader = header.split(' ').reverse().join(' ');
