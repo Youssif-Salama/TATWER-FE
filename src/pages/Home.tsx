@@ -28,16 +28,6 @@ const Home = () => {
                 </div>
                 <div className='shadow-md border border-[#0077bc] p-2 rounded-md bg-gray-100'>
                 <TasksReports/>
-                <div className="text-[12px] text-[#0077bc]">
-                    <div className="flex gap-2">
-                    <p className="bg-[#0077bc] w-[5px] h-[5px]"></p>
-                    <p>المهام النشطة</p>
-                    </div>
-                    <div className="flex gap-2 text-[#8eaccd]">
-                    <p className="bg-[#8eaccd] w-[5px] h-[5px]"></p>
-                    <p>المهام المنتهية</p>
-                    </div>
-                </div>
                 </div>
                 <div className="shadow-md border border-[#0077bc] p-2 rounded-md bg-gray-100">
                     <MinSystemInfo/>

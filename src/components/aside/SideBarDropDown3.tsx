@@ -1,6 +1,8 @@
 import { SiGoogleforms } from "react-icons/si";
 import { Link } from "react-router-dom";
+// @ts-ignore
 import { FaLocationDot } from "react-icons/fa6";
+// @ts-ignore
 import { FaFileContract } from "react-icons/fa";
 
 interface asideRoutesTypes {
@@ -16,16 +18,16 @@ const nestedRoutes: asideRoutesTypes[] = [
     path: ["/contracts/create"],
     icon: SiGoogleforms,
   },
-  {
-    name: " اضافه عنوان العقد",
-    path: ["/contracts/create/address"],
-    icon: FaLocationDot,
-  },
-  {
-    name: " اضافه ملفات العقد ",
-    path: ["/contracts/create/files"],
-    icon: FaFileContract,
-  },
+  // {
+  //   name: " اضافه عنوان العقد",
+  //   path: ["/contracts/create/address"],
+  //   icon: FaLocationDot,
+  // },
+  // {
+  //   name: " اضافه ملفات العقد ",
+  //   path: ["/contracts/create/files"],
+  //   icon: FaFileContract,
+  // },
 ];
 
 const SideBarDropDown3 = ({opendSideDrop3}:{opendSideDrop3:boolean}) => {

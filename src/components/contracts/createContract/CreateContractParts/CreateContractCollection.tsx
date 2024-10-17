@@ -20,6 +20,7 @@ const CreateContractCollection = () => {
   const [loading, setLoading] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const contractId = Cookies.get("contractId");
+  const [hasTax, setHasTax] = useState(false);
 
   const formik = useFormik<CreateContractCollectionTypes>({
     initialValues: {
@@ -32,7 +33,6 @@ const CreateContractCollection = () => {
       TaxNumber: "",
       Mobile: "",
       AdditionalPhone: "",
-      Website: "",
       Agent: "",
       RepresentationDocument: "",
       IdNumber: "",
@@ -49,6 +49,8 @@ const CreateContractCollection = () => {
       FixedPrice: 1,
       Times: 1,
       BankAccount:"",
+      HasTax:hasTax,
+      TaxValue:"",
     },
     validationSchema: CreateContractValidationSchema,
     onSubmit: async (values) => {
@@ -83,6 +85,10 @@ const CreateContractCollection = () => {
   const getOneContract = async (id: any) => {
     const result = await GetSpecifiContractApi(id);
     result?.data?.data.length>0 && formik.setValues(result?.data?.data[0]);
+    result?.data?.data.length>0 && formik.setFieldValue("PaymentWay",result?.data?.data[0]?.PaymentWay[0]);
+    result?.data?.data.length>0 && (
+      result?.data?.data[0]?.HasTax ? setHasTax(true) : setHasTax(false)
+    )
     dispatch(setContractType(result?.data?.data[0]?.Type));
   };
 
@@ -107,7 +113,7 @@ const CreateContractCollection = () => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <ContractOn formik={formik} />
+      <ContractOn formik={formik} setHasTax={setHasTax}/>
       <div className="my-6">
         <p className="h-[2px] bg-gray-300" />
       </div>
@@ -119,7 +125,7 @@ const CreateContractCollection = () => {
       <div className="my-6">
         <p className="h-[2px] bg-gray-300" />
       </div>
-      <CreateContractPayments formik={formik} />
+      <CreateContractPayments formik={formik} hasTax={hasTax} />
 
         <Button
         disabled={!(formik.isValid && formik.dirty)}

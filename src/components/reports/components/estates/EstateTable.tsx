@@ -30,7 +30,7 @@ const EstateTable = ({ allEstates,contracts }: any) => {
               <td className="px-2 py-2 whitespace-nowrap text-center">{estate?.PieceNumber}</td>
               <td className="px-2 py-2 whitespace-nowrap text-center">{estate?.PlanNumber}</td>
               {contracts && <td className="px-2 py-2 whitespace-nowrap text-center">{contracts[index]?.BankAccount}</td>}
-              <td className="px-2 py-2 whitespace-nowrap text-center">{estate?.Situation=="active" ? "مكتمل":"غير مكتمل"}</td>
+              <td className="px-2 py-2 whitespace-nowrap text-center">{estate?.Situation=="active" ? "نشط":"مسوده"}</td>
               {
               contracts &&
               <th className="font-semibold w-[50px] px-2 py-2">{contracts[index]?.RelyOn}</th>

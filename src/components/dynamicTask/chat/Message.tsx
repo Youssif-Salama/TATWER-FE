@@ -40,8 +40,8 @@ const Message = ({ message, key,setCurrentImageToDisplay }: { message: any; key:
     `} key={key} ref={lastMessage}>
       <div className={`flex gap-1 relative  max-md:w-[60%] w-[30%] ${(message?.EmpId?._id == currentEmpData?._id) ? "flex-row" : "flex-row-reverse"} `}>
         <div
-          className={` flex p-2 rounded-xl  break-words w-full   text-[#1f1f1f] text-[12px]
-            ${(message?.EmpId?._id == currentEmpData?._id) ? "rounded-br-none justify-start bg-[#0077bc]" : "rounded-bl-none  justify-end bg-slate-200 text-[#1f1f1f]"}
+          className={` flex p-2 rounded-xl  break-words w-full  text-[12px]
+            ${(message?.EmpId?._id == currentEmpData?._id) ? "rounded-br-none justify-start text-white bg-[#0077bc]" : "rounded-bl-none  justify-end bg-slate-200 text-[#1f1f1f]"}
             `}
         >
           {message?.Message}

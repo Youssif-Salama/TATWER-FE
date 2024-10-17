@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-export const GetAllTaxApi=async(setLoading:any)=>{
+export const GetAllTaxApi=async(setLoading?:any)=>{
   try{
     setLoading(true)
     const response:any=await axios.get(`${import.meta.env.VITE_BASE_URL}tax`,{

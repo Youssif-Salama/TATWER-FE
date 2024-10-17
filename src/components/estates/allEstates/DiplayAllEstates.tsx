@@ -66,7 +66,7 @@ const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:str
       name: "الحاله",
       selector: (row: AllEstatesTypes) =><div>
         {
-          row?.Situation=="active" ?<p className="bg-green-500 text-white p-1 rounded-md">مكتمل</p>:<p className="bg-red-500 text-white p-1 rounded-md">غير مكتمل</p>
+          row?.Situation=="active" ?<p className="bg-green-500 text-white p-1 rounded-md">نشط</p>:<p className="bg-red-500 text-white p-1 rounded-md">مسوده</p>
         }
       </div>,
     }

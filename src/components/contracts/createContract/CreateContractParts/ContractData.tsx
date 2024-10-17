@@ -133,24 +133,7 @@ const ContractData = ({ formik }: { formik: any }) => {
             }
           />
         </div>
-        <div className="w-[30%] max-md:w-[45%] max-sm:w-full">
-          <InputCommon
-            type="text"
-            required
-            id="BankAccount"
-            name="BankAccount"
-            placeholder="ادخل الحساب البنكي هنا"
-            label=" الحساب البنكي"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.BankAccount}
-            error={
-              formik.errors &&
-              formik.touched.BankAccount &&
-              formik.errors.BankAccount
-            }
-          />
-        </div>
+  
         <div className="w-[30%] max-md:w-[45%] max-sm:w-full">
           <div className="flex items-center gap-3" dir="rtl">
             <div className="w-[13%]">

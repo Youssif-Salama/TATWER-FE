@@ -54,7 +54,7 @@ function App() {
 
             <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
               <Route index element={<Home />} />
-              <Route path="/emp" element={<Employee />} />
+              <Route path="/settings/emp" element={<Employee />} />
               <Route path="/reports" element={<Reports/>}>
               </Route>
               <Route path="/reports/contracts" element={<ContractMain/>}></Route>

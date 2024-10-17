@@ -6,44 +6,43 @@ export const CreateContractValidationSchema = Yup.object().shape({
     .required("النوع مطلوب"),
   Name: Yup.string()
     .min(3, "يجب ألا يقل الاسم عن 3 أحرف")
-    .max(25, "يجب ألا يزيد الاسم عن 25 حرفًا")
     .required("الاسم مطلوب"),
   AdditionalName: Yup.string()
     .min(3, "يجب ألا يقل الاسم عن 3 أحرف")
-    .max(25, "يجب ألا يزيد الاسم عن 25 حرفًا")
     .optional(),
-  Phone: Yup.string().required("رقم الهاتف مطلوب"),
+  Phone: Yup.string().optional(),
   Email: Yup.string()
     .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "تنسيق البريد الإلكتروني غير صالح")
     .optional(),
-  TaxNumber: Yup.string().required("رقم الضريبة مطلوب"),
-  Mobile: Yup.string().required("رقم الجوال مطلوب"),
+  TaxNumber: Yup.string().optional(),
+  Mobile: Yup.string().optional(),
   AdditionalPhone: Yup.string().optional(),
-  Website: Yup.string()
-    .matches(
-      /^(https?:\/\/)?(www\.)?([a-zA-Z0-9-_]+\.)+[a-zA-Z]{2,}(:\d{1,5})?(\/.*)?$/,
-      "الرابط غير صالح"
-    )
-    .optional(),
+  // Website: Yup.string()
+  //   .matches(
+  //     /^(https?:\/\/)?(www\.)?([a-zA-Z0-9-_]+\.)+[a-zA-Z]{2,}(:\d{1,5})?(\/.*)?$/,
+  //     "الرابط غير صالح"
+  //   )
+  //   .optional(),
   Agent: Yup.string()
     .min(3, "يجب ألا يقل الاسم عن 3 أحرف")
-    .max(25, "يجب ألا يزيد الاسم عن 25 حرفًا")
-    .required("الوكيل مطلوب"),
-  RepresentationDocument: Yup.string().required("مستند التمثيل مطلوب"),
-  IdNumber: Yup.string().required("رقم الهوية مطلوب"),
-  Identity: Yup.string().required("رقم الهوية مطلوب"),
-  DocumentNumber: Yup.string().required("رقم المستند مطلوب"),
-  MobileNumber: Yup.string().required("رقم الجوال مطلوب"),
-  DocumentDate: Yup.date().required("تاريخ المستند مطلوب"),
-  ContractNumber: Yup.string().required("رقم العقد مطلوب"),
-  ContractCopy: Yup.string().required("نسخة العقد مطلوبة"),
-  RelyOn: Yup.string().required("الاعتماد مطلوب"),
-  ContractReleaseDate: Yup.date().required("تاريخ إصدار العقد مطلوب"),
-  ContractDate: Yup.date().required("تاريخ العقد مطلوب"),
+    .optional(),
+  RepresentationDocument: Yup.string().optional(),
+  IdNumber: Yup.string().optional(),
+  Identity: Yup.string().required("الرقم الوطني مطلوب"),
+  DocumentNumber: Yup.string().optional(),
+  MobileNumber: Yup.string().optional(),
+  DocumentDate: Yup.date().optional(),
+  ContractNumber: Yup.string().optional(),
+  ContractCopy: Yup.string().optional(),
+  RelyOn: Yup.string().optional(),
+  ContractReleaseDate: Yup.date().optional(),
+  ContractDate: Yup.date().optional(),
   PaymentWay: Yup.string()
-    .required("طريقة الدفع مطلوبة"),
-  Price: Yup.number().required("السعر مطلوب"),
-  FixedPrice: Yup.number().required("السعر الثابت مطلوب"),
-  Times: Yup.number().required("عدد مرات الدفع مطلوب"),
+    .optional(),
+  Price: Yup.number().optional(),
+  FixedPrice: Yup.number().optional(),
+  Times: Yup.number().optional(),
   BankAccount: Yup.string().optional(),
+  HasTax: Yup.boolean().optional(),
+  TaxValue: Yup.string().optional(),
 });

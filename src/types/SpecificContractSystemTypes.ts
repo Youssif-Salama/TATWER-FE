@@ -12,4 +12,6 @@ export interface SpecificContractSystemTypes {
     updatedAt: string
     __v: number
     IsRuning: boolean
+    TaxValue:string
+    Message:string
   }

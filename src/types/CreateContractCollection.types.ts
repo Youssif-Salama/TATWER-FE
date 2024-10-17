@@ -7,7 +7,6 @@ export interface CreateContractCollectionTypes {
   TaxNumber: string;
   Mobile: string;
   AdditionalPhone?: string;
-  Website?: string;
   Agent: string;
   RepresentationDocument: string;
   IdNumber: string;
@@ -24,6 +23,8 @@ export interface CreateContractCollectionTypes {
   ContractDate:Date |string;
   Price:number;
   FixedPrice:number;
-  Times:number
-  BankAccount:string
+  Times:number;
+  BankAccount:string;
+  HasTax:boolean;
+  TaxValue:"";
 }

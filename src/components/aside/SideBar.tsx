@@ -11,6 +11,7 @@ import SideBarDropDown3 from './SideBarDropDown3';
 import SideBarDropDown4 from './SideBarDropDown4';
 
 import SideBarDropDown5 from './SideBarDropDown5';
+// @ts-ignore
 import { FaUserCircle } from "react-icons/fa";
 import Cookies from 'js-cookie';
 import { FaTasks } from "react-icons/fa";
@@ -30,20 +31,36 @@ interface AsideRoute {
 
 let routes: AsideRoute[] = [
   {
-    name: 'الصفحه الرئيسيه',
+    name: 'الرئيسيه',
     path: ['/'],
     icon: MdFormatAlignCenter,
   },
   {
-    name:'التقارير',
-    path: ['/reports'],
-    icon: TbReport,
+    name: 'المؤجر و المستأجر',
+    path: ['/contracts', '/contracts/create', '/contracts/create/files', '/contracts/create/address'],
+    icon: SiGoogleforms,
+    haveDropDown: true,
+    id: 3,
+    arrow: RiArrowDownSFill,
   },
+  // {
+    //   name: 'الموظفين',
+  //   path: ['/settings/emp'],
+  //   icon: FaUserCircle     ,
+  // },
   {
-    name: 'الموظفين',
-    path: ['/emp'],
-    icon: FaUserCircle     ,
-  },
+    name: 'العقارات و المواقع',
+    path: ['/estates', '/estates/create', '/estates/create/files', '/estates/create/address'],
+    icon: SiGoogleforms,
+      haveDropDown: true,
+      id:5 ,
+      arrow: RiArrowDownSFill,
+    },
+    {
+      name: 'متابعه الاقساط و الدفعات',
+      path: ['/systems'],
+      icon: MdPayments,
+    },
   {
     name: 'المهمات',
     path: ['/todo','/todo/add','/todo/tasks'],
@@ -54,29 +71,13 @@ let routes: AsideRoute[] = [
     path: ['/tasks'],
     icon: FaTasks     ,
   },
-  {
-    name: 'الدفعات',
-    path: ['/systems'],
-    icon: MdPayments,
-  },
-  {
-    name: 'العقود',
-    path: ['/contracts', '/contracts/create', '/contracts/create/files', '/contracts/create/address'],
-    icon: SiGoogleforms,
-    haveDropDown: true,
-    id: 3,
-    arrow: RiArrowDownSFill,
-  },
-  {
-    name: 'العقارات',
-    path: ['/estates', '/estates/create', '/estates/create/files', '/estates/create/address'],
-      icon: SiGoogleforms,
-      haveDropDown: true,
-      id:5 ,
-      arrow: RiArrowDownSFill,
+    {
+      name:'التقارير',
+      path: ['/reports'],
+      icon: TbReport,
     },
     {
-    name: 'الاعدادات',
+      name: 'الاعدادات',
     path: ['/settings', '/settings/payment', '/settings/objects', '/settings/profile', '/settings/remindings'],
     icon: IoSettings,
     haveDropDown: true,

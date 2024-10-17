@@ -29,3 +29,27 @@ export const AddContractUnitesApi = async (data: any, setLoading: any) => {
     }
   }
 };
+
+
+export const hasContract = async (type:string) => {
+  try {
+    const estateId=Cookies.get("estateId")
+    const response = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}estate/attach/${estateId}/${type}`,
+      {
+        headers: {
+          token: Cookies.get("token"),
+        },
+      }
+    );
+    return response;
+  } catch (error: any) {
+    if (error.response) {
+      errorToaster(error.response.data.message || "Server Error");
+    } else if (error.request) {
+      errorToaster("Network Error");
+    } else {
+      errorToaster("Error in setting up the request");
+    }
+  }
+};

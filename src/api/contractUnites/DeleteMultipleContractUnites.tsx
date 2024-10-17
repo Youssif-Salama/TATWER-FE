@@ -20,6 +20,15 @@ export const DeleteMultipleContractUnites = async (row: any,setLoading:any,type:
       response && type==="tenant"&& DeleteTenantFilesDependingOnContract(item?.ContractId)
 
     });
+    const estateId=Cookies.get("estateId")
+    await axios.get(
+      `${import.meta.env.VITE_BASE_URL}estate/attach/${estateId}/${type}/${row?.length}`,
+      {
+        headers: {
+          token: Cookies.get("token"),
+        },
+      }
+    );
     return true;
   } catch (error: any) {
     setLoading(false)

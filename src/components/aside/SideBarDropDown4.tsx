@@ -12,8 +12,18 @@ interface asideRoutesTypes {
 
 const nestedRoutes: asideRoutesTypes[] = [
   {
+    name: "الموظفين",
+    path: ["/settings/emp"],
+    icon: MdOutlinePermIdentity,
+  },
+  {
     name: "طرق الدفع",
     path: ["/settings/payment"],
+    icon: MdPayments,
+  },
+  {
+    name: "الضرائب",
+    path: ["/settings"],
     icon: MdPayments,
   },
   {

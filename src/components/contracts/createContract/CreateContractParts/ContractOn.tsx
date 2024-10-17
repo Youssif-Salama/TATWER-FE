@@ -3,7 +3,8 @@ import { Input } from "@/componentsShadcn/ui/input";
 
 import { useState } from "react";
 
-const ContractOn = ({ formik }: { formik: any }) => {
+const ContractOn = ({ formik,setHasTax }: { formik: any,setHasTax:any }) => {
+  const [isTax, setIsTax] = useState(false);
   const [typeOfOwnerIdentity, setTypeOfOwnerIdentity] = useState<string>();
   return (
     <div className="w-full flex flex-col gap-4">
@@ -135,7 +136,7 @@ const ContractOn = ({ formik }: { formik: any }) => {
       </div>
 
       <div className="flex items-center flex-wrap w-full gap-4 justify-between">
-        <div className="w-[30%] max-md:w-[45%] max-sm:w-full">
+        <div className="w-[30%] max-md:w-[45%] max-sm:w-full flex items-center ">
           <InputCommon
             type="text"
             required
@@ -151,7 +152,19 @@ const ContractOn = ({ formik }: { formik: any }) => {
               formik.touched.TaxNumber &&
               formik.errors.TaxNumber
             }
+            disabled={isTax==false}
           />
+          <select className="bg-[#0077bc] text-white w-[20px]"
+          onChange={
+            (e:any)=>{
+              setHasTax(e.target.value);
+              setIsTax(e.target.value=="true"?true:false);
+            }
+          }
+          >
+            <option value="false">لا يوجد ضريبه</option>
+            <option value="true">يوجد ضريبه</option>
+          </select>
         </div>
         <div className="w-[30%] max-md:w-[45%] max-sm:w-full">
           <InputCommon
@@ -171,15 +184,15 @@ const ContractOn = ({ formik }: { formik: any }) => {
           <InputCommon
             type="text"
             required={false}
-            id="Website"
-            name="Website"
-            placeholder="ادخل  الموقع الالكتروني هنا"
-            label="   الموقع الالكتروني"
+            id="BankAccount"
+            name="BankAccount"
+            placeholder="ادخل رقم الحساب البنكي"
+            label="الحساب البنكي"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.Website}
+            value={formik.values.BankAccount}
             error={
-              formik.errors && formik.touched.Website && formik.errors.Website
+              formik.errors && formik.touched.BankAccount && formik.errors.BankAccount
             }
           />
         </div>

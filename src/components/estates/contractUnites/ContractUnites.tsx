@@ -5,7 +5,7 @@ import UnitesForLandlords from "./ContractUnitesTypes/ContractUnitesLandlords/Un
 import UnitesForTenants from "./ContractUnitesTypes/ContractUnitesTenants/UnitesForTenants";
 import { Button } from "@/componentsShadcn/ui/button";
 import LoadingSpinner from "@/common/LoadingSpinner";
-import { AddContractUnitesApi } from "@/api/contractUnites/AddContractUnitesApi";
+import { AddContractUnitesApi, hasContract } from "@/api/contractUnites/AddContractUnitesApi";
 import LandlordUnitesTable from "./ContractUnitesTypes/ContractUnitesLandlords/displayContractLandlordsUnites/LandlordUnitesTable";
 import TenantUnitesTable from "./ContractUnitesTypes/ContractUnitesTenants/displayContractTenantsUnites /TenantUnitesTable";
 import { useDispatch } from "react-redux";
@@ -46,6 +46,7 @@ const ContractUnites = () => {
     result && setTenantUnit(null);
     result && setTenantId(null);
     result && dispatch(setRefreshTenantUnites(Math.random()));
+    await hasContract("tenant");
     if(result &&tenantFiles?.length>0 && tenantNames?.length>0){
       let formData=new FormData();
       // @ts-ignore
@@ -75,6 +76,7 @@ const ContractUnites = () => {
     result && setLandlordUnit(null);
     result && setLandlordId(null);
     result && dispatch(setRefreshLandlordunites(Math.random()));
+    await hasContract("landlord");
   if(result &&landlordFiles?.length>0 && landlordNames?.length>0){
     let formData=new FormData();
     // @ts-ignore

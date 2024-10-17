@@ -9,6 +9,7 @@ import AddNewContractSystem from "./AddNewContractSystem";
 import {  customStylesSystems } from "@/common/TableRowStyle";
 import NestedTableFeatures from "./NestedTableFeatures";
 import { StopSystemsApi } from "@/api/systems/StopSystemsApi";
+import ContractSystemMessage from "./ContractSystemMessage";
 
 const SpecificContractSystems = () => {
   const [contractSystems, setContractSystems] = useState<
@@ -33,50 +34,54 @@ const SpecificContractSystems = () => {
     !result && setContractSystems(null);
   };
   useEffect(() => {
-    if(contractId)    getSpecificContractSystems();
+      getSpecificContractSystems();
   }, [ contractId]);
 
   useEffect(()=>{
     setPage(1)
     getSpecificContractSystems();
-  },[,refreshOnDeleteContractSystems])
+  },[refreshOnDeleteContractSystems])
 
   useEffect(()=>{
     getSpecificContractSystems();
   },[page,refreshOnAddNewContractSystem,limit])
+  // @ts-ignore
   const today=new Date();
 
   const columns = [
     {
-      name: "الرقم",
-      // @ts-ignore
-      selector: (row: SpecificContractSystemTypes, index: number) => index + 1,
-    },
-    {
-      name: "رقم الدفعه",
+      name: "رقم المسلسل",
       selector: (row: SpecificContractSystemTypes) => row.SystemNumber,
     },
     {
       name: "قيمه الايجار",
-      selector: (row: SpecificContractSystemTypes) => row.RentValue,
+      selector: (row: SpecificContractSystemTypes) => Number(row?.RentValue) / (1 + (Number(row?.TaxValue) / 100)),
+    },
+    {
+      name: "ضريبه القيمه المضافه",
+      selector: (row: SpecificContractSystemTypes) => `${Number(row?.TaxValue)/100*Number(row?.RentValue) / (1 + (Number(row?.TaxValue) / 100))}`,
     },
     {
       name: "المبالغ الثابته",
       selector: (row: SpecificContractSystemTypes) => row.FixedPrice,
     },
     {
-      name: "الحاله",
-      selector: (row: SpecificContractSystemTypes) => <div>
-        {
-          // @ts-ignore
-          ((new Date(row?.DueDate)-today) && !row?.Applied)<0?<span className="text-red-500">متأحره</span>:<span className="text-[#0077bc]">قادم</span>
-        }
-        {
-          // @ts-ignore
-          row?.Applied && <span className="text-[#0077bc]">تم الدفع</span>
-        }
-      </div>,
+      name: "القيمه الكليه ",
+      selector: (row: SpecificContractSystemTypes) => Number(row?.RentValue)+Number(row?.FixedPrice),
     },
+    // {
+    //   name: "الحاله",
+    //   selector: (row: SpecificContractSystemTypes) => <div>
+    //     {
+    //       // @ts-ignore
+    //       ((new Date(row?.DueDate)-today) && !row?.Applied)<0?<span className="text-red-500">متأحره</span>:<span className="text-[#0077bc]">قادم</span>
+    //     }
+    //     {
+    //       // @ts-ignore
+    //       row?.Applied && <span className="text-[#0077bc]">تم الدفع</span>
+    //     }
+    //   </div>,
+    // },
     {
       name: " تاريخ البدأ",
       selector: (row: SpecificContractSystemTypes) =>
@@ -145,7 +150,8 @@ const SpecificContractSystems = () => {
               paginationTotalRows={totalRows}
               selectableRows
               onSelectedRowsChange={handleSelectedRowsChange}
-
+              expandableRows
+              expandableRowsComponent={ContractSystemMessage}
               onChangePage={(value:number)=>{
                 setPage(value)
               }}

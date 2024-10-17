@@ -67,7 +67,7 @@ const AddTaxDialog = () => {
         <form onSubmit={formik.handleSubmit}>
       <div className="w-full">
         <InputCommon
-          type="number"
+          type="text"
           required
           id="TaxValue"
           name="TaxValue"

@@ -26,12 +26,20 @@ const CreateEstateCollection = () => {
       PieceNumber: "",
       PlanNumber: "",
       Notes: "",
-      Situation:"active"
+      Situation:"incomplete",
+      ConstructionAndMaintenanceExpenses:"",
+      BuildingPermit:"",
+      ConstructionCompletionPermit:"",
+      ComplianceCertificate:""
     },
     validationSchema:   CreateEstateValidationSchema,
     onSubmit: async (values) => {
       setLoading(true);
       if (estateId) {
+        // @ts-ignore
+        delete values.HasTenant;
+        // @ts-ignore
+        delete values.HasLandLord;
         const result: any = await UpdateEstateApi(values,estateId);
         result && successToaster(result?.data?.message);
         result && setLoading(false);

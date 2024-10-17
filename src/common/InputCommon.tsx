@@ -12,9 +12,10 @@ interface InputCommonProps {
     placeholder?: string;
     label: string;
     error: any;
+    disabled?:boolean
 }
 
-const InputCommon: React.FC<InputCommonProps> = ({ type, required = false, onChange, value, onBlur, id, name, placeholder, label, error }) => {
+const InputCommon: React.FC<InputCommonProps> = ({ type, required = false, onChange, value, onBlur, id, name, placeholder, label, error ,disabled}) => {
 
     useEffect(() => {
         if (type === "date") {
@@ -73,6 +74,7 @@ const InputCommon: React.FC<InputCommonProps> = ({ type, required = false, onCha
                     className="rounded-none w-full px-2 py-3 mx-auto placeholder:text-gray-400 text-[14px] border-2"
                     dir="rtl"
                     min={type === "number" ? 1 : undefined}
+                    disabled={disabled}
                 />
             </div>
         </div>
