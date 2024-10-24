@@ -45,7 +45,7 @@ const DisplayTenantFiles = ({allTenants,setTenantsPage,page,totalRows}:any) => {
       {
         (allTenants && allTenants?.length>0 && tenantFiles) &&
       <div className="my-4">
-        <p>ملفات المؤجر {clickedTenant?.ContractId?.Name}</p>
+        <p>ملفات المؤجر {clickedTenant?.ContractId?.Name || "------"}</p>
         <TenantFilesDisplay files={tenantFiles}/>
       </div>
       }
