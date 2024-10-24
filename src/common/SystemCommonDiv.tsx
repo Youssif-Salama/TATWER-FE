@@ -93,7 +93,15 @@ const SystemCommonDiv = ({ system }: { system: any }) => {
                   </div>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>{remainingDays?.days} يوم</p> {/* Tooltip shows remaining days in days */}
+                  {
+                    item.label=="متبقي له" &&
+                  <p>{remainingDays?.days} يوم</p>                  }
+                     {
+                    item.label!=="متبقي له" &&
+                  <p>{item.value}</p>                  }
+                  {
+                    item.label=="تذكير / تأكيد" &&
+                  <p>اضفط لفتح القائمة</p>                  }
                 </TooltipContent>
               </Tooltip>
             </div>
@@ -109,7 +117,6 @@ const SystemCommonDiv = ({ system }: { system: any }) => {
           <div className="p-2 cursor-pointer">
           <AddSystemMessageDialog system={system}  setDropdownOpen={setDropdownOpen} />
           </div>
-
         </div>
       )}
     </div>

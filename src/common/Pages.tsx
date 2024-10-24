@@ -1,7 +1,7 @@
 import  { useEffect, useState } from 'react';
 
 
-const Pages = ({setPages,pages}:any) => {
+const Pages = ({setPages,pages,disabled}:{setPages:any,pages:any,disabled?:any}) => {
   const [temp, setTemp] = useState(pages);
 
 
@@ -15,6 +15,174 @@ const Pages = ({setPages,pages}:any) => {
   useEffect(()=>{
     setPages(temp);
   },[temp])
+
+  useEffect(()=>{
+    console.log(pages);
+    
+  },[pages])
+
+  const [onChnageAllContracts,setOnChnageAllContracts] = useState(0);
+  const [onChnageAllEstates,setOnChnageAllEstates] = useState(0);
+  const [onChnageAllSettings,setOnChnageAllSettings] = useState(0);
+    useEffect(() => {
+    const updatePermissions = () => {
+      if (temp?.contracts?.all) {
+        temp.contracts = {
+          all: true,
+          tenants: {
+            post: true,
+            delete: true,
+            get: true,
+            put: true,
+          },
+          landlords: {
+            post: true,
+            delete: true,
+            get: true,
+            put: true,
+          },
+        };
+        temp.systems = {
+          system: {
+            post: true,
+            delete: true,
+            get: true,
+            put: true,
+          },
+        };
+      } else {
+        temp.contracts = {
+          all: false,
+          tenants: {
+            post: false,
+            delete: false,
+            get: false,
+            put: false,
+          },
+          landlords: {
+            post: false,
+            delete: false,
+            get: false,
+            put: false,
+          },
+        };
+        temp.systems = {
+          system: {
+            post: false,
+            delete: false,
+            get: false,
+            put: false,
+          },
+        };
+      }
+
+      if (temp?.estates?.all) {
+        temp.estates = {
+          all: true,
+          estate: {
+            post: true,
+            delete: true,
+            get: true,
+            put: true,
+          },
+          estateUnits: {
+            post: true,
+            delete: true,
+            get: true,
+            put: true,
+          },
+        };
+      } else {
+        temp.estates = {
+          all: false,
+          estate: {
+            post: false,
+            delete: false,
+            get: false,
+            put: false,
+          },
+          estateUnits: {
+            post: false,
+            delete: false,
+            get: false,
+            put: false,
+          },
+        };
+      }
+
+      if (temp?.settings?.all) {
+        temp.settings = {
+          all: true,
+          paymentWays: {
+            post: true,
+            delete: true,
+            get: true,
+            put: true,
+          },
+          taxes: {
+            post: true,
+            delete: true,
+            get: true,
+            put: true,
+          },
+          employees: {
+            post: true,
+            delete: true,
+            get: true,
+            put: true,
+          },
+          objects: {
+            post: true,
+            delete: true,
+            get: true,
+            put: true,
+          },
+          remindings: {
+            post: true,
+            delete: true,
+            get: true,
+            put: true,
+          },
+        };
+      } else {
+        temp.settings = {
+          all: false,
+          paymentWays: {
+            post: false,
+            delete: false,
+            get: false,
+            put: false,
+          },
+          taxes: {
+            post: false,
+            delete: false,
+            get: false,
+            put: false,
+          },
+          employees: {
+            post: false,
+            delete: false,
+            get: false,
+            put: false,
+          },
+          objects: {
+            post: false,
+            delete: false,
+            get: false,
+            put: false,
+          },
+          remindings: {
+            post: false,
+            delete: false,
+            get: false,
+            put: false,
+          },
+        };
+      }
+    };
+      updatePermissions()
+      setTemp(temp);
+  }, [onChnageAllContracts,onChnageAllEstates,onChnageAllSettings]);
 
   const handleCheckboxChange = (section: string, subSection: string, permission: string) => {
     setTemp((prevPages: any) => ({
@@ -40,8 +208,8 @@ const Pages = ({setPages,pages}:any) => {
   };
 
   return (
-    <div className="flex flex-col gap-2 max-h-[50vh] overflow-y-scroll relative">
-      <div className="flex items-center gap-2 text-[10px] bg-[#0077bcb5] text-white p-1 sticky top-0">
+    <div className={`flex flex-col gap-1 max-h-[50vh] overflow-y-scroll relative ${disabled && "pointer-events-none"}`}>
+      <div className="flex items-center gap-1 text-[10px] bg-[#0077bcb5] text-white p-1 sticky top-0">
         <div className="w-[20%]">الخدمه</div>
         <div className="grid-cols-4 grid w-[80%]">
           <div><label htmlFor="post">انشاء</label></div>
@@ -52,7 +220,7 @@ const Pages = ({setPages,pages}:any) => {
       </div>
 
       {/* Contracts Section */}
-      <div className="flex items-center gap-2 text-[10px]">
+      <div className="flex items-center gap-1 text-[10px]">
         <div className="w-[20%]">العقود</div>
         <div className="grid-cols-4 grid w-[80%]">
           <div className="flex items-center gap-1">
@@ -60,7 +228,10 @@ const Pages = ({setPages,pages}:any) => {
               type="checkbox"
               id="contractsAll"
               checked={temp.contracts.all}
-              onChange={() => toggleAll('contracts')}
+              onChange={() => {
+                toggleAll('contracts');
+                setOnChnageAllContracts(Math.random());
+              }}
             />
             <label htmlFor="contractsAll">كل المهام</label>
           </div>
@@ -68,7 +239,7 @@ const Pages = ({setPages,pages}:any) => {
       </div>
 
       {/* Tenants Permissions */}
-      <div className="flex items-center gap-2 text-[10px]">
+      <div className="flex items-center gap-1 text-[10px]">
         <div className="w-[20%]">المؤجرين</div>
         <div className="grid-cols-4 grid w-[80%]">
           {['post', 'delete', 'get', 'put'].map(action => (
@@ -85,7 +256,7 @@ const Pages = ({setPages,pages}:any) => {
       </div>
 
       {/* Landlords Permissions */}
-      <div className="flex items-center gap-2 text-[10px]">
+      <div className="flex items-center gap-1 text-[10px]">
         <div className="w-[20%]">المستأجرين</div>
         <div className="grid-cols-4 grid w-[80%]">
           {['post', 'delete', 'get', 'put'].map(action => (
@@ -103,7 +274,7 @@ const Pages = ({setPages,pages}:any) => {
 
 
       {/* System Permissions */}
-      <div className="flex items-center gap-2 text-[10px]">
+      <div className="flex items-center gap-1 text-[10px]">
         <div className="w-[20%]">الدفعات</div>
         <div className="grid-cols-4 grid w-[80%]">
           {['post', 'delete', 'get', 'put'].map(action => (
@@ -120,7 +291,7 @@ const Pages = ({setPages,pages}:any) => {
       </div>
 
       {/* Estates Section */}
-      <div className="flex items-center gap-2 text-[10px]">
+      <div className="flex items-center gap-1 text-[10px]">
         <div className="w-[20%]">العقارات</div>
         <div className="grid-cols-4 grid w-[80%]">
           <div className="flex items-center gap-1">
@@ -128,7 +299,10 @@ const Pages = ({setPages,pages}:any) => {
               type="checkbox"
               id="estatesAll"
               checked={temp.estates.all}
-              onChange={() => toggleAll('estates')}
+              onChange={() => {
+                toggleAll('estates')
+                setOnChnageAllEstates(Math.random());
+              }}
             />
             <label htmlFor="estatesAll">كل المهام</label>
           </div>
@@ -136,7 +310,7 @@ const Pages = ({setPages,pages}:any) => {
       </div>
 
       {/* Estate Permissions */}
-      <div className="flex items-center gap-2 text-[10px]">
+      <div className="flex items-center gap-1 text-[10px]">
         <div className="w-[20%]">العقار</div>
         <div className="grid-cols-4 grid w-[80%]">
           {['post', 'delete', 'get', 'put'].map(action => (
@@ -153,7 +327,7 @@ const Pages = ({setPages,pages}:any) => {
       </div>
 
       {/* Estate Units Permissions */}
-      <div className="flex items-center gap-2 text-[10px]">
+      <div className="flex items-center gap-1 text-[10px]">
         <div className="w-[20%]">وحدات العقار</div>
         <div className="grid-cols-4 grid w-[80%]">
           {['post', 'delete', 'get', 'put'].map(action => (
@@ -171,7 +345,7 @@ const Pages = ({setPages,pages}:any) => {
 
 
       {/* Settings Section */}
-      <div className="flex items-center gap-2 text-[10px]">
+      <div className="flex items-center gap-1 text-[10px]">
         <div className="w-[20%]">الإعدادات</div>
         <div className="grid-cols-4 grid w-[80%]">
           <div className="flex items-center gap-1">
@@ -179,7 +353,10 @@ const Pages = ({setPages,pages}:any) => {
               type="checkbox"
               id="settingsAll"
               checked={temp.settings.all}
-              onChange={() => toggleAll('settings')}
+              onChange={() => {
+                toggleAll('settings')
+                setOnChnageAllSettings(Math.random());
+              }}
             />
             <label htmlFor="settingsAll">كل المهام</label>
           </div>
@@ -187,7 +364,7 @@ const Pages = ({setPages,pages}:any) => {
       </div>
 
       {/* Payment Ways Permissions */}
-      <div className="flex items-center gap-2 text-[10px]">
+      <div className="flex items-center gap-1 text-[10px]">
         <div className="w-[20%]">طرق الدفع</div>
         <div className="grid-cols-4 grid w-[80%]">
           {['post', 'delete', 'get', 'put'].map(action => (
@@ -204,7 +381,7 @@ const Pages = ({setPages,pages}:any) => {
       </div>
 
       {/* Taxes Permissions */}
-      <div className="flex items-center gap-2 text-[10px]">
+      <div className="flex items-center gap-1 text-[10px]">
         <div className="w-[20%]">الضرائب</div>
         <div className="grid-cols-4 grid w-[80%]">
           {['post', 'delete', 'get', 'put'].map(action => (
@@ -221,7 +398,7 @@ const Pages = ({setPages,pages}:any) => {
       </div>
 
       {/* Employees Permissions */}
-      <div className="flex items-center gap-2 text-[10px]">
+      <div className="flex items-center gap-1 text-[10px]">
         <div className="w-[20%]">الموظفين</div>
         <div className="grid-cols-4 grid w-[80%]">
           {['post', 'delete', 'get', 'put'].map(action => (
@@ -238,7 +415,7 @@ const Pages = ({setPages,pages}:any) => {
       </div>
 
       {/* Remindings Permissions */}
-      <div className="flex items-center gap-2 text-[10px]">
+      <div className="flex items-center gap-1 text-[10px]">
         <div className="w-[20%]">التذكيرات</div>
         <div className="grid-cols-4 grid w-[80%]">
           {['post', 'delete', 'get', 'put'].map(action => (
@@ -255,7 +432,7 @@ const Pages = ({setPages,pages}:any) => {
       </div>
 
         {/* Objects Permissions */}
-        <div className="flex items-center gap-2 text-[10px]">
+        <div className="flex items-center gap-1 text-[10px]">
         <div className="w-[20%]"> الكيانات</div>
         <div className="grid-cols-4 grid w-[80%]">
           {['post', 'delete', 'get', 'put'].map(action => (

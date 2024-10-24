@@ -28,22 +28,23 @@ const SystemsCollection = () => {
   const [showWay, setShowWay] = useState<string | null>(null);
   const [startDate, setStartDate] = useState<string | null>(null);
   const [endDate, setEndDate] = useState<string | null>(null);
-  const [isApplied, setIsApplied] = useState<boolean>(false);
+  const [isApplied, setIsApplied] = useState<any>("paid");
 
   const [openNotes,setOpenNotes] = useState<boolean>(false);
   const [no,setNo]=useState<number>(6);
 
   const {refreshOnApplyOrSetSystemMessage}=useSelector((state:RootState)=>state.GlobalReducer)
+  const [rowsPerPage,   setRowsPerPage] = useState<number>(10);
 
   const getAllSystems=async()=>{
-    const result = await GetAllSystemsApi(isApplied,setLoading,page,showWay,searchKeyWord,searchValue,startDate,endDate,no);
+    const result = await GetAllSystemsApi(isApplied,setLoading,page,showWay,searchKeyWord,searchValue,startDate,endDate,no,rowsPerPage);
     result && setTotalRows(result?.data?.meta?.numberOfRows);
     result && setAllSystems(result?.data?.data);
   }
 
   useEffect(()=>{
     getAllSystems();
-  },[page,searchKeyWord,searchValue,showWay,startDate,endDate,refreshOnApplyOrSetSystemMessage,isApplied,no])
+  },[page,searchKeyWord,searchValue,showWay,startDate,endDate,refreshOnApplyOrSetSystemMessage,isApplied,no,rowsPerPage])
 
   const token=Cookies.get("token");
   const [decodedToken,setDecodedToken]=useState<any>(null);
@@ -75,14 +76,19 @@ const SystemsCollection = () => {
       <div className="bg-[#0077bc] p-1 text-white font-bold cursor-pointer flex gap-1 items-center justify-center">
         <span
         onClick={()=>{
-          setIsApplied(true)
+          setIsApplied("paid")
         }}
-        className={`${ isApplied?"bg-[#fff] text-[#0077bc]":""} p-1`}>تم دفعها</span>
+        className={`${ isApplied==="paid"?"bg-[#fff] text-[#0077bc]":""} p-1`}>تم دفعها</span>
         <span
         onClick={()=>{
-          setIsApplied(false)
+          setIsApplied("unpaid")
         }}
-        className={`${ isApplied?"":"bg-[#fff] text-[#0077bc]"} p-1`}>لم يتم دفعها</span>
+        className={`${ isApplied==="unpaid"?"bg-[#fff] text-[#0077bc]":""} p-1`}>لم يتم دفعها</span>
+          <span
+        onClick={()=>{
+          setIsApplied("stop")
+        }}
+        className={`${ isApplied==="stop"?"bg-[#fff] text-[#0077bc]":""} p-1`}> تم ايقافها</span>
       </div>
     </div>
     <div>
@@ -107,7 +113,7 @@ const SystemsCollection = () => {
     </div>
     {allSystems.length>0 &&
     <div className="flex items-center justify-center">
-      <SystemsPagination totalRows={totalRows} setPage={setPage} page={page}/>
+      <SystemsPagination totalRows={totalRows} setPage={setPage} page={page} rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage}/>
     </div>
     }
   </div>

@@ -197,7 +197,7 @@ const ContractCurrentFiles = ({
       <div className="mt-auto flex items-center ">
         <Button
           type="submit"
-          className="mt-auto w-full bg-red-500 flex items-center justify-center rounded-none hover:bg-red-400 transition ease-in-out duration-300 transform flex items-center justify-center"
+          className="mt-auto w-full bg-red-500 flex items-center justify-center rounded-none hover:bg-red-400 transition ease-in-out duration-300 transform "
           onClick={async () => {
             catchAllFiles([]);
             catchAllNames([]);
@@ -218,7 +218,7 @@ const ContractCurrentFiles = ({
         </Button>
         <Button
           type="submit"
-          className=" w-full bg-[#0077bc] flex items-center justify-center rounded-none hover:bg-[#0078bdc7] transition ease-in-out duration-300 transform flex items-center justify-center"
+          className=" w-full bg-[#0077bc] flex items-center justify-center rounded-none hover:bg-[#0078bdc7] transition ease-in-out duration-300 transform flex"
           onClick={() => {
             let formData = new FormData();
             formData.append("Names", JSON.stringify(currentNames));

@@ -1,38 +1,19 @@
 import { GetAllRolesApi } from "@/api/roles/GetAllRolesApi";
 import LoadingSpinner from "@/common/LoadingSpinner";
+import UpdateEmployeeRoles from "@/components/employees/allEmployees/UpdateEmployeeRoles";
 import SystemsPagination from "@/components/systems/SystemsPagination";
-import React, { useEffect, useState } from "react";
-import EmployeeRoles from "./EmployeeRoles";
+import { RootState } from "@/store/store";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-interface Permission {
-  post: boolean;
-  delete: boolean;
-  get: boolean;
-  put: boolean;
-}
-
-interface Page {
-  all: boolean;
-  [key: string]: Permission | boolean;
-}
-
-interface PagesData {
-  [key: string]: Page;
-}
-
-interface NestedEmployeePagesProps {
-  data: {
-    Pages: PagesData;
-  };
-}
-
-const NestedEmployeePages: React.FC<NestedEmployeePagesProps> = ({ data }:any) => {
+const EmployeesRoles = () => {
   const [roles,setRoles]=useState<any>([]);
   const [page,setPage]=useState<any>(1);
   const [loading,setLoading]=useState<boolean>(false);
   const [totalRows,setTotalRows]=useState<number>(0);
   const [rowsPerPage,setRowsPerPage]=useState<any>(10);
 
+  const refreshAllRoles=useSelector((state:RootState)=>state.GlobalReducer?.refreshAllRoles)
 
   const getAllRoles=async()=>{
     const result=await GetAllRolesApi(page,setLoading,rowsPerPage);
@@ -42,12 +23,11 @@ const NestedEmployeePages: React.FC<NestedEmployeePagesProps> = ({ data }:any) =
 
   useEffect(()=>{
     getAllRoles()
-  },[page,rowsPerPage])
+  },[page,rowsPerPage,refreshAllRoles])
 
 
   return (
-    <div className={` p-4 text-[12px] ${data?.Role=="super_admin" && "hidden"}`}>
-      <p className="text-[#0077bc] underline p-2 w-full">* اختار من الصلاحيات المتاحه</p>
+    <div>
       <>
       {
         loading ? <div className="flex items-center justify-center h-[10vh]"><LoadingSpinner/></div>:<>
@@ -56,7 +36,7 @@ const NestedEmployeePages: React.FC<NestedEmployeePagesProps> = ({ data }:any) =
            {/* display roles */}
           <div>
             {roles?.map((role:any)=>{
-              return <EmployeeRoles key={role._id} role={role} employee={data}/>
+              return <UpdateEmployeeRoles key={role._id} role={role}/>
             })
             }
           </div>
@@ -69,6 +49,6 @@ const NestedEmployeePages: React.FC<NestedEmployeePagesProps> = ({ data }:any) =
       </>
     </div>
   );
-};
+}
 
-export default NestedEmployeePages;
+export default EmployeesRoles

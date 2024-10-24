@@ -45,6 +45,7 @@ import LandlordsMain from "./components/reports/components/landlords/LandlordsMa
 import EstateMain from "./components/reports/components/estates/EstateMain";
 import OneEstateMain from "./components/reports/components/estate/main/OneEstateMain";
 import Earnings from "./components/reports/components/earnings/Earnings";
+import Employees from "./components/settings/employees/Employees";
 
 function App() {
   return (
@@ -80,6 +81,7 @@ function App() {
                 <Route path="objects" element={<ObjectsCollection />} />
                 <Route path="profile" element={<ProfileCollection />} />
                 <Route path="remindings" element={<RemindingsCollection />} />
+                <Route path="employees" element={<Employees />} />
               </Route>
               <Route path="contracts" element={<Contract />}>
                 <Route index element={<AllContracts />} />

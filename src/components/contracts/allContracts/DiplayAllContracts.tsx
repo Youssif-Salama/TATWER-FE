@@ -7,9 +7,11 @@ import DataTable from "react-data-table-component";
 import { useSelector } from "react-redux";
 import NestedTableFeatures from "./NestedTableFeatures";
 import { StopContractApi } from "@/api/contract/StopContractApi";
+import CommonTooltip from "@/common/CommonTooltip";
+import ExpandedRowForContract from "./ExpandedRowForContract";
 
 const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate}:{searchKeyWord:string |null,searchValue:string|null,showWay:string|null,startDate:string|null,endDate:string|null}) => {
-  
+
   const { getContractType ,refreshONDeleteContracts} = useSelector(
     (state: RootState) => state.GlobalReducer
   );
@@ -19,9 +21,10 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
   const [page, setPage] = useState<number>(1);
   const [allContracts, setAllContracts] = useState<any[]>([]);
   const [catchSelectedRows, setCatchSelectedRows] = useState<any[]>([]);
+  const [rowPerPage, setRowPerPage] = useState<number>(10);
 
   const getAllContractsDependingOnType = async () => {
-    const result = await GetAllContractsApi(setLoading, getContractType, page,showWay,searchKeyWord,searchValue,startDate,endDate);
+    const result = await GetAllContractsApi(setLoading, getContractType, page,showWay,searchKeyWord,searchValue,startDate,endDate,rowPerPage);
     result && setTotalRows(result?.data?.meta?.numberOfRows);
     result && setAllContracts(result?.data?.data);
     !result && setAllContracts([]);
@@ -29,82 +32,85 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
   };
   useEffect(() => {
     getAllContractsDependingOnType();
-  }, [getContractType, page,searchKeyWord,searchValue,showWay,startDate,endDate,refreshONDeleteContracts]);
+  }, [getContractType, page,searchKeyWord,searchValue,showWay,startDate,endDate,refreshONDeleteContracts,rowPerPage]);
 
 
 
 
   const columns = [
     {
-      name: "رقم العقد",
+      name: "الرمز",
       // @ts-ignore
       selector: (row: AllContractTypes, index: number) => index + 1,
+      minWidth:"70px"
     },{
-      name: " الاسم",
-      selector: (row: AllContractTypes) => row?.Name,
+      name: "المؤجر - المستأجر",
+      selector: (row: AllContractTypes) => <CommonTooltip field={row?.Name || "-"}/>,
+      minWidth:"120px"
     },
     {
-      name: "رقم الجوال",
-      selector: (row: AllContractTypes) => row?.Phone,
-    },{
       name: "الهويه",
-      selector: (row: AllContractTypes) => row?.Identity,
+      selector: (row: AllContractTypes) => <CommonTooltip field={row?.Identity || "-"}/>,
+      minWidth:"150px"
+    },{
+      name: "الجوال",
+      selector: (row: AllContractTypes) =>  <CommonTooltip field={row?.Phone || "-"}/>,
+      minWidth:"150px"
+    },
+    {
+      name: "الايميل",
+      selector: (row: AllContractTypes) => <CommonTooltip field={row?.Email || "-"}/>,
+      minWidth:"150px"
+    },
+    {
+      name: "المدينه",
+      // @ts-ignore
+      selector: (row: AllContractTypes) => <CommonTooltip field={row?.City?.CityName || "-"}/>,
+      minWidth:"150px"
+    },
+    {
+      name: "رقم العقد",
+      selector: (row: AllContractTypes) => < CommonTooltip field={row?.ContractNumber || "-"}/>,
+      minWidth:"150px"
     },
     {
       name: " صفه",
       selector: (row: AllContractTypes) => {
         return row?.Type == "tenant" ? "مؤجر" : "مستأجر";
       },
+      minWidth:"100px"
     },
     {
       name: "طريقه الدفع",
-      selector: (row: AllContractTypes) => {
-        if (row?.PaymentWay == "1") {
-          return "شهري";
-        } else if (row?.PaymentWay == "3") {
-          return "ربع سنوي";
-        } else if (row?.PaymentWay == "6") {
-          return "نصف سنوي";
-        } else if (row?.PaymentWay == "12") {
-          return "سنوي";
-        } else {
-          return `${row?.PaymentWay} شهور`;
-        }
-      },
+      selector: (row: AllContractTypes) =>< CommonTooltip field={`كل ${row?.PaymentWay} اشهر` || "-"}/>,
+      minWidth:"150px"
     },
-    // {
-    //   name: "سعر الدفعه",
-    //   selector: (row: AllContractTypes) => row?.Price,
-    // },
-    // {
-    //   name: "سعر الدفعه الثابت",
-    //   selector: (row: AllContractTypes) => row?.FixedPrice,
-    // },
     {
       name: "عدد الدفعات",
-      selector: (row: AllContractTypes) => row?.Times,
-    },
-    {
-      name: "السعر الكلي",
-      selector: (row: AllContractTypes) => row?.TotalPrice,
+      selector: (row: AllContractTypes) => < CommonTooltip field={row?.Times || "-"}/>,
+      minWidth:"70px"
     },
     {
       name: "تاريخ البدء",
       selector: (row: AllContractTypes) =>
         row?.ContractReleaseDate?.split("T")[0],
+      minWidth:"100px"
     },
     {
       name: "تاريخ  البدء الهجري",
       selector: (row: AllContractTypes) =>
         row?.ContractReleaseDateH?.split("T")[0],
+      minWidth:"100px"
     },
     {
       name: "تاريخ الانتهاء",
       selector: (row: AllContractTypes) => row?.ContractEndDate?.split("T")[0],
+      minWidth:"100px"
     },
     {
       name: "تاريخ  الانتهاء الهجري",
       selector: (row: AllContractTypes) => row?.ContractEndDateH?.split("T")[0],
+      minWidth:"100px"
     },
     {
       name: "الحاله",
@@ -134,6 +140,10 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
     setCatchSelectedRows(selectedRows)
   }
 
+  useEffect(()=>{
+    setCatchSelectedRows([])
+  },[])
+
   return (
     <div className="py-4 text-[12px]">
       {
@@ -154,6 +164,11 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
         paginationServer
         paginationTotalRows={totalRows}
         onSelectedRowsChange={handleSelectedRowsChange}
+        expandableRows
+        expandableRowsComponent={ExpandedRowForContract}
+        onChangeRowsPerPage={(value: number) => {
+            setRowPerPage(value);
+        }}
         selectableRows
         onChangePage={(value: number) => {
           setPage(value);

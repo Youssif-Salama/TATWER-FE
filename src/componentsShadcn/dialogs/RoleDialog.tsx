@@ -1,4 +1,3 @@
-import LoadingSpinner from "@/common/LoadingSpinner";
 import { Button } from "@/componentsShadcn/ui/button";
 
 import {
@@ -11,19 +10,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/componentsShadcn/ui/dialog";
-import { AppDispatch } from "@/store/store";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import {  useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import Pages from "@/common/Pages";
 import { UpdateEmployeePagesApi } from "@/api/employee/UpdateEmployeePagesApi";
 import { successToaster } from "@/utils/ReactToatify";
-import { setRefreshONDeleteEmployee } from "@/store/slices/GlobalSlice";
-import { GetOneEmployeeApi } from "@/api/profile/GetOneEmployeeApi";
-import { AddRoleApi } from "@/api/roles/AddRoleApi";
+import LoadingSpinner from "@/common/LoadingSpinner";
 
-const EmployeesPagesDialog = ({ rows, setCatchSelectedRows }: any) => {
-  const [loading, setLoading] = useState(false);
+
+const RoleDialog = ({dbPages,dbRoleName,employeeId}:any) => {
   const [roleName, setRoleName] = useState("");
   const [pages, setPages] = useState<any>({
     systems: {
@@ -98,37 +93,29 @@ const EmployeesPagesDialog = ({ rows, setCatchSelectedRows }: any) => {
       },
     },
   });
-  const dispatch: AppDispatch = useDispatch();
-  const deletMultipleEmployees = async () => {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(()=>{
+    setPages(dbPages)
+    setRoleName(dbRoleName)
+  },[
+    dbPages,dbRoleName
+  ])
+
+  const updateEmployeeRole = async () => {
     const data = {
       Pages: pages,
     };
+    const rows=[{_id:employeeId}];
     const result = await UpdateEmployeePagesApi(data, setLoading, rows);
-    result && dispatch(setRefreshONDeleteEmployee(Math.random()));
-    result && setCatchSelectedRows([]);
     result && successToaster("تم التعديل بنجاح");
   };
-
-  const getMydate = async () => {
-    const result = await GetOneEmployeeApi(rows[0]?._id);
-    if (result) {
-      if (result?.data?.data[0]?.Pages) {
-        setPages(result?.data?.data[0]?.Pages);
-      }
-    }
-  };
-
-  useEffect(() => {
-    getMydate();
-  }, []);
-
-  const [openInputDiv, SetopenInputDiv] = useState(false);
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="bg-green-500 border-0 outline-0 rounded-md p-2 text-sm text-white">
-          الصلاحيات
+        <button className="bg-[#0077bc] border-0 outline-0 rounded-md p-1 text-sm text-white">
+          مشاهده
         </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]" dir="rtl">
@@ -141,42 +128,21 @@ const EmployeesPagesDialog = ({ rows, setCatchSelectedRows }: any) => {
             </DialogClose>
           </DialogTitle>
           <DialogDescription className="text-start">
-            تحديد الصفحات
+            دور {roleName}
           </DialogDescription>
         </DialogHeader>
-        <Pages setPages={setPages} pages={pages} />
+        <Pages setPages={setPages} pages={pages} disabled={true}/>
         <DialogFooter>
-          <div className="flex gap-2">
-          <Button
-            onClick={() => {
-              deletMultipleEmployees();
-            }}
-            type="button"
-            className="text-white bg-green-500 hover:text-white rounded-lg hover:bg-green-400"
-          >
-            {loading ? <LoadingSpinner color="text-white" /> : "تأكيد"}
-          </Button>
           <div className="relative">
           <Button
             onClick={() => {
-             SetopenInputDiv(!openInputDiv)
+              updateEmployeeRole()
             }}
             type="button"
-            className="text-white bg-[#0077bc] hover:text-white rounded-lg hover:bg-[#0077bcb1]"
+            className="text-white bg-[#0077bc] hover:text-white rounded-lg hover:bg-[#0077bcb1] flex items-center justify-center"
           >
-           {openInputDiv ? "اغلاق" : "تسجيل الدور"}
+            {loading?(<LoadingSpinner/>):(<>اختيار</>)}
           </Button>
-            <div className={`${openInputDiv ? "absolute left-0 -top-[55px]" : "hidden"} bg-gray-200 p-2 rounded-md flex items-center gap-4`}>
-            <input type="text" className="rounded-md px-2 py-1" placeholder="ادخل اسم الدور او الصلاحيه هنا " onChange={(e:any)=>{
-              setRoleName(e?.target?.value)
-            }} />
-            <button className="text-white bg-[#0077bc] hover:text-white rounded-lg hover:bg-[#0077bcb1] px-4 py-1"
-onClick={async()=>{
-  await AddRoleApi({Name:roleName,Pages:pages});
-}}
-            >تأكيد</button>
-            </div>
-          </div>
           </div>
         </DialogFooter>
       </DialogContent>
@@ -184,4 +150,4 @@ onClick={async()=>{
   );
 };
 
-export default EmployeesPagesDialog;
+export default RoleDialog;

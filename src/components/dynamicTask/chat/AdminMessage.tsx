@@ -13,7 +13,7 @@ import FilePreview from "@/common/FilePreview";
 const AdminMessage = ({
   message,
   key,
-  setCurrentImageToDisplay,
+  setCurrentImageToDisplay
 }: {
   message: any;
   key: any;
@@ -24,6 +24,8 @@ const AdminMessage = ({
   const dispatch: AppDispatch = useDispatch();
   const token = Cookies.get("token");
   const lastMessage = useRef<any>(null);
+  const [openMessage, setOpenMessage] = useState(false);
+
 
   useEffect(() => {
     if (token) {
@@ -66,7 +68,26 @@ const AdminMessage = ({
         <div
           className={`flex p-2 rounded-xl break-words w-full text-white text-[12px] ${messageBoxStyles}`}
         >
-          {message?.Message}
+            <p className="max-w-[100%] whitespace-wrap break-words">
+            {message?.Message && message.Message.length > 100 ? (
+              <span>
+                {!openMessage
+                  ? `${message.Message.substring(0, 100)}...`
+                  : message.Message}
+              </span>
+            ) : (
+              message?.Message
+            )}
+            {message?.Message && message.Message.length > 100 && (
+              <span
+                className="text-[10px] text-[#1f1f1f] hover:underline cursor-pointer mx-1"
+                onClick={() => setOpenMessage(!openMessage)}
+              >
+                {!openMessage ? "عرض المزيد" : "عرض اقل"}
+              </span>
+            )}
+          </p>
+          <div className="w-full">
           {message?.FileId && (
             <div
               className={`grid w-full gap-2 ${
@@ -78,9 +99,7 @@ const AdminMessage = ({
                   <div className="w-full rounded-xl overflow-hidden">
                     <FilePreview path={`${import.meta.env.VITE_BE_Domain}${file?.path}`} />
                   </div>
-                  <div className="text-[12px] break-words w-full">
-                    {message?.FileId?.FileMessage}
-                  </div>
+
                   <div
                     className={`bg-white p-1 absolute rounded-full cursor-pointer ${filePreviewPosition}`}
                     onClick={() => {
@@ -96,6 +115,33 @@ const AdminMessage = ({
               ))}
             </div>
           )}
+<div className="text-[12px] break-words w-full">
+                  <p className="max-w-[100%] whitespace-wrap break-words">
+                      {message?.FileId?.FileMessage &&
+                      message?.FileId?.FileMessage.length > 100 ? (
+                        <span>
+                          {!openMessage
+                            ? `${message?.FileId?.FileMessage.substring(
+                                0,
+                                100
+                              )}...`
+                            : message?.FileId?.FileMessage}
+                        </span>
+                      ) : (
+                        message?.FileId?.FileMessage
+                      )}
+                      {message?.FileId?.FileMessage &&
+                        message?.FileId?.FileMessage.length > 100 && (
+                          <span
+                            className="text-[10px] text-[#1f1f1f] hover:underline cursor-pointer mx-1"
+                            onClick={() => setOpenMessage(!openMessage)}
+                          >
+                            {!openMessage ? "عرض المزيد" : "عرض اقل"}
+                          </span>
+                        )}
+                    </p>
+                  </div>
+          </div>
         </div>
 
         <div

@@ -14,7 +14,7 @@ interface asideRoutesTypes {
 
 const nestedRoutes: asideRoutesTypes[] = [
   {
-    name: "اضافه بيانات عقد",
+    name: "اضافه بيانات مؤجر او مستأجر",
     path: ["/contracts/create"],
     icon: SiGoogleforms,
   },

@@ -6,9 +6,10 @@ export interface AllEstatesTypes {
   PieceNumber: number
   PlanNumber: number
   Notes: string
-  createdAt: string
+  EstateDate: string
   updatedAt: string
   __v: number
   AddressId: string
   Situation: string
+  Status  : string
 }

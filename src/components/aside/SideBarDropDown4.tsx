@@ -37,6 +37,11 @@ const nestedRoutes: asideRoutesTypes[] = [
     icon: RiProfileLine,
   },
   {
+    name: "اعداد المستخدمين ",
+    path: ["/settings/employees"],
+    icon: RiProfileLine,
+  },
+  {
     name:"التذكيرات",
     path: ["/settings/remindings"],
     icon: MdEmail,

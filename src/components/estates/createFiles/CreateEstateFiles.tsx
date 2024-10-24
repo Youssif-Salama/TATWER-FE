@@ -10,6 +10,7 @@ import { RootState } from "@/store/store";
 import { Button } from "@/componentsShadcn/ui/button";
 import LoadingSpinner from "@/common/LoadingSpinner";
 import { AddEstateFileApi } from "@/api/estateFile/AddEstateFileApi";
+import DisplayEstateContractsFiles from "./DisplayEstateContractsFiles";
 
 export const  CreateEstateFiles= ()=> {
 
@@ -42,6 +43,7 @@ export const  CreateEstateFiles= ()=> {
 
   return (
     <>
+    <DisplayEstateContractsFiles/>
       {
         <>
           <div

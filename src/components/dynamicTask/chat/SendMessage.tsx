@@ -107,8 +107,8 @@ const SendMessage = ({ setCarryFiles, carryFiles }: { setCarryFiles: any, carryF
           onChange={handleFileChange}
         />
       </label>
-      <input
-        type="text"
+      <textarea
+        rows={1}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="اكتب ملاحظتك هنا"

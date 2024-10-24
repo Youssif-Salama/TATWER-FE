@@ -17,26 +17,39 @@ const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:str
   const [page, setPage] = useState<number>(1);
   const [allContracts, setAllContracts] = useState<any[]>([]);
   const [catchSelectedRows, setCatchSelectedRows] = useState<any[]>([]);
+  const [rowsPerPage,   setRowsPerPage] = useState<number>(10);
 
   const getAllContractsDependingOnType = async () => {
-    const result = await GetAllEstatesApi(setLoading, page,showWay,searchKeyWord,searchValue);
+    const result = await GetAllEstatesApi(setLoading, page,showWay,searchKeyWord,searchValue,rowsPerPage);
     result && setTotalRows(result?.data?.meta?.numberOfRows);
     result && setAllContracts(result?.data?.data);
   };
 
   useEffect(() => {
     getAllContractsDependingOnType();
-  }, [ page,searchKeyWord,searchValue,showWay,refreshONDeleteContracts]);
+  }, [ page,searchKeyWord,searchValue,showWay,refreshONDeleteContracts,rowsPerPage]);
 
   const columns = [
     {
-      name: "رقم العقار",
+      name: "الرمز",
       // @ts-ignore
       selector: (row: AllEstatesTypes, index: number) => index + 1,
     },
     {
       name: "اسم العقار",
       selector: (row: AllEstatesTypes) => row?.EstateName,
+    },
+    {
+      name: "المدينه",
+      selector: (row: any) => row?.AddressId?.City || row?.AddressData?.City || "-",
+    },
+    {
+      name: "الحي",
+      selector: (row: any) => row?.AddressId?.Neighborhood || row?.AddressData?.Neighborhood || "-",
+    },
+    {
+      name: "الشارع",
+      selector: (row: any) => row?.AddressId?.Neighborhood || row?.AddressData?.Neighborhood || "-",
     },
     {
       name: "رقم وثيقه الملكيه",
@@ -55,18 +68,17 @@ const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:str
       selector: (row: AllEstatesTypes) => row?.EstateSpace,
     },
     {
-      name: "المنطقه",
-      selector: (row: any) => row?.AddressId?.City || row?.AddressData?.City || "-",
-    },
-    {
       name: "تاريخ التسجيل",
-      selector: (row: AllEstatesTypes) => row?.createdAt.slice(0,10),
+      selector: (row: AllEstatesTypes) => row?.EstateDate.slice(0,10),
     },
     {
       name: "الحاله",
-      selector: (row: AllEstatesTypes) =><div>
+      selector: (row: AllEstatesTypes) =><div className="flex gap-2">
         {
           row?.Situation=="active" ?<p className="bg-green-500 text-white p-1 rounded-md">نشط</p>:<p className="bg-red-500 text-white p-1 rounded-md">مسوده</p>
+        }
+         {
+          row?.Status=="complete" ?<p className="bg-green-500 text-white p-1 rounded-md">مكتمل</p>:<p className="bg-red-500 text-white p-1 rounded-md">غير مكتمل</p>
         }
       </div>,
     }
@@ -89,6 +101,9 @@ const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:str
         pagination
         paginationServer
         paginationTotalRows={totalRows}
+        onChangeRowsPerPage={(value: number) => {
+          setRowsPerPage(value);
+        }}
         onSelectedRowsChange={handleSelectedRowsChange}
         selectableRows
         onChangePage={(value: number) => {

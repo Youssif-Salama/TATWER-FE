@@ -12,7 +12,6 @@ const MyTaskBody = () => {
   const {id:taskId}=useParams();
   const {refreshOnChangeMessages,refreshFileUploaderInSendMessage,refreshonDeleteMessage}=useSelector((state:any)=>state.GlobalReducer);
   // const [page,setPage]=useState<any>(1);
-
     const getAllMessagesPerTask=async()=>{
 await GetMyTaskMessagesApi(taskId,setAllMessages);
     }
@@ -31,8 +30,9 @@ await GetMyTaskMessagesApi(taskId,setAllMessages);
 
 
 
+
   return (
-    <div className="mb-4">
+    <div className="mb-4" >
       <MessagesBody carryFiles={carryFiles} setCarryFiles={setCarryFiles} allMessages={allMessages}/>
       <SendMessage setCarryFiles={setCarryFiles}  carryFiles={carryFiles}/>
     </div>

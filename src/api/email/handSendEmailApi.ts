@@ -23,7 +23,7 @@ export const handSendEmailApi = async (data:any, setLoading: any) => {
 catch (error: any) {
   setLoading(false);
   if (error.response) {
-    errorToaster(error.response.data.message || "Server Error");
+    errorToaster("خطأ ف الارسال تأكد من ادخال بياناتك كالايميل وكلمة السر بشكل صحيح");
   } else if (error.request) {
     errorToaster("Network Error");
   } else {

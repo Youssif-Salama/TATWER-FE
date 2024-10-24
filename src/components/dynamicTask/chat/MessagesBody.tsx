@@ -3,7 +3,7 @@ import { AppDispatch } from "@/store/store";
 import { IoIosCloseCircle } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import Message from "./Message";
-import {  useState } from "react";
+import {   useEffect, useRef, useState } from "react";
 import AdminMessage from "./AdminMessage";
 
 const MessagesBody = ({
@@ -17,6 +17,7 @@ const MessagesBody = ({
 }) => {
   const dispatch: AppDispatch = useDispatch();
   const [currentImageToDisplay, setCurrentImageToDisplay] = useState<any>(null);
+  const messageBodyRef=useRef<HTMLDivElement>(null);
 
   const handleFileRemove = (fileToRemove: File) => {
     if (carryFiles) {
@@ -27,9 +28,16 @@ const MessagesBody = ({
     }
   };
 
+  useEffect(()=>{
+    if (messageBodyRef.current) {
+        console.log(messageBodyRef.current.scrollHeight,  messageBodyRef.current.scrollTop,  messageBodyRef.current.offsetHeight);
+    }
+  },[])
+
+
 
   return (
-    <div className="bg-[#0077bc] h-[65vh] shadow-lg border relative w-full">
+    <div ref={messageBodyRef} className="h-[65vh] shadow-lg border relative w-full">
       {carryFiles && (
         <div className="grid grid-cols-4 gap-2 max-md:grid-cols-2 max-sm:grid-cols-1 bg-[#1f1f1f78] p-2 w-full h-full absolute top-0 z-[50] overflow-y-scroll">
           <div
@@ -129,7 +137,7 @@ const MessagesBody = ({
       )}
       <div className="bg-white border p-4 w-full h-full overflow-y-scroll">
         {allMessages?.map((item: any) => (
-          <>
+          <div key={item?._id}>
           {
             item.EmpId !==null ?
             <Message
@@ -138,7 +146,7 @@ const MessagesBody = ({
             setCurrentImageToDisplay={setCurrentImageToDisplay}
             />:<AdminMessage message={item} key={item.id}  setCurrentImageToDisplay={setCurrentImageToDisplay}/>
           }
-          </>
+          </div>
         ))}
       </div>
     </div>

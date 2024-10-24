@@ -33,7 +33,8 @@ interface InitialState {
   refreshRemindings:any
   refreshonDeleteMessage:any,
   currentEstateTenantId:any
-  currentEstateLandlordId:any
+  currentEstateLandlordId:any,
+  refreshAllRoles:any
 }
 
 const initialState: InitialState = {
@@ -69,7 +70,8 @@ const initialState: InitialState = {
   refreshRemindings:null,
   refreshonDeleteMessage:null,
   currentEstateTenantId:null,
-  currentEstateLandlordId:null
+  currentEstateLandlordId:null,
+  refreshAllRoles:null
 };
 
 const GlobalReducer = createSlice({
@@ -175,6 +177,9 @@ const GlobalReducer = createSlice({
     setCurrentEstateLandlordId:(state,action)=>{
       state.currentEstateLandlordId=action.payload
     },
+    setRefreshAllRoles:(state,action)=>{
+      state.refreshAllRoles=action.payload
+    }
   },
 });
 
@@ -211,7 +216,8 @@ export const {
   setRefreshRemindings,
   setRefreshOnDeleteMessage,
   setCurrentEstateTenantId,
-  setCurrentEstateLandlordId
+  setCurrentEstateLandlordId,
+  setRefreshAllRoles
 } = GlobalReducer.actions;
 
 export default GlobalReducer.reducer;
