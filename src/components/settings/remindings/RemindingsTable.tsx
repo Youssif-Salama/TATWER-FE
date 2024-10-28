@@ -75,7 +75,18 @@ const RemindingsTable = () => {
                 </p>
                 </div>
                 <div className="text-gray-400 break-words p-1">
-                  {item?.RemindingMessage}
+                  <p>
+                    <span>المقدمه: </span>
+                    <span>{item?.RemindingHead}</span>
+                  </p>
+                  <p>
+                    <span>الرساله: </span>
+                    <span>{item?.RemindingMessage}</span>
+                  </p>
+                  <p>
+                    <span>الخاتمه: </span>
+                    <span>{item?.RemindingTail}</span>
+                  </p>
                 </div>
               </div>
             })

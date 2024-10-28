@@ -26,8 +26,9 @@ const FilterEmployees: React.FC<FilterContractsProps> = ({
             }
           >
             <option value="">اختر حقل البحث</option>
-            <option value="Name">اسم الموظف</option>
-            <option value="email">البريد الالكتروني</option>
+            <option value="Fname">الاسم الاول</option>
+            <option value="Lname">الاسم الثاني</option>
+            <option value="Email">البريد الالكتروني</option>
             <option value="Phone">الهاتف</option>
           </select>
         </div>

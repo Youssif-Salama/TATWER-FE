@@ -4,7 +4,8 @@ import Cookies from "js-cookie";
 
 export const handSendEmailApi = async (data:any, setLoading: any) => {
   try{
-    setLoading(true)
+    data={message:data.messageHead+"##"+data.message+"##"+data.messageTail,systemId:data.systemId}
+    setLoading(true);
     const response = await axios.post(
     `${import.meta.env.VITE_BASE_URL}/email/handSend`,data,
     {
@@ -19,6 +20,8 @@ export const handSendEmailApi = async (data:any, setLoading: any) => {
     successToaster(response?.data?.message);
     setLoading(false);
   }
+
+
 }
 catch (error: any) {
   setLoading(false);

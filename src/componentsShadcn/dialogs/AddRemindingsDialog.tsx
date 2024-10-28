@@ -20,6 +20,8 @@ import { AddRemindingsApi } from "@/api/remindings/AddRemindingsApi";
 interface TaxFormProps {
   RemindingTimeLine: string;
   RemindingMessage: string;
+  RemindingHead: string;
+  RemindingTail: string;
 }
 
 const AddRemindingsDialog = () => {
@@ -30,6 +32,8 @@ const AddRemindingsDialog = () => {
   const formik = useFormik<TaxFormProps>({
     initialValues: {
       RemindingTimeLine: "",
+      RemindingHead:"",
+      RemindingTail:"",
       RemindingMessage:"",
     },
     onSubmit: async (values: TaxFormProps, { resetForm }) => {
@@ -80,6 +84,14 @@ const AddRemindingsDialog = () => {
         </select>
       </div>
       <div className="flex flex-col gap-2 text-[12px]">
+        <label htmlFor="RemindingHead" className=" text-[#0077bc]">المقدمه</label>
+        <textarea className="border-2" name="RemindingHead" id="RemindingHead"
+          onChange={formik.handleChange}
+          value={formik.values.RemindingHead}
+          onBlur={formik.handleBlur}
+        />
+      </div>
+      <div className="flex flex-col gap-2 text-[12px]">
         <label htmlFor="RemindingMessage" className=" text-[#0077bc]">الرساله</label>
         <textarea className="border-2" name="RemindingMessage" id="RemindingMessage"
           onChange={formik.handleChange}
@@ -87,7 +99,14 @@ const AddRemindingsDialog = () => {
           onBlur={formik.handleBlur}
         />
       </div>
-      <div></div>
+      <div className="flex flex-col gap-2 text-[12px]">
+        <label htmlFor="RemindingTail" className=" text-[#0077bc]">الخاتمه</label>
+        <textarea className="border-2" name="RemindingTail" id="RemindingTail"
+          onChange={formik.handleChange}
+          value={formik.values.RemindingTail}
+          onBlur={formik.handleBlur}
+        />
+      </div>
       <div className="flex items-center justify-end mt-4">
         <Button
           type="submit" // Changed type to submit for form submission

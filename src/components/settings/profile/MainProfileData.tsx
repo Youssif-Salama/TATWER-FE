@@ -16,7 +16,8 @@ const MainProfileData = ({data}:any) => {
       Fname:data?.Fname,
       Lname:data?.Lname,
       Email:data?.Email,
-      Password:data?.Password
+      Password:data?.Password,
+      Phone:data?.Phone
     },
     onSubmit: async (values) => {
       let objData=values;
@@ -32,6 +33,9 @@ const MainProfileData = ({data}:any) => {
       if(values?.Password==data?.Password){
         delete objData?.Password;
       }
+      if(values?.Phone==data?.Phone){
+        delete objData?.Phone;
+      }
       const result = await UpdateMyDataApi(objData,setLoading);
       result && dispatch(setRefreshProfile(Math.random()));
       result && formik.resetForm();
@@ -43,7 +47,8 @@ const MainProfileData = ({data}:any) => {
       Fname:data?.Fname,
       Lname:data?.Lname,
       Email:data?.Email,
-      Password:data?.Password
+      Password:data?.Password,
+      Phone:data?.Phone
     })
   },[data])
 
@@ -76,6 +81,14 @@ const MainProfileData = ({data}:any) => {
           <input type="text" name="Email" id="Email" className="border p-1 rounded-md mt-1 w-full text-[12px]"
             onChange={formik.handleChange}
             value={formik.values.Email}
+            onBlur={formik.handleBlur}
+          />
+        </div>
+        <div className="flex items-start flex-col">
+          <label htmlFor="Phone" className="text-[10px] text-[#0077bc]">الهاتف</label>
+          <input type="text" name="Phone" id="Phone" className="border p-1 rounded-md mt-1 w-full text-[12px]"
+            onChange={formik.handleChange}
+            value={formik.values.Phone}
             onBlur={formik.handleBlur}
           />
         </div>

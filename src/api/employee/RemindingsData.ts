@@ -1,3 +1,4 @@
+import { successToaster } from "@/utils/ReactToatify";
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -24,6 +25,7 @@ export const AddEmployeeRemindingsInfoApi = async (data:any) => {
         }
       }
     );
+    response && successToaster(response?.data?.message);
     return response;
   } catch (error: any) {
   }

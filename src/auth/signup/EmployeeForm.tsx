@@ -8,6 +8,7 @@ const EmployeeForm = () => {
   const [lname, setLname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -17,7 +18,8 @@ const EmployeeForm = () => {
       Fname: fname,
       Lname: lname,
       Email: email,
-      Password: password
+      Password: password,
+      Phone: phone,
     };
     const result: any = await EmployeeSignupApi(data, setLoading);
     result && navigate("/login");
@@ -79,8 +81,24 @@ const EmployeeForm = () => {
               />
           </div>
 
+           {/* Phone Field */}
+           <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
+              الهاتف
+            </label>
+            <input
+              type="phone"
+              id="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="ادخل الهاتف"
+              required
+              />
+          </div>
+
           {/* Password Field */}
-          <div className="mb-4">
+          <div className="mb-4 col-span-2">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
               كلمه السر
             </label>

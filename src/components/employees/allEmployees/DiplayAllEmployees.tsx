@@ -23,6 +23,7 @@ export interface AllEmployeesTypes {
   createdAt: string
   updatedAt: string
   __v: number
+  Phone: string
 }
 
 
@@ -79,6 +80,12 @@ const DiplayAllEmployees = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:s
       name: "البريد الالكتروني",
       selector: (row: AllEmployeesTypes) => <div className={`${row?.Verified?"":"text-red-500"}`}>
 {row?.Email}
+      </div>,
+    },
+    {
+      name: "الهاتف",
+      selector: (row: AllEmployeesTypes) => <div>
+{row?.Phone || "لا يوجد"}
       </div>,
     },
     {
