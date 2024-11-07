@@ -9,7 +9,7 @@ const NestedTableFeatures = ({selectedRows,setCatchSelectedRows}:{selectedRows:a
 
   const getFileId=async()=>{
     const result=await GetContractFileApi(selectedRows[0]?._id);
-    result && Cookies.set("fileId",result?.data?.data[0]?._id)
+    result && result?.data?.data.length>0 && Cookies.set("fileId",result?.data?.data[0]?._id);
   }
 
   return (
@@ -27,9 +27,12 @@ const NestedTableFeatures = ({selectedRows,setCatchSelectedRows}:{selectedRows:a
             selectedRows.length >=2 ?null:<button className="bg-green-500 border-0 outline-0 rounded-md p-2 text-sm text-white"
             onClick={()=>{
               Cookies.remove("contractId");
+              Cookies.remove("addressId");
               Cookies.remove("fileId");
               getFileId();
               Cookies.set("contractId",selectedRows[0]?._id)
+              Cookies.set("contractType",selectedRows[0]?.Type)
+              Cookies.set("addressId",selectedRows[0]?.AddressId?._id)
               window.location.href = "/contracts/create"
             }}
             ><FaEye  className=" text-white" />

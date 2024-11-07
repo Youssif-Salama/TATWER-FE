@@ -5,7 +5,8 @@ import { IoMdMore } from "react-icons/io";
 
 interface Contract {
   Name: string;
-  _id:string
+  _id:string;
+  NickName: string;
 }
 
 interface PaginationMeta {
@@ -140,7 +141,7 @@ const ContractUnitesTenants = ({setTenantId}: {setTenantId: any}) => {
                     setTenantId(item._id)
                   }}
                 >
-                  {item.Name}
+                  {item.Name} | {item.NickName}
                 </p>
               ))
             ) : (

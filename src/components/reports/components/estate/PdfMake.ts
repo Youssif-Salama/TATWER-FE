@@ -60,7 +60,7 @@ export const generatePdfFromArray = async(systems: any,headers: string[], keys: 
   if(extraContent){
     tableMaped= systems.map((system: any, index: number) =>{
       const lastAlert = system?.Alerts && system.Alerts.length > 0 ? system.Alerts[system.Alerts.length - 1] : "-";
-      const totalPrice =Number(Number(system?.RentValue) + Number(system?.FixedPrice)).toFixed(4)
+      const totalPrice =Number(Number(system?.RentValue) + Number(system?.FixedPrice))
       return (
         [
           { text: (index + 1).toString(), style: 'tableCell' },

@@ -26,6 +26,7 @@ import { UpdateUniteApi } from '@/api/unites/UpdateUniteApi';
 const UpdateUniteDialog = ({ row }: { row: any }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch: AppDispatch = useDispatch();
+  // @ts-ignore
   const { uniteAddonsLength } = useSelector((state: RootState) => state.GlobalReducer);
   const { _id } = row;
 
@@ -129,7 +130,6 @@ const UpdateUniteDialog = ({ row }: { row: any }) => {
             <div className="flex items-center justify-end mt-6">
               <Button
                 type="submit"
-                disabled={loading || uniteAddonsLength === 0}
                 className="rounded-none bg-[#0077bc] hover:bg-[#0077bccd]"
               >
                 {loading ? <LoadingSpinner color="text-white" /> : 'تحديث الوحدة'}

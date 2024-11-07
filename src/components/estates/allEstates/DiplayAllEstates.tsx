@@ -41,7 +41,7 @@ const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:str
     },
     {
       name: "المدينه",
-      selector: (row: any) => row?.AddressId?.City || row?.AddressData?.City || "-",
+      selector: (row: any) => row?.AddressId?.Town || row?.AddressData?.Town || "-",
     },
     {
       name: "الحي",
@@ -49,7 +49,7 @@ const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:str
     },
     {
       name: "الشارع",
-      selector: (row: any) => row?.AddressId?.Neighborhood || row?.AddressData?.Neighborhood || "-",
+      selector: (row: any) => row?.AddressId?.Street || row?.AddressData?.Street || "-",
     },
     {
       name: "رقم وثيقه الملكيه",
@@ -73,15 +73,14 @@ const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:str
     },
     {
       name: "الحاله",
-      selector: (row: AllEstatesTypes) =><div className="flex gap-2">
+      selector: (row: AllEstatesTypes) =><div className="flex gap-2 text-[12px] w-[400px]">
         {
           row?.Situation=="active" ?<p className="bg-green-500 text-white p-1 rounded-md">نشط</p>:<p className="bg-red-500 text-white p-1 rounded-md">مسوده</p>
         }
          {
           row?.Status=="complete" ?<p className="bg-green-500 text-white p-1 rounded-md">مكتمل</p>:<p className="bg-red-500 text-white p-1 rounded-md">غير مكتمل</p>
         }
-      </div>,
-    }
+      </div>    }
   ];
 
 

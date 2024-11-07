@@ -56,7 +56,12 @@ export const GetAllSystemsApiForReports = async (setLoading:any) => {
   try {
     setLoading(true);
     const response = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}contract-systems/reports/min`
+      `${import.meta.env.VITE_BASE_URL}contract-systems/reports/min`,
+      {
+        headers: {
+          token:Cookies.get("token")
+        }
+      }
     );
     response&&setLoading(false);
     return response;

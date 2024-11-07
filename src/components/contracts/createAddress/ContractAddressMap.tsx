@@ -4,10 +4,19 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
+import { FaMapPin } from 'react-icons/fa6';
+import ReactDOMServer from 'react-dom/server';
 
 const ContractAddressMap = ({ formik }: { formik: any }) => {
     const [location, setLocation] = useState<{ lat: number; lng: number } | null>(null);
-    const {mapLocation}=useSelector((state:RootState)=>state.GlobalReducer);
+    const { mapLocation } = useSelector((state: RootState) => state.GlobalReducer);
+
+const redMapPin = new L.DivIcon({
+    html: ReactDOMServer.renderToString(<FaMapPin size={24} color="red" />),
+    iconSize: [24, 24],
+    className: 'custom-marker-icon'
+});
+
     const handleMapClick = (e: L.LeafletMouseEvent) => {
         setLocation({ lat: e.latlng.lat, lng: e.latlng.lng });
     };
@@ -17,7 +26,14 @@ const ContractAddressMap = ({ formik }: { formik: any }) => {
             formik.setFieldValue('lat', location.lat);
             formik.setFieldValue('lang', location.lng);
         }
-    }, [location])
+    }, [location]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            window.dispatchEvent(new Event('resize'));
+            console.log("resize");
+        }, 1000);
+    }, []);
 
     return (
         <div className='flex flex-col items-center'>
@@ -40,57 +56,37 @@ const ContractAddressMap = ({ formik }: { formik: any }) => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='© OpenStreetMap contributors'
                 />
+                {mapLocation && (
+                    <Marker position={[mapLocation.lat, mapLocation.lng]} icon={redMapPin}>
+                    </Marker>
+                )}
                 {location && (
                     <Marker position={[location.lat, location.lng]}>
                     </Marker>
                 )}
             </MapContainer>
             <div className='my-6'>
-                {
-                    location && (
-                        <div>
-                            <div className='flex items-center justify-around gap-2'>
-                                <div className='bg-[#0077bc] text-white p-2'>الموقع الجديد</div>
-                                <div className='bg-[#0077bc] text-white p-2'>
-
-                                    دائره عرض: {location.lat}
-                                </div>
-                                <div className='bg-[#0077bc] text-white p-2'>
-
-                                    خط الطول: {location.lng}
-                                </div>
-                            </div>
-                        </div>
-                    )
-                }
-                {
-                    mapLocation && (
-                        <div className='mt-6'>
-                            <div className='flex items-center justify-around gap-2'>
-                                <div className='bg-[#0077bc] text-white p-2'>الموقع الحالي</div>
-                                <div className='bg-[#0077bc] text-white p-2'>
-
-                                    دائره عرض: {mapLocation.lat}
-                                </div>
-                                <div className='bg-[#0077bc] text-white p-2'>
-
-                                    خط الطول: {mapLocation.lng}
-                                </div>
-                            </div>
-                        </div>
-                    )
-                }
+                {location && (
+                    <div className='flex items-center justify-around gap-2'>
+                        <div className='bg-[#0077bc] text-white p-2'>الموقع الجديد</div>
+                        <div className='bg-[#0077bc] text-white p-2'>دائره عرض: {location.lat}</div>
+                        <div className='bg-[#0077bc] text-white p-2'>خط الطول: {location.lng}</div>
+                    </div>
+                )}
+                {mapLocation && (
+                    <div className='mt-6 flex items-center justify-around gap-2'>
+                        <div className='bg-[#0077bc] text-white p-2'>الموقع الحالي</div>
+                        <div className='bg-[#0077bc] text-white p-2'>دائره عرض: {mapLocation.lat}</div>
+                        <div className='bg-[#0077bc] text-white p-2'>خط الطول: {mapLocation.lng}</div>
+                    </div>
+                )}
             </div>
             <div className="w-full">
-                {
-                    formik.errors && formik.errors.lang || !formik.errors && formik.errors.lat ? (
-                        <div className='text-red-500 bg-red-300 w-full text-center px-1 py-4 font-semibold'>
-                            يجب عليك اختيار موقع
-                        </div>
-
-                    )
-                        : null
-                }
+                {formik.errors && (formik.errors.lang || formik.errors.lat) && (
+                    <div className='text-red-500 bg-red-300 w-full text-center px-1 py-4 font-semibold'>
+                        يجب عليك اختيار موقع
+                    </div>
+                )}
             </div>
         </div>
     );

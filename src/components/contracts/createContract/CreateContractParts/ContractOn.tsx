@@ -1,11 +1,21 @@
 import InputCommon from "@/common/InputCommon";
 import { Input } from "@/componentsShadcn/ui/input";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const ContractOn = ({ formik,setHasTax }: { formik: any,setHasTax:any }) => {
-  const [isTax, setIsTax] = useState(false);
+const ContractOn = ({ formik,setHasTax,hasTax }: { formik: any,setHasTax:any,hasTax:any }) => {
+  const [isTax, setIsTax] = useState(hasTax);
   const [typeOfOwnerIdentity, setTypeOfOwnerIdentity] = useState<string>();
+
+
+  useEffect(()=>{
+    if(hasTax){
+      setHasTax(true)
+    }else{
+      setHasTax(false)
+    }
+  },[hasTax])
+
   return (
     <div className="w-full flex flex-col gap-4">
       <div
@@ -68,7 +78,7 @@ const ContractOn = ({ formik,setHasTax }: { formik: any,setHasTax:any }) => {
             />
           </div>
         )}
-        <div className="w-[30%] max-md:w-[45%] max-sm:w-full">
+        <div className="w-[30%] max-md:w-[45%] max-sm:w-full flex items-center gap-2">
           <InputCommon
             type="text"
             required
@@ -81,6 +91,22 @@ const ContractOn = ({ formik,setHasTax }: { formik: any,setHasTax:any }) => {
             value={formik.values.Name}
             error={formik.errors && formik.touched.Name && formik.errors.Name}
           />
+              <InputCommon
+              type="text"
+              required={false}
+              id="NickName"
+              name="NickName"
+              placeholder="الكنيه"
+              label="الكنيه"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.NickName}
+              error={
+                formik.errors &&
+                formik.touched.NickName &&
+                formik.errors.NickName
+              }
+            />
         </div>
       </div>
 
@@ -154,17 +180,18 @@ const ContractOn = ({ formik,setHasTax }: { formik: any,setHasTax:any }) => {
             }
             disabled={isTax==false}
           />
-          <select className="bg-[#0077bc] text-white w-[20px]"
-          onChange={
-            (e:any)=>{
-              setHasTax(e.target.value);
-              setIsTax(e.target.value=="true"?true:false);
-            }
-          }
-          >
-            <option value="false">لا يوجد ضريبه</option>
-            <option value="true">يوجد ضريبه</option>
-          </select>
+          <select
+  className="bg-[#0077bc] text-white w-[20px]"
+  onChange={(e) => {
+    const hasTaxValue = e.target.value === "true";
+    setHasTax(hasTaxValue);
+    setIsTax(hasTaxValue);
+  }}
+  value={isTax ? "true" : "false"}
+>
+  <option value="false">لا يوجد ضريبه</option>
+  <option value="true">يوجد ضريبه</option>
+</select>
         </div>
         <div className="w-[30%] max-md:w-[45%] max-sm:w-full">
           <InputCommon

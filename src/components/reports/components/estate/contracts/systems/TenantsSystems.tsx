@@ -72,13 +72,13 @@ const TenantsSystems = ({ allSystems }: any) => {
                 <td className="px-2 py-2 whitespace-nowrap text-center">{index + 1}</td>
                 <td className="px-2 py-2 whitespace-nowrap text-center">{system?.SystemNumber}</td>
                 <td className="px-2 py-2 whitespace-nowrap text-center">
-                  {Number(system?.RentValue).toFixed(2)}
+                  {Number(system?.RentValue)}
                 </td>
                 <td className="px-2 py-2 whitespace-nowrap text-center">
-                  {Number(system?.FixedPrice).toFixed(2)}
+                  {Number(system?.FixedPrice)}
                 </td>
                 <td className={`px-2 py-2 whitespace-nowrap text-center`}>
-                  {(Number(system?.RentValue) + Number(system?.FixedPrice)).toFixed(2)}
+                  {(Number(system?.RentValue) + Number(system?.FixedPrice))}
                 </td>
                 <td className={`px-2 py-2 whitespace-nowrap text-center`}>
                   {system?.ReleaseDate?.slice(0, 10)}
@@ -117,9 +117,9 @@ const TenantsSystems = ({ allSystems }: any) => {
           <tr>
             <td></td>
             <td></td>
-            <td className="text-center bg-[#0077bc96] text-white font-semibold">{Number(totalRents).toFixed(4)}</td>
-            <td className="text-center bg-[#0077bc96] text-white font-semibold">{Number(totalFixeds).toFixed(4)}</td>
-            <td className="text-center bg-[#0077bc96] text-white font-semibold">{Number(Number(totalRents)+Number(totalFixeds)).toFixed(4)}</td>
+            <td className="text-center bg-[#0077bc96] text-white font-semibold">{Number(totalRents)}</td>
+            <td className="text-center bg-[#0077bc96] text-white font-semibold">{Number(totalFixeds)}</td>
+            <td className="text-center bg-[#0077bc96] text-white font-semibold">{Number(Number(totalRents)+Number(totalFixeds))}</td>
             <td></td>
             <td></td>
             <td></td>

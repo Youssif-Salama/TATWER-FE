@@ -64,9 +64,9 @@ const TenantsMain = () => {
         "العقار مدينه": allSystems[0]?.EstateAddress?.City || "-",
         "علي مسجل": allSystems[0]?.ContractId?.RelyOn || "-",
         "الضريبي الرقم ": allSystems[0]?.ContractId?.TaxNumber || "-",
-        "العقد قيمه اجمال ": Number(paymentInfo?.totalContractPrice).toFixed(4) || "-",
-        "المدفوعه المبالغ ": Number(paymentInfo?.totalAppliedSystemsPrice).toFixed(4) || "-",
-        "العقد من المتبقي  ": Number(paymentInfo?.totalNotAppliedSystemsPrice).toFixed(4) || "-"
+        "العقد قيمه اجمال ": Number(paymentInfo?.totalContractPrice) || "-",
+        "المدفوعه المبالغ ": Number(paymentInfo?.totalAppliedSystemsPrice) || "-",
+        "العقد من المتبقي  ": Number(paymentInfo?.totalNotAppliedSystemsPrice) || "-"
     }
     setExtraContent(temp);
   },[allSystems])
@@ -212,19 +212,19 @@ const dataToExport=useMemo(()=>{
             <div className="flex items-center bg-gray-100 shadow-md">
               <div className="bg-[#0077bc] text-white px-2 py-1 w-[110px]">اجمالي قيمه العقد</div>
               <div className=" bg-gray-100 p-1 text-center w-[160px]">{
-                Number(paymentInfo?.totalContractPrice).toFixed(4)
+                Number(paymentInfo?.totalContractPrice)
                 }</div>
             </div>
             <div className="flex items-center bg-gray-100 shadow-md">
               <div className="bg-[#0077bc] text-white px-2 py-1 w-[110px]">المبالغ المدفوعة</div>
               <div className=" bg-gray-100 p-1 text-center w-[160px]">{
-                Number(paymentInfo?.totalAppliedSystemsPrice).toFixed(4)
+                Number(paymentInfo?.totalAppliedSystemsPrice)
                 }</div>
             </div>
             <div className="flex items-center bg-gray-100 shadow-md">
               <div className="bg-[#0077bc] text-white px-2 py-1 w-[110px]">المتبقي من العقد</div>
               <div className=" bg-gray-100 p-1 text-center w-[160px]">{
-                Number(paymentInfo?.totalNotAppliedSystemsPrice).toFixed(4)
+                Number(paymentInfo?.totalNotAppliedSystemsPrice)
                 }</div>
             </div>
           </div>

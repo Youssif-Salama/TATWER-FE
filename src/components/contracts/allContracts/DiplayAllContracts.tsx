@@ -65,20 +65,13 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
     {
       name: "المدينه",
       // @ts-ignore
-      selector: (row: AllContractTypes) => <CommonTooltip field={row?.City?.CityName || "-"}/>,
+      selector: (row: AllContractTypes) => <CommonTooltip field={row?.AddressId?.City   || "-"}/>,
       minWidth:"150px"
     },
     {
       name: "رقم العقد",
       selector: (row: AllContractTypes) => < CommonTooltip field={row?.ContractNumber || "-"}/>,
       minWidth:"150px"
-    },
-    {
-      name: " صفه",
-      selector: (row: AllContractTypes) => {
-        return row?.Type == "tenant" ? "مؤجر" : "مستأجر";
-      },
-      minWidth:"100px"
     },
     {
       name: "طريقه الدفع",

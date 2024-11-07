@@ -64,7 +64,9 @@ const CreateContract = () => {
                 const result = await DeleteContractApi(contractId,setLoading,contractType);
                 result && Cookies.remove("contractId");
                 result && Cookies.remove("addressId");
+                result && Cookies.remove("fileId");
                 result && dispatch(setCatchContractIdChange(Math.random()));
+                result && dispatch(setResetForm(Math.random()));
                 result && dispatch(setRefreshOnAddNewContractSystem(Math.random()));
               }}
               type="button"
@@ -77,6 +79,7 @@ const CreateContract = () => {
               onClick={() => {
                 Cookies.remove("contractId");
                 Cookies.remove("addressId");
+                 Cookies.remove("fileId");
                 dispatch(setCatchContractIdChange(Math.random()));
                 dispatch(setRefreshOnAddNewContractSystem(Math.random()));
                 dispatch(setResetForm(Math.random()));

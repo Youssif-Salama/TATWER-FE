@@ -16,11 +16,14 @@ import { setCatchContractIdChange, setContractType, setRefreshOnAddNewContractSy
 import CreateContractPayments from "../CreateContractPayments/CreateContractPayments";
 import { UpdateContractApi } from "@/api/contract/UpdateContractApi";
 import { GetSpecifiContractApi } from "@/api/contract/GetSpecificContractApi";
+import ContractMoreEmails from "./ContractMoreEmails";
+import ContractDates from "./ContractDates";
 const CreateContractCollection = () => {
   const [loading, setLoading] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const contractId = Cookies.get("contractId");
   const [hasTax, setHasTax] = useState(false);
+  const [currentMoreEmails, setCurrentMoreEmails] = useState<string[]>([]);
 
   const formik = useFormik<CreateContractCollectionTypes>({
     initialValues: {
@@ -28,6 +31,7 @@ const CreateContractCollection = () => {
       Identity: "",
       Name: "",
       AdditionalName: "",
+      Nickname: "",
       Phone: "",
       Email: "",
       TaxNumber: "",
@@ -51,6 +55,10 @@ const CreateContractCollection = () => {
       BankAccount:"",
       HasTax:hasTax,
       TaxValue:"",
+      MoreEmails: [],
+      ContractStartsDate: new Date(),
+      ContractSigningDate: new Date(),
+      ContractEndsDate: new Date(),
     },
     validationSchema: CreateContractValidationSchema,
     onSubmit: async (values) => {
@@ -60,16 +68,19 @@ const CreateContractCollection = () => {
         result && successToaster(result?.data?.message);
         result && setLoading(false);
         !result && setLoading(false);
+        result && Cookies.set("contractType", result?.data?.data?.Type);
         result && dispatch(setRefreshOnAddNewContractSystem(Math.random()))
       } else {
         const result: any = await AddContractApi(values,values?.Type);
         result && successToaster(result?.data?.message);
-        result && Cookies.set("contractId", result?.data?.contractId);
-        result && Cookies.set("contractType", result?.data?.Type);
+        result && Cookies.set("contractId", result?.data?.data?._id);
+        result && Cookies.set("contractType", result?.data?.data?.Type);
         result && dispatch(setCatchContractIdChange(Math.random()));
         result && dispatch(setRefreshOnAddNewContractSystem(Math.random()))
         result && setLoading(false);
         !result && setLoading(false);
+        console.log(result);
+
       }
     },
   });
@@ -89,6 +100,7 @@ const CreateContractCollection = () => {
     result?.data?.data.length>0 && (
       result?.data?.data[0]?.HasTax ? setHasTax(true) : setHasTax(false)
     )
+    result?.data?.data.length>0 && setCurrentMoreEmails(result?.data?.data[0]?.MoreEmails);
     dispatch(setContractType(result?.data?.data[0]?.Type));
   };
 
@@ -113,7 +125,11 @@ const CreateContractCollection = () => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <ContractOn formik={formik} setHasTax={setHasTax}/>
+      <ContractOn formik={formik} setHasTax={setHasTax} hasTax={hasTax}/>
+      <div className="my-6">
+        <p className="h-[2px] bg-gray-300" />
+      </div>
+      <ContractMoreEmails formik={formik}  currentMoreEmail={currentMoreEmails}/>
       <div className="my-6">
         <p className="h-[2px] bg-gray-300" />
       </div>
@@ -122,6 +138,7 @@ const CreateContractCollection = () => {
         <p className="h-[2px] bg-gray-300" />
       </div>
       <ContractData formik={formik} />
+      <ContractDates  formik={formik}/>
       <div className="my-6">
         <p className="h-[2px] bg-gray-300" />
       </div>

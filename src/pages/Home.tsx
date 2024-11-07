@@ -1,3 +1,5 @@
+import CalendarComponent from "@/components/home/Calender";
+import ClockNow from "@/components/home/ClockNow";
 import EmployeesReports from "@/components/home/EmployeesReports";
 import MinSystemInfo from "@/components/home/MinSystemInfo";
 import Reports from "@/components/home/Reports";
@@ -32,12 +34,13 @@ const Home = () => {
                 <div className="shadow-md border border-[#0077bc] p-2 rounded-md bg-gray-100">
                     <MinSystemInfo/>
                 </div>
-                <div className="shadow-md border border-[#0077bc] bg-gray-100 text-[#0077bc] p-2 rounded-md text-[5vw] flex items-center justify-center flex-col"
+                <div className="shadow-md border border-[#0077bc] bg-gray-100 text-[#0077bc] p-2 rounded-md text-[5vw] flex flex-col"
                 style={{ fontFamily: 'Cairo, sans-serif',textShadow: '2px 2px 4px rgba(0, 0, 0, 0.4)' }}
                 >
-                    <p>منصه</p>
-                    <p>تطوير البوادي</p>
-                    <p>العقاريه</p>
+                    {/* clock */}
+                    <div className="text-[14px]"><ClockNow/></div>
+                    {/* calender */}
+                    <div className="text-[14px]"><CalendarComponent/></div>
                 </div>
             </div>
            </div>

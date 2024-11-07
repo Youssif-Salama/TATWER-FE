@@ -55,7 +55,7 @@ const SpecificContractSystems = () => {
     },
     {
       name: "قيمه الايجار",
-      selector: (row: SpecificContractSystemTypes) => Number(row?.RentValue) / (1 + (Number(row?.TaxValue) / 100)),
+      selector: (row: SpecificContractSystemTypes) => Math.ceil(Number(row?.RentValue) / (1 + (Number(row?.TaxValue) / 100))),
     },
     {
       name: "ضريبه القيمه المضافه",

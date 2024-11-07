@@ -17,11 +17,11 @@ const Export = ({
   useEffect(() => {
     let temp = {
       "إجمالي قيمة العقد":
-        Number(sprints?.totalContractPrice).toFixed(4) || "-",
+        Number(sprints?.totalContractPrice) || "-",
       "المبالغ المدفوعة":
-        Number(sprints?.totalAppliedSystemsPrice).toFixed(4) || "-",
+        Number(sprints?.totalAppliedSystemsPrice) || "-",
       "المتبقي من العقد":
-        Number(sprints?.totalNotAppliedSystemsPrice).toFixed(4) || "-",
+        Number(sprints?.totalNotAppliedSystemsPrice) || "-",
       "عدد سنوات العقد": Number(sprints?.totalContractSprints) || "-",
       "عدد السنوات المدفوعة": Number(sprints?.totalAppliedSystemSprints) || "-",
       "عدد السنوات المتبقية من العقد":

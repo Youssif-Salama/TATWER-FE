@@ -113,9 +113,9 @@ const AddContractSystemByOne = () => {
 
                   {/* @ts-ignore */}
                   <select
-                    name="PaymentWay"
+                    name="CurrentPaymentWay"
                     //@ts-ignore
-                    id="PaymentWay"
+                    id="CurrentPaymentWay"
                     dir="rtl"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}

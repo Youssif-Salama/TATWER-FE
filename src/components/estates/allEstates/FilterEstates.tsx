@@ -31,7 +31,7 @@ const FilterEstates: React.FC<FilterContractsProps> = ({
             <option value="EstateSpace">مساحه العقار</option>
             <option value="PieceNumber">رقم القطعه</option>
             <option value="PlanNumber">رقم المخطط</option>
-            <option value="AddressId.City">المنطقه</option>
+            <option value="AddressId.Town">المدينه</option>
           </select>
         </div>
         <div className="w-full h-full">

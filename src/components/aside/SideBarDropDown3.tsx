@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
 // @ts-ignore
 import { FaFileContract } from "react-icons/fa";
+import Cookies from "js-cookie";
 
 interface asideRoutesTypes {
   name: string;
@@ -41,6 +42,11 @@ const SideBarDropDown3 = ({opendSideDrop3}:{opendSideDrop3:boolean}) => {
               <li key={index}>
                 <Link
                   to={item.path[0]}
+                  onClick={()=>{
+                    Cookies.remove("contractId");
+            Cookies.remove("fileId");
+            Cookies.remove("addressId");
+                  }}
                   className={`
                                    flex items-center justify-between uppercase font-medium p-2 rounded-md
  ${

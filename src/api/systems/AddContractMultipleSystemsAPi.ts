@@ -3,6 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 export const AddContractMultipleSystemsAPi = async (data:any,setLoading:any) => {
+  const type= Cookies.get("contractType");
   try {
     Object.entries(data).forEach(([key, value]) => {
       if (value =="" || value == null) {
@@ -11,7 +12,7 @@ export const AddContractMultipleSystemsAPi = async (data:any,setLoading:any) => 
     })
     setLoading(true);
     const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}contract`,
+      `${import.meta.env.VITE_BASE_URL}contract/${type}`,
       data,
       {
         headers: {

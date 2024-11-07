@@ -28,7 +28,7 @@ const SystemsCollection = () => {
   const [showWay, setShowWay] = useState<string | null>(null);
   const [startDate, setStartDate] = useState<string | null>(null);
   const [endDate, setEndDate] = useState<string | null>(null);
-  const [isApplied, setIsApplied] = useState<any>("paid");
+  const [isApplied, setIsApplied] = useState<any>("unpaid");
 
   const [openNotes,setOpenNotes] = useState<boolean>(false);
   const [no,setNo]=useState<number>(6);

@@ -19,7 +19,7 @@ export interface CreateContractCollectionTypes {
   ContractReleaseDate: Date|"";
   PaymentWay: "1" | "3" | "6" | "12" | string;
   Identity:string;
-
+  Nickname:string;
   ContractDate:Date |string;
   Price:number;
   FixedPrice:number;
@@ -27,4 +27,8 @@ export interface CreateContractCollectionTypes {
   BankAccount:string;
   HasTax:boolean;
   TaxValue:"";
+  MoreEmails:string[];
+  ContractStartsDate:Date|"";
+  ContractSigningDate:Date|"";
+  ContractEndsDate:Date|"";
 }

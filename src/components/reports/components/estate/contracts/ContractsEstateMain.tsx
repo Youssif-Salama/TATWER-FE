@@ -308,7 +308,7 @@ const ContractsEstateMain = ({
                       اجمالي قيمه العقد
                     </div>
                     <div className=" bg-gray-100 p-1 text-center w-[160px]">
-                      {Number(paymentTenantInfo?.totalContractPrice).toFixed(4)}
+                      {Number(paymentTenantInfo?.totalContractPrice)}
                     </div>
                   </div>
                   <div className="flex items-center bg-gray-100 shadow-md">
@@ -318,7 +318,7 @@ const ContractsEstateMain = ({
                     <div className=" bg-gray-100 p-1 text-center w-[160px]">
                       {Number(
                         paymentTenantInfo?.totalAppliedSystemsPrice
-                      ).toFixed(4)}
+                      )}
                     </div>
                   </div>
                   <div className="flex items-center bg-gray-100 shadow-md">
@@ -328,7 +328,7 @@ const ContractsEstateMain = ({
                     <div className=" bg-gray-100 p-1 text-center w-[160px]">
                       {Number(
                         paymentTenantInfo?.totalNotAppliedSystemsPrice
-                      ).toFixed(4)}
+                      )}
                     </div>
                   </div>
                 </div>
@@ -414,7 +414,7 @@ const ContractsEstateMain = ({
                     <div className=" bg-gray-100 p-1 text-center w-[160px]">
                       {Number(
                         paymentLandlordInfo?.totalAppliedSystemsPrice
-                      ).toFixed(4)}
+                      )}
                     </div>
                   </div>
                   <div className="flex items-center bg-gray-100 shadow-md">
@@ -424,7 +424,7 @@ const ContractsEstateMain = ({
                     <div className=" bg-gray-100 p-1 text-center w-[160px]">
                       {Number(
                         paymentLandlordInfo?.totalNotAppliedSystemsPrice
-                      ).toFixed(4)}
+                      )}
                     </div>
                   </div>
                 </div>
