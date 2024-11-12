@@ -13,7 +13,7 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-const AddContractSystemByOne = () => {
+const AddContractSystemByOne = ({taxes}:any) => {
   const [loading, setLoading] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const contractId = Cookies.get("contractId");
@@ -37,6 +37,7 @@ const AddContractSystemByOne = () => {
       FixedPrice: "",
       CurrentPaymentWay: "",
       CurrentReleaseDate: "",
+      TaxValue:""
     },
     onSubmit: async (values: UpdateContractSystemDialogProps) => {
       const result = await AddContractSystemApi(values, setLoading, contractId);
@@ -133,6 +134,28 @@ const AddContractSystemByOne = () => {
               )}
             </div>
           </div>
+
+          <div className="w-full flex items-center justify-between gap-2">
+                <label htmlFor="TaxValue" className="text-[14px] text-[#0077bc]">الضريبه</label>
+                 {/* @ts-ignore */}
+                 <select
+                          name="TaxValue"
+                          //@ts-ignore
+                          id="TaxValue"
+                          dir="rtl"
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          value={formik.values.TaxValue}
+                          className="bg-[#fff] w-full rounded-none mx-auto placeholder:text-gray-400 text-[14px] px-2 py-[11px] border-2 border-slate-200"
+                        >
+                          <option>اختر الضريبه</option>
+                          {taxes?.map((tax: any) => (
+                            <option key={tax._id} value={tax.TaxValue}>
+                              {tax.TaxValue} | {tax.Name}
+                            </option>
+                          ))}
+                        </select>
+               </div>
 
           <div className="text-[12px] opacity-75 w-full flex items-center gap-4">
             <div>هل تريد اضافه تاريح البدأ يدويا</div>

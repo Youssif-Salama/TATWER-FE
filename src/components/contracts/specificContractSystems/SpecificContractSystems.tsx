@@ -10,6 +10,7 @@ import {  customStylesSystems } from "@/common/TableRowStyle";
 import NestedTableFeatures from "./NestedTableFeatures";
 import { StopSystemsApi } from "@/api/systems/StopSystemsApi";
 import ContractSystemMessage from "./ContractSystemMessage";
+import CommonTooltip from "@/common/CommonTooltip";
 
 const SpecificContractSystems = () => {
   const [contractSystems, setContractSystems] = useState<
@@ -51,23 +52,25 @@ const SpecificContractSystems = () => {
   const columns = [
     {
       name: "رقم المسلسل",
-      selector: (row: SpecificContractSystemTypes) => row.SystemNumber,
+      selector: (row: SpecificContractSystemTypes) => <div className={` ${row.Applied?"text-[#0077bc]":" "}`}>
+        {row.SystemNumber}
+      </div>,
     },
     {
       name: "قيمه الايجار",
-      selector: (row: SpecificContractSystemTypes) => Math.ceil(Number(row?.RentValue) / (1 + (Number(row?.TaxValue) / 100))),
+      selector: (row: SpecificContractSystemTypes) => <CommonTooltip field={row?.RentValue}/>,
     },
     {
-      name: "ضريبه القيمه المضافه",
-      selector: (row: SpecificContractSystemTypes) => `${Number(row?.TaxValue)/100*Number(row?.RentValue) / (1 + (Number(row?.TaxValue) / 100))}`,
+      name: "الضريبه",
+      selector: (row: SpecificContractSystemTypes) =><CommonTooltip field={`${row?.TaxValue}%`}/>,
     },
     {
       name: "المبالغ الثابته",
-      selector: (row: SpecificContractSystemTypes) => row.FixedPrice,
+      selector: (row: SpecificContractSystemTypes) =><CommonTooltip field={row?.FixedPrice}/>,
     },
     {
       name: "القيمه الكليه ",
-      selector: (row: SpecificContractSystemTypes) => Number(row?.RentValue)+Number(row?.FixedPrice),
+      selector: (row: SpecificContractSystemTypes) => <CommonTooltip field={row?.TotalPrice}/>,
     },
     // {
     //   name: "الحاله",
@@ -88,8 +91,8 @@ const SpecificContractSystems = () => {
         row.ReleaseDate.split("T")[0],
     },
     {
-      name: " تاريخ الانتهاء",
-      selector: (row: SpecificContractSystemTypes) => row.DueDate.split("T")[0],
+      name: " تاريخ الاستحقاق",
+      selector: (row: SpecificContractSystemTypes) => row.LastAskDate.split("T")[0],
     },
     {
       name: "تاريخ البدأ الهجري",
@@ -97,26 +100,36 @@ const SpecificContractSystems = () => {
         row.ReleaseDateH.split("T")[0],
     },
     {
-      name: " تاريخ الانتهاء الهجري",
+      name: " تاريخ الاستحقاق الهجري",
 
       selector: (row: SpecificContractSystemTypes) =>
-        row.DueDateH.split("T")[0],
+        row.LastAskDateH.split("T")[0],
     },
     {
       name:"الحاله",
       selector: (row: SpecificContractSystemTypes) => <div>
         {
-          (row?.IsRuning)?<p
-          onClick={async()=>{
-            await StopSystemsApi(row?._id)
-            getSpecificContractSystems()
-          }}
-          className="text-[12px] rounded-md px-2 py-1  cursor-pointer text-white bg-green-500">مفعل</p>:<p
-          onClick={async()=>{
-            await StopSystemsApi(row?._id)
-            getSpecificContractSystems()
-          }}
-          className="text-[12px] rounded-md px-2 py-1  cursor-pointer text-white bg-red-500">غير مفعل</p>
+          (!row?.Applied)?
+          (<>
+          {
+            (row?.IsRuning)?<p
+            onClick={async()=>{
+              await StopSystemsApi(row?._id)
+              getSpecificContractSystems()
+            }}
+            className="text-[12px] rounded-md px-2 py-1  cursor-pointer text-white bg-green-500">مفعل</p>:<p
+            onClick={async()=>{
+              await StopSystemsApi(row?._id)
+              getSpecificContractSystems()
+            }}
+            className="text-[12px] rounded-md px-2 py-1  cursor-pointer text-white bg-red-500">غير مفعل</p>
+          }
+          </>):(<>
+          {
+              <p className="text-[12px] rounded-md px-2 py-1 text-white bg-[#0077bc]">مدفوع</p>
+          }
+          </>)
+
         }
       </div>
     }

@@ -108,7 +108,7 @@ const TasksReports = () => {
                       <td className="px-2 py-2 whitespace-nowrap text-center">{system?.Description?.length>50?system?.Description?.slice(0,50)+"...":system?.Description}</td>
                       <td className="px-2 py-2 whitespace-nowrap text-center">{priorityOfTask(system?.Priority)}</td>
                       <td className="px-2 py-2 whitespace-nowrap text-center">{statusOfTask(system?.Status)}</td>
-                      <td className="px-2 py-2 whitespace-nowrap text-center">{new Date(system?.DueDate).toLocaleDateString()}</td>
+                      <td className="px-2 py-2 whitespace-nowrap text-center">{new Date(system?.LastAskDate).toLocaleDateString()}</td>
                     </tr>
                   );
                 })}

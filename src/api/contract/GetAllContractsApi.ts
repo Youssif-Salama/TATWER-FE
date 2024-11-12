@@ -51,3 +51,42 @@ export const GetAllContractsApiForUnite = async (page:any,contractsType:any,setL
     setLoading(false)
   }
 };
+
+
+
+
+export const GetAllContractsPerEstateApi = async (setLoading:any,contractsType:any,page:any,showWay:any,searchValue:any,startDate:any,endDate:any,rowsPerPage?:any) => {
+  let queries=`?page=${page}`;
+  showWay && (queries+=`&sort=updatedAt&dir=${showWay}`);
+  startDate && (queries+=`&startDate=${startDate}`);
+  endDate && (queries+=`&endDate=${endDate}`);
+  rowsPerPage && (queries+=`&limit=${rowsPerPage}`);
+
+  try {
+    setLoading(true);
+    let result:any=[];
+    const response = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}contract/searchByEstateNameToGetContracts/${searchValue}/${contractsType}${queries}`,
+      {
+        headers: {
+          token:Cookies.get("token")
+        }
+      }
+    );
+    response&&setLoading(false);
+    response && response?.data?.data?.map((obj:any)=>{
+      if(obj?.ContractId){
+        result.push(obj.ContractId)
+      }
+    })
+
+    return {
+      data:{
+        data:result,
+        meta:response?.data?.meta
+      }
+    };
+  } catch (error: any) {
+    setLoading(false)
+  }
+};

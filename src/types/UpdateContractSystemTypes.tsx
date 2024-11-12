@@ -4,6 +4,7 @@ export interface UpdateContractSystemDialogProps {
   CurrentReleaseDate?:string;
   CurrentPaymentWay?:string
   Applied?:boolean
+  TaxValue?:string
 }
 export interface UpdateContractMultipleSystemDialogProps {
   Id: string;
@@ -12,4 +13,5 @@ export interface UpdateContractMultipleSystemDialogProps {
   Times: string;
   ContractReleaseDate:string;
   PaymentWay:string
+  TaxValue:string
 }

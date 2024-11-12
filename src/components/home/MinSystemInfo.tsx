@@ -76,8 +76,8 @@ const MinSystemInfo = () => {
           let situation: any = "متأخره";
           let today = new Date();
 
-          if (system && system.DueDate && !system.Applied) {
-            situation = new Date(system.DueDate) > today ? "قادمه" : "متأخره";
+          if (system && system.LastAskDate && !system.Applied) {
+            situation = new Date(system.LastAskDate) > today ? "قادمه" : "متأخره";
           } else {
             situation = "مدفوعه"; // Paid
           }
@@ -98,11 +98,11 @@ const MinSystemInfo = () => {
               <td className={`px-2 py-2 whitespace-nowrap text-center`}>
                 {system?.ReleaseDate?.slice(0, 10)}
               </td>
-              <td className="px-2 py-2 whitespace-nowrap text-center">{system?.DueDate?.slice(0, 10)}</td>
+              <td className="px-2 py-2 whitespace-nowrap text-center">{system?.LastAskDate?.slice(0, 10)}</td>
               <td className={`px-2 py-2 whitespace-nowrap text-center`}>
                 {system?.ReleaseDateH?.slice(0, 10)}
               </td>
-              <td className="px-2 py-2 whitespace-nowrap text-center">{system?.DueDateH?.slice(0, 10)}</td>
+              <td className="px-2 py-2 whitespace-nowrap text-center">{system?.LastAskDateH?.slice(0, 10)}</td>
               <td className={`px-2 py-2 whitespace-nowrap text-center`}>
                 {system?.PaymentWay || "-"} اشهر
               </td>

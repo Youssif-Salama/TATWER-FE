@@ -43,7 +43,7 @@ const AddSystemWarningDialog = ({ system }: any) => {
 
 ${message}
 
-    اخر موعد للتسديد: ${system?.DueDate?.slice(0, 10)}
+    اخر موعد للتسديد: ${system?.LastAskDate?.slice(0, 10)}
 
 ${messageTail}
 `;
@@ -65,7 +65,7 @@ ${messageTail}
     if (result) {
       let temp = result?.data?.data;
       // @ts-ignore
-      const days = new Date(system?.DueDate) - today;
+      const days = new Date(system?.LastAskDate) - today;
 
       if (days / (1000 * 60 * 60 * 24) >= 30) {
         const desiredMessage = temp.filter((item: any) => {

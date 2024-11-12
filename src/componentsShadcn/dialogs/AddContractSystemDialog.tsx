@@ -10,11 +10,24 @@ import {
 
 import { IoClose } from "react-icons/io5";
 import AddContractSystemByOne from "@/components/dialogsComponents/AddContractSystemByOne";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddContractSystemMultiple from "@/components/dialogsComponents/AddContractSystemMultiple";
+import { GetAllTaxApi } from "@/api/tax/GetAllTaxApi";
 
 
 const AddContractSystemDialog = () => {
+
+  const [taxes, setTaxes] = useState([]);
+  // @ts-ignore
+    const [loading, setLoading] = useState(false);
+    const getAllTaxes = async () => {
+      const result = await GetAllTaxApi(setLoading);
+      result && setTaxes(result?.data?.data);
+    }
+
+    useEffect(() => {
+      getAllTaxes();
+    }, []);
 
   const [addingSystem, setAddingSystem] = useState<number>(1);
   return (
@@ -64,7 +77,7 @@ const AddContractSystemDialog = () => {
           </DialogTitle>
         </DialogHeader>
       {
-        addingSystem == 1 ? <AddContractSystemByOne /> : <AddContractSystemMultiple />
+        addingSystem == 1 ? <AddContractSystemByOne taxes={taxes} /> : <AddContractSystemMultiple  taxes={taxes}/>
       }
       </DialogContent>
     </Dialog>

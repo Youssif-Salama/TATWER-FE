@@ -92,9 +92,9 @@ const TenantsMain = () => {
     "RentValue",
     "FixedPrice",
     "ReleaseDate",
-    "DueDate",
+    "LastAskDate",
     "ReleaseDateH",
-    "DueDateH",
+    "LastAskDateH",
     "PaymentWay",
     "Applied",
     // "Message"

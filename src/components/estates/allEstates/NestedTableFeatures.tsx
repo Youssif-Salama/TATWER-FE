@@ -1,3 +1,4 @@
+import { GetEstateFileApi } from "@/api/estateFile/GetEstateFileApi";
 import DeleteContracts from "@/componentsShadcn/dialogs/DeleteContracts";
 import Cookies from "js-cookie"
 import { FaEdit } from "react-icons/fa";
@@ -5,7 +6,14 @@ import { FaEdit } from "react-icons/fa";
 
 
 const NestedTableFeatures = ({selectedRows,setCatchSelectedRows}:{selectedRows:any,setCatchSelectedRows:any}) => {
-  console.log(selectedRows.length);
+
+  const getEstateFileId=async(id:string)=>{
+    const result=await GetEstateFileApi(id);
+    if(result){
+      Cookies.set("estateFileId",result?.data?.data[0]?._id);
+      window.location.href = "/estates/create"
+    }
+  }
 
   return (
     <div className="mb-4 px-2 flex items-center justify-between">
@@ -22,7 +30,11 @@ const NestedTableFeatures = ({selectedRows,setCatchSelectedRows}:{selectedRows:a
             selectedRows.length >=2 ?null:<button className="bg-green-500 border-0 outline-0 rounded-md p-2 text-sm text-white"
             onClick={()=>{
               Cookies.set("estateId",selectedRows[0]?._id)
-              window.location.href = "/estates/create"
+              Cookies.remove("estateAddressId");
+              Cookies.remove("estateFileId");
+              Cookies.set("estateAddressId",selectedRows[0]?.AddressId?._id);
+              getEstateFileId(selectedRows[0]?._id)
+
             }}
             ><FaEdit  className=" text-white" />
 </button>

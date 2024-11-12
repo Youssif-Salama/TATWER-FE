@@ -65,6 +65,7 @@ const InputCommon: React.FC<InputCommonProps> = ({ type, required = false, onCha
                 <Input
                     type={type !== "date" ? type : "text"}
                     required={required}
+                    step={type === "number" ? "any" : undefined}
                     id={id}
                     name={name}
                     onChange={onChange}

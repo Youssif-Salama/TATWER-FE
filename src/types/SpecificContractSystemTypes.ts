@@ -14,4 +14,8 @@ export interface SpecificContractSystemTypes {
     IsRuning: boolean
     TaxValue:string
     Message:string
+    Applied:  boolean
+    TotalPrice:string
+    LastAskDate:string
+    LastAskDateH:string
   }

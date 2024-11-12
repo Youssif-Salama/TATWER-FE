@@ -44,8 +44,8 @@ const MyDynamicTaskMeta = ({ currentTask ,currentTaskFiles}: { currentTask: any,
     <p className="text-sm text-gray-600">{currentTask?.StartDate?.slice(0, 10)}</p>
   </div>
   <div className="flex items-center gap-2">
-    <p className="text-sm font-medium text-gray-700">تاريخ الانتهاء:</p>
-    <p className="text-sm text-gray-600">{currentTask?.DueDate?.slice(0, 10)}</p>
+    <p className="text-sm font-medium text-gray-700">تاريخ الاستحقاق:</p>
+    <p className="text-sm text-gray-600">{currentTask?.LastAskDate?.slice(0, 10)}</p>
   </div>
   <div className="flex flex-col gap-1">
     <p className="text-sm font-medium text-gray-700">المعينون:</p>

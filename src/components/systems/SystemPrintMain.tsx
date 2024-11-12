@@ -68,7 +68,7 @@ const SystemPrintMain = ({ applied }: { applied: any }) => {
               ...allSystems.map((system) => [
                 { text: system?.SystemNumber, style: 'tableCell' },
                 { text: (+system?.RentValue + system?.FixedPrice), style: 'tableCell' },
-                { text: system?.DueDate?.split('T')[0], style: 'tableCell' },
+                { text: system?.LastAskDate?.split('T')[0], style: 'tableCell' },
                 { text: system?.Applied ? "دفعها  تم" : "دفعها  يتم  لم", style: 'tableCell' },
                 { text: " اشهر" + system?.PaymentWay, style: 'tableCell' },
                 { text: system?.ContractId?.Name, style: 'tableCell' },
@@ -117,7 +117,7 @@ const SystemPrintMain = ({ applied }: { applied: any }) => {
     const worksheetData = allSystems.map(system => ({
       "رقم الدفعه": system?.SystemNumber,
       "السعر الكلي": (+system?.RentValue + system?.FixedPrice),
-      "تاريخ السداد": system?.DueDate?.split('T')[0],
+      "تاريخ السداد": system?.LastAskDate?.split('T')[0],
       "حاله السداد": system.Applied ? "تم دفعها" : "لم يتم دفعها",
       "طريقة السداد": `${system?.PaymentWay} اشهر`,
       "العقد": system?.ContractId?.Name,
@@ -206,7 +206,7 @@ const SystemPrintMain = ({ applied }: { applied: any }) => {
                 <div key={system._id} className="grid grid-cols-8 text-[12px]">
                   <div className="px-1">{system?.SystemNumber}</div>
                   <div className="px-1">{(+system?.RentValue + system?.FixedPrice)}</div>
-                  <div className="px-1">{system?.DueDate?.split('T')[0]}</div>
+                  <div className="px-1">{system?.LastAskDate?.split('T')[0]}</div>
                   <div className="px-1">{system.Applied ? "تم دفعها" : "لم يتم دفعها"}</div>
                   <div className="px-1">{system?.PaymentWay} اشهر</div>
                   <div className="px-1">{system?.ContractId?.Name}</div>

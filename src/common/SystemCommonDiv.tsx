@@ -17,7 +17,7 @@ import AddSystemWarningDialog from "@/componentsShadcn/dialogs/AddSystemWarningD
 
 
 const SystemCommonDiv = ({ system }: { system: any }) => {
-  const dueDateGregorian = system?.DueDate ? new Date(system?.DueDate) : null;
+  const dueDateGregorian = system?.LastAskDate ? new Date(system?.LastAskDate) : null;
   const remainingDays = dueDateGregorian
     ? countResetDaysAndColors(dueDateGregorian)
     : null;
@@ -52,11 +52,11 @@ const SystemCommonDiv = ({ system }: { system: any }) => {
     { id: 4, label: "الاسم/الشركه", value: system?.ContractId?.Name || system?.contractData?.Name },
     { id: 5, label: "مسجل علي", value: system?.ContractId?.RelyOn || system?.ContractData?.RelyOn },
     { id: 6, label: "نظام العقد ", value: system?.PaymentWay + " اشهر" },
-    { id: 7, label: "المبلغ ", value: Number(system?.RentValue) + Number(system?.FixedPrice) },
+    { id: 7, label: "المبلغ ", value: Number(system?.TotalPrice) },
     { id: 8, label: "رقم العقد", value: system?.ContractId?.ContractNumber || system?.contractData?.ContractNumber },
     { id: 9, label: "المشروع", value: system?.Estate?.EstateName || "_" },
-    { id: 10, label: "تاريخه (م)", value: system?.DueDate?.slice(0, 10) },
-    { id: 11, label: "تاريخه (ه)", value: system?.DueDateH?.slice(0, 10) },
+    { id: 10, label: "تاريخه (م)", value: system?.LastAskDate?.slice(0, 10) },
+    { id: 11, label: "تاريخه (ه)", value: system?.LastAskDateH?.slice(0, 10) },
     { id: 12, label: system.Applied ? "كان متبقي له" : "متبقي له", value: remainingFormatted(remainingDays?.days), color: remainingDays?.color },
     { id: 13, label: "الحاله", value: remainingDays?.situation, color: remainingDays?.color },
     { id: 15, label: "تذكير / تأكيد", dropdown: true }

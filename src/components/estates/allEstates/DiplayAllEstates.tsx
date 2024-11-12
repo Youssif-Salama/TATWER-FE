@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import NestedTableFeatures from "./NestedTableFeatures";
 import { GetAllEstatesApi } from "@/api/estate/GetAllEstatesApi";
 import { AllEstatesTypes } from "@/types/GetAllEstatesTypes";
+import CommonTooltip from "@/common/CommonTooltip";
 
 const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:string |null,searchValue:string|null,showWay:string|null}) => {
   const { refreshONDeleteContracts} = useSelector(
@@ -37,19 +38,19 @@ const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:str
     },
     {
       name: "اسم العقار",
-      selector: (row: AllEstatesTypes) => row?.EstateName,
+      selector: (row: AllEstatesTypes) => <CommonTooltip field={row?.EstateName}/>,
     },
     {
       name: "المدينه",
-      selector: (row: any) => row?.AddressId?.Town || row?.AddressData?.Town || "-",
+      selector: (row: any) =><CommonTooltip field={row?.AddressId?.City || row?.AddressData?.City || "-" }/>,
     },
     {
       name: "الحي",
-      selector: (row: any) => row?.AddressId?.Neighborhood || row?.AddressData?.Neighborhood || "-",
+      selector: (row: any) => <CommonTooltip field={row?.AddressId?.Neighborhood || row?.AddressData?.Neighborhood || "-" }/>
     },
     {
       name: "الشارع",
-      selector: (row: any) => row?.AddressId?.Street || row?.AddressData?.Street || "-",
+      selector: (row: any) =><CommonTooltip field={row?.AddressId?.Street || row?.AddressData?.Street || "-" }/>
     },
     {
       name: "رقم وثيقه الملكيه",
@@ -57,19 +58,19 @@ const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:str
     },
     {
       name: "رقم القطعه",
-      selector: (row: AllEstatesTypes) => row?.PieceNumber,
+      selector: (row: AllEstatesTypes) =><CommonTooltip field={row?.PieceNumber}/>,
     },
     {
       name: "رقم المخطط",
-      selector: (row: AllEstatesTypes) => row?.PlanNumber,
+      selector: (row: AllEstatesTypes) => <CommonTooltip field={row?.PlanNumber}/>
     },
     {
       name: "المساحة",
-      selector: (row: AllEstatesTypes) => row?.EstateSpace,
+      selector: (row: AllEstatesTypes) =><CommonTooltip field={row?.EstateSpace}/>
     },
     {
       name: "تاريخ التسجيل",
-      selector: (row: AllEstatesTypes) => row?.EstateDate.slice(0,10),
+      selector: (row: AllEstatesTypes) =><CommonTooltip field={row?.EstateDate.slice(0,10)}/> ,
     },
     {
       name: "الحاله",

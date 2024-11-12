@@ -40,7 +40,7 @@ const FilterContracts: React.FC<FilterContractsProps> = ({
             <option value="Name">الاسم</option>
             <option value="AddressId.City">المدينه</option>
             <option value="RelyOn">مسجل علي</option>
-            <option value="Type">الصفه</option>
+            <option value="estate">العقار</option>
           </select>
         </div>
         <div className="w-full h-full">

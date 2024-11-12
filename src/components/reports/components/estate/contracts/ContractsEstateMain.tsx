@@ -256,9 +256,9 @@ const ContractsEstateMain = ({
     "RentValue",
     "FixedPrice",
     "ReleaseDate",
-    "DueDate",
+    "LastAskDate",
     "ReleaseDateH",
-    "DueDateH",
+    "LastAskDateH",
     "PaymentWay",
     "Applied",
   ];

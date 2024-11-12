@@ -1,4 +1,4 @@
-import { GetAllContractsApi } from "@/api/contract/GetAllContractsApi";
+import { GetAllContractsApi, GetAllContractsPerEstateApi } from "@/api/contract/GetAllContractsApi";
 import { customStyles } from "@/common/TableRowStyle";
 import { RootState } from "@/store/store";
 import { AllContractTypes } from "@/types/GetAllContractTypes";
@@ -30,8 +30,24 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
     !result && setAllContracts([]);
     !result && setTotalRows(0);
   };
+
+
+  const getAllContractsDependingOnTypePerEstate = async () => {
+    const result = await GetAllContractsPerEstateApi(setLoading, getContractType, page,showWay,searchValue,startDate,endDate,rowPerPage);
+    result && setTotalRows(result?.data?.meta?.numberOfRows);
+    result && setAllContracts(result?.data?.data);
+    !result && setAllContracts([]);
+    !result && setTotalRows(0);
+  };
   useEffect(() => {
-    getAllContractsDependingOnType();
+      if(searchKeyWord=="estate"){
+        getAllContractsDependingOnTypePerEstate();
+      }
+      else{
+        getAllContractsDependingOnType();
+      }
+      console.log(searchKeyWord);
+
   }, [getContractType, page,searchKeyWord,searchValue,showWay,startDate,endDate,refreshONDeleteContracts,rowPerPage]);
 
 
@@ -45,7 +61,7 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
       minWidth:"70px"
     },{
       name: "المؤجر - المستأجر",
-      selector: (row: AllContractTypes) => <CommonTooltip field={row?.Name || "-"}/>,
+      selector: (row: AllContractTypes) => <CommonTooltip field={row?.Name + row?.NickName || "-"}/>,
       minWidth:"120px"
     },
     {
