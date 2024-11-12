@@ -46,6 +46,7 @@ const SideBarDropDown3 = ({opendSideDrop3}:{opendSideDrop3:boolean}) => {
                     Cookies.remove("contractId");
             Cookies.remove("fileId");
             Cookies.remove("addressId");
+            Cookies.remove("contractType");
                   }}
                   className={`
                                    flex items-center justify-between uppercase font-medium p-2 rounded-md

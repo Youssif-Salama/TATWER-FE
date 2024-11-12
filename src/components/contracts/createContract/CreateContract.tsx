@@ -80,6 +80,7 @@ const CreateContract = () => {
                 Cookies.remove("contractId");
                 Cookies.remove("addressId");
                  Cookies.remove("fileId");
+                 Cookies.remove("contractType");
                 dispatch(setCatchContractIdChange(Math.random()));
                 dispatch(setRefreshOnAddNewContractSystem(Math.random()));
                 dispatch(setResetForm(Math.random()));

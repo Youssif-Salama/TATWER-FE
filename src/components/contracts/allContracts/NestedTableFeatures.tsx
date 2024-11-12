@@ -33,10 +33,9 @@ const NestedTableFeatures = ({selectedRows,setCatchSelectedRows}:{selectedRows:a
               Cookies.remove("addressId");
               Cookies.remove("fileId");
               Cookies.set("contractId",selectedRows[0]?._id)
-              Cookies.set("contractType",selectedRows[0]?.Type)
-              Cookies.set("addressId",selectedRows[0]?.AddressId?._id)
+              selectedRows[0]?.Type && Cookies.set("contractType",selectedRows[0]?.Type)
+              selectedRows[0]?.AddressId && Cookies.set("addressId",selectedRows[0]?.AddressId?._id)
               getFileId();
-
             }}
             ><FaEye  className=" text-white" />
 </button>

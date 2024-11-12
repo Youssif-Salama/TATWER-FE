@@ -6,7 +6,7 @@ export const DeleteContractApi = async (id: string,setLoading:any,type:string) =
   try {
     setLoading(true);
     const response = await axios.delete(
-      `${import.meta.env.VITE_BASE_URL}contract/${id}/${type}`,
+      `${import.meta.env.VITE_BASE_URL}contract/${id}/${type}/one`,
       {
         headers: {
         token: Cookies.get("token")
