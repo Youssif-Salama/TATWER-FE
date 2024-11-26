@@ -18,6 +18,7 @@ import { FaTasks } from "react-icons/fa";
 import { decodeToken } from '@/methods/GlobalMethods';
 import { TbReport } from "react-icons/tb";
 import { IoSettings } from 'react-icons/io5';
+import SideBarDropDown6 from './SideBarDropDown6';
 
 
 interface AsideRoute {
@@ -63,13 +64,19 @@ let routes: AsideRoute[] = [
     },
   {
     name: 'المهمات',
-    path: ['/todo','/todo/add','/todo/tasks'],
+    path: ['/todo','/todo/add','/todo/tasks',"tasks/orders"],
     icon: FaTasks     ,
+    arrow: RiArrowDownSFill,
+    id:6,
+    haveDropDown: true
   },
   {
     name: 'المهمات',
-    path: ['/tasks'],
-    icon: FaTasks     ,
+    path: ['/tasks',"tasks/orders"],
+    icon: FaTasks,
+    arrow: RiArrowDownSFill,
+    id:6,
+    haveDropDown: true
   },
     {
       name:'التقارير',
@@ -92,6 +99,7 @@ export default function Sidebar({ hide }: { hide: boolean }) {
   const [opendSideDrop3, setOpendSideDrop3] = useState(false);
   const [opendSideDrop4, setOpendSideDrop4] = useState(false);
   const [opendSideDrop5, setOpendSideDrop5] = useState(false);
+  const [opendSideDrop6, setOpendSideDrop6] = useState(false);
   const asideRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const pathname = location.pathname;
@@ -115,6 +123,7 @@ export default function Sidebar({ hide }: { hide: boolean }) {
     if (id === 3) setOpendSideDrop3(prev => !prev);
     if (id === 4) setOpendSideDrop4(prev => !prev);
     if (id === 5) setOpendSideDrop5(prev => !prev);
+    if (id === 6) setOpendSideDrop6(prev => !prev);
   };
 
 
@@ -206,6 +215,7 @@ interface DecodedToken {
                   {item.haveDropDown && item.id === 3 && <SideBarDropDown3 opendSideDrop3={opendSideDrop3} />}
                   {item.haveDropDown && item.id === 4 && <SideBarDropDown4 opendSideDrop4={opendSideDrop4} />}
                   {item.haveDropDown && item.id === 5 && <SideBarDropDown5 opendSideDrop5={opendSideDrop5} />}
+                  {item.haveDropDown && item.id === 6 && <SideBarDropDown6 opendSideDrop6={opendSideDrop6} />}
                 </li>
               );
             })}

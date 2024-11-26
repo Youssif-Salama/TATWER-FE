@@ -1,7 +1,7 @@
 const ContractTable = ({ allContracts,fullView }: any) => {
   return (
     <div className="overflow-x-auto">
-      <table className="table-auto border border-[#0077bc] text-[10px] min-w-full">
+      <table className="table-auto border border-[#0077bc] text-[12px] min-w-full">
         <thead>
           <tr className="bg-[#0077bc] text-white">
             <th className="font-semibold w-[50px] px-2 py-2">الرمز</th>
@@ -24,27 +24,29 @@ const ContractTable = ({ allContracts,fullView }: any) => {
             <th className="font-semibold w-[120px] px-2 py-2">مسجل علي</th>
           </tr>
         </thead>
-        <tbody className="font-normal text-[8px]" >
+        <tbody className="font-normal text-[10px]" >
           {allContracts.map((contract: any, index: number) => (
             <tr key={index} className={(index%2===0)?"bg-[#0077bc17]":"bg-white"}>
-              <td className="px-2 py-2 whitespace-nowrap text-center">{index + 1}</td>
-              <td className="px-2 py-2 whitespace-nowrap text-center">{contract?.Name}</td>
-              <td className="px-2 py-2 whitespace-nowrap text-center">{contract?.IdNumber}</td>
-              <td className="px-2 py-2 whitespace-nowrap text-center">{contract?.Mobile}</td>
-              <td className={`px-2 py-2 whitespace-nowrap text-center ${!fullView && "hidden"}`}>{contract?.AdditionalPhone}</td>
-              <td className={`${!fullView && "hidden"} px-2 py-2 whitespace-nowrap text-center`}>{contract?.Type}</td>
-              <td className="px-2 py-2 whitespace-nowrap text-center">{contract?.Email}</td>
-              <td className={`px-2 py-2 whitespace-nowrap text-center ${!fullView && "hidden"}`}>{contract?.estate?.EstateName}</td>
-              <td className="px-2 py-2 whitespace-nowrap text-center">{contract?.estate?.PieceNumber}</td>
-              <td className={`${!fullView && "hidden"} px-2 py-2 whitespace-nowrap text-center`}>{contract?.BankAccount || "-"}</td>
-              <td className={`${!fullView && "hidden"} px-2 py-2 whitespace-nowrap text-center`}>{contract?.AddressId?.City || "-"}</td>
-              <td className="px-2 py-2 whitespace-nowrap text-center">{contract?.Agent}</td>
-              <td className="px-2 py-2 whitespace-nowrap text-center">{contract?.MobileNumber}</td>
-              <td className="px-2 py-2 whitespace-nowrap text-center">{contract?.DocumentNumber}</td>
-              <td className="px-2 py-2 whitespace-nowrap text-center">{contract?.ContractNumber}</td>
-              <td className="px-2 py-2 whitespace-nowrap text-center">{contract?.ContractReleaseDate?.slice(0, 10)}</td>
-              <td className="px-2 py-2 whitespace-nowrap text-center">{contract?.ContractEndDate?.slice(0, 10)}</td>
-              <td className="px-2 py-2 whitespace-nowrap text-center">{contract?.RelyOn}</td>
+              <td className="px-2 py-2 whitespace-nowrap">{index + 1 || "-"}</td>
+              <td className="px-2 py-2 whitespace-nowrap">{contract?.Name || "-"}</td>
+              <td className="px-2 py-2 whitespace-nowrap">{contract?.IdNumber || "-"}</td>
+              <td className="px-2 py-2 whitespace-nowrap">{contract?.Mobile || "-"}</td>
+              <td className={`px-2 py-2 whitespace-nowrap ${!fullView && "hidden"}`}>{contract?.AdditionalPhone || "-"}</td>
+              <td className={`${!fullView && "hidden"} px-2 py-2 whitespace-nowrap`}>{
+                (contract?.Type==="Tenant")?"مؤجر":"مستأجر"
+                }</td>
+              <td className="px-2 py-2 whitespace-nowrap">{contract?.Email || "-"}</td>
+              <td className={`px-2 py-2 whitespace-nowrap ${!fullView && "hidden"}`}>{contract?.estate?.EstateName || "-"}</td>
+              <td className="px-2 py-2 whitespace-nowrap">{contract?.estate?.PieceNumber || "-"}</td>
+              <td className={`${!fullView && "hidden"} px-2 py-2 whitespace-nowrap`}>{contract?.BankAccount || "-"}</td>
+              <td className={`${!fullView && "hidden"} px-2 py-2 whitespace-nowrap`}>{contract?.AddressId?.City || "-"}</td>
+              <td className="px-2 py-2 whitespace-nowrap">{contract?.Agent || "-"}</td>
+              <td className="px-2 py-2 whitespace-nowrap">{contract?.MobileNumber || "-"}</td>
+              <td className="px-2 py-2 whitespace-nowrap">{contract?.DocumentNumber || "-"}</td>
+              <td className="px-2 py-2 whitespace-nowrap">{contract?.ContractNumber || "-"}</td>
+              <td className="px-2 py-2 whitespace-nowrap">{contract?.ContractReleaseDate?.slice(0, 10) || "-"}</td>
+              <td className="px-2 py-2 whitespace-nowrap">{contract?.ContractEndDate?.slice(0, 10) || "-"}</td>
+              <td className="px-2 py-2 whitespace-nowrap">{contract?.RelyOn || "-"}</td>
             </tr>
           ))}
         </tbody>

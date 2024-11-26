@@ -16,7 +16,7 @@ const EmployeesRoles = () => {
   const refreshAllRoles=useSelector((state:RootState)=>state.GlobalReducer?.refreshAllRoles)
 
   const getAllRoles=async()=>{
-    const result=await GetAllRolesApi(page,setLoading,rowsPerPage);
+    const result=await GetAllRolesApi(page,setLoading,Number(rowsPerPage));
     result&&setRoles(result?.data?.data);
     result&&setTotalRows(result?.data?.meta?.numberOfRows);
   }
@@ -40,13 +40,16 @@ const EmployeesRoles = () => {
             })
             }
           </div>
-      {/* pagination part */}
-      <SystemsPagination page={page} setPage={setPage} totalRows={totalRows}  rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage}/>
-          </>:<div className="flex items-center justify-center h-[10vh]">لا يوجد ادوار متاحه للاستخدام</div>
+          </>:
+          <div className="flex items-center justify-center h-[10vh]"><p>لا يوجد بيانات</p></div>
         }
         </>
       }
       </>
+      {
+        (roles && roles?.length>0) &&
+        <SystemsPagination page={page} setPage={setPage} totalRows={totalRows} rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage}/>
+      }
     </div>
   );
 }

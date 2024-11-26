@@ -5,7 +5,7 @@ export const GetAllRolesApi = async (page:any,setLoading:any,rowsPerPage?:any) =
   try {
     setLoading(true);
     const response = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}role?page=${page}&limit=${rowsPerPage}`,{
+      `${import.meta.env.VITE_BASE_URL}role?page=${page}&limit=${rowsPerPage||10}`,{
         headers:{
           token:Cookies.get("token")
         }

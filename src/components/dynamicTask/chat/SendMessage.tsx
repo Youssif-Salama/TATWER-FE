@@ -121,7 +121,7 @@ const SendMessage = ({ setCarryFiles, carryFiles }: { setCarryFiles: any, carryF
           loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#0077bc] text-white hover:bg-[#005fa3]'
         }`}
       >
-        {loading ? 'Sending...' : <AiOutlineSend className="text-xl" />}
+        {loading ? 'جاري الارسال...' : <AiOutlineSend className="text-xl" />}
       </button>
       {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
     </div>

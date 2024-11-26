@@ -46,6 +46,9 @@ import EstateMain from "./components/reports/components/estates/EstateMain";
 import OneEstateMain from "./components/reports/components/estate/main/OneEstateMain";
 import Earnings from "./components/reports/components/earnings/Earnings";
 import Employees from "./components/settings/employees/Employees";
+import DynamicContractPdf from "./methods/reports/DynamicContractPdf";
+import DynamicContractExcel from "./methods/reports/DynamicContractExcel";
+import TasksOrders from "./components/tasks/tasksOrder/TasksOrders";
 
 function App() {
   return (
@@ -59,6 +62,8 @@ function App() {
               <Route path="/reports" element={<Reports/>}>
               </Route>
               <Route path="/reports/contracts" element={<ContractMain/>}></Route>
+              <Route path="/reports/contracts/pdf" element={<DynamicContractPdf/>}></Route>
+              <Route path="/reports/contracts/excel" element={<DynamicContractExcel/>}></Route>
               <Route path="/reports/tenants" element={<TenantsMain/>}></Route>
               <Route path="/reports/landlords" element={<LandlordsMain/>}></Route>
               <Route path="/reports/estates" element={<EstateMain />} />
@@ -67,6 +72,7 @@ function App() {
               <Route path="/tasks" element={<Tasks />} >
               </Route>
               <Route path="/tasks/:id" element={<MyDynamicTask />}></Route>
+              <Route path="/tasks/orders" element={<TasksOrders />}></Route>
               <Route path="/unites/tenants/:id" element={<DynamicUnite />}></Route>
               <Route path="/unites/landlords/:id" element={<DynamicLandlordUnites />}></Route>
               <Route path="/todo" element={<AdminTodoRoute><Todo /></AdminTodoRoute>} >

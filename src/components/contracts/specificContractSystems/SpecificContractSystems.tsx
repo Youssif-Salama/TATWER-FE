@@ -62,7 +62,7 @@ const SpecificContractSystems = () => {
     },
     {
       name: "الضريبه",
-      selector: (row: SpecificContractSystemTypes) =><CommonTooltip field={`${row?.TaxValue}%`}/>,
+      selector: (row: SpecificContractSystemTypes) =><CommonTooltip field={`${(Number(row?.TaxValue) * Number(row?.RentValue))/100}`}/>,
     },
     {
       name: "المبالغ الثابته",

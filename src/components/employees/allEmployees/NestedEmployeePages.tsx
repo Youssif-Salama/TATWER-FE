@@ -60,13 +60,14 @@ const NestedEmployeePages: React.FC<NestedEmployeePagesProps> = ({ data }:any) =
             })
             }
           </div>
-      {/* pagination part */}
-      <SystemsPagination page={page} setPage={setPage} totalRows={totalRows}  rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage}/>
           </>:<div className="flex items-center justify-center h-[10vh]">لا يوجد ادوار متاحه للاستخدام</div>
         }
         </>
       }
       </>
+      {
+          roles && roles?.length>0 && <SystemsPagination page={page} setPage={setPage} totalRows={totalRows} rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage}/>
+      }
     </div>
   );
 };

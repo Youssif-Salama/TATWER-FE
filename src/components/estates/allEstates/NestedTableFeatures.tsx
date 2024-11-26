@@ -10,7 +10,7 @@ const NestedTableFeatures = ({selectedRows,setCatchSelectedRows}:{selectedRows:a
   const getEstateFileId=async(id:string)=>{
     const result=await GetEstateFileApi(id);
     if(result){
-      Cookies.set("estateFileId",result?.data?.data[0]?._id);
+      result?.data?.data?.length>0 && Cookies.set("estateFileId",result?.data?.data[0]?._id);
       window.location.href = "/estates/create"
     }
   }
@@ -29,10 +29,10 @@ const NestedTableFeatures = ({selectedRows,setCatchSelectedRows}:{selectedRows:a
           {
             selectedRows.length >=2 ?null:<button className="bg-green-500 border-0 outline-0 rounded-md p-2 text-sm text-white"
             onClick={()=>{
-              Cookies.set("estateId",selectedRows[0]?._id)
+              selectedRows[0]?._id && Cookies.set("estateId",selectedRows[0]?._id)
               Cookies.remove("estateAddressId");
               Cookies.remove("estateFileId");
-              Cookies.set("estateAddressId",selectedRows[0]?.AddressId?._id);
+              selectedRows[0]?.AddressId && Cookies.set("estateAddressId",selectedRows[0]?.AddressId?._id);
               getEstateFileId(selectedRows[0]?._id)
 
             }}

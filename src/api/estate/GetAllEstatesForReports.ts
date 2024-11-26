@@ -6,7 +6,7 @@ export const GetAllEstatesForReportsWithAddress = async (setLoading:any,page:any
   try {
     setLoading(true);
     const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}estate/reports/${situation}/?page=${page}&limit=30`,
+      `${import.meta.env.VITE_BASE_URL}estate/reports/${situation}?page=${page}&limit=30`,
       data,{
         headers: {
           token:Cookies.get("token")
@@ -29,7 +29,7 @@ export const GetAllEstatesForReportsWithRelyOn = async (setLoading:any,page:any,
   try {
     setLoading(true);
     const response = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}estate/reports/${situation}/${relyOn}/?page=${page}&limit=30`,
+      `${import.meta.env.VITE_BASE_URL}estate/reports/${situation}/${relyOn}?page=${page}&limit=30`,
       {
         headers: {
           token:Cookies.get("token")

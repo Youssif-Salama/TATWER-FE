@@ -2,12 +2,12 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 
-export const GetAllContractsForReportsApi = async (page:number,setLoading:any,startDate?:string,endDate?:string) => {
+export const GetAllContractsForReportsApi = async (page:number,limit:number,setLoading?:any,startDate?:string,endDate?:string) => {
 
   let queries=`?page=${page}`;
   startDate && (queries+=`&startDate=${startDate}`);
   endDate && (queries+=`&endDate=${endDate}`);
-  queries+=`&limit=30`;
+  queries+=`&limit=${limit||10}`;
 
   try {
     setLoading(true);

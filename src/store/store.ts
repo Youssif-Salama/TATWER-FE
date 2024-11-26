@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import GlobalReducer from "./slices/GlobalSlice";
+import PdfReducer from "./slices/PdfSlice";
 
 export const store = configureStore({
     reducer: {
-        GlobalReducer
+        GlobalReducer,
+        PdfReducer
     }
 })
 
