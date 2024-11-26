@@ -37,8 +37,6 @@ const OrdersTable = ({ setRefreshOrders, headRef, data, setPage, setLimit, setTo
 
   return (
     <div dir="rtl" className='text-[14px] mt-4'>
-      <h2 className="text-[#0077bc] font-bold mb-4">جدول الطلبات</h2>
-
       {/* Table wrapper with scrolling */}
       <div className="overflow-auto">
         <table className="table-auto border-collapse border border-gray-300 min-w-full">
@@ -71,21 +69,21 @@ const OrdersTable = ({ setRefreshOrders, headRef, data, setPage, setLimit, setTo
                   <td className="px-4 py-2">{order.UserPassword ?? "-"}</td>
                   <td className="px-4 py-2">{order.OrderPhone ?? "-"}</td>
                   <td className="px-4 py-2">{new Date(order.OrderDate).toLocaleDateString()}</td>
-                  <td className="px-4 py-2">
+                  <td className="px-4 py-2 min-w-[400px]">
                     {/* Display order notes */}
                     {order.OrderNotes.map((note: any, noteIndex: number) => {
                       const isExpanded = expandedNotes[`${order._id}-${noteIndex}`];
 
                       return (
-                        <div key={noteIndex} className='border p-1 rounded-md my-1 text-[12px] flex items-start justify-between gap-2'>
-                          <p className='max-w-[200px] break-words'>
+                        <div key={noteIndex} className='border p-1 rounded-md my-1 text-[14px] flex items-start justify-between gap-2'>
+                          <p className='max-w-[300px] break-words'>
                             {isExpanded ? note?.Note : note?.Note?.slice(0, 16)}
                             {note?.Note?.length > 16 && (
                               <button
                                 className='text-[10px] text-[#0077bc]'
                                 onClick={() => toggleExpand(order._id, noteIndex)}
                               >
-                                {isExpanded ? "عرض أقل" : "عرض المزيد"}
+                                {isExpanded ? "عرض أقل" : " عرض المزيد"}
                               </button>
                             )}
                           </p>
