@@ -40,7 +40,8 @@ const AddContractSystemMultiple = ({taxes}:any) => {
       Times: "",
       ContractReleaseDate: "",
       PaymentWay: "",
-      TaxValue:""
+      TaxValue:"",
+      IsHanded:true
     },
     onSubmit: async (values: any) => {
       const result = await AddContractMultipleSystemsAPi(values, setLoading);

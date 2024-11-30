@@ -38,7 +38,7 @@ const FilterContracts: React.FC<FilterContractsProps> = ({
             <option value="">اختر حقل البحث</option>
             <option value="ContractNumber">رقم العقد</option>
             <option value="Name">الاسم</option>
-            <option value="AddressId.City">المدينه</option>
+            <option value="AddressId.Town">المدينه</option>
             <option value="RelyOn">مسجل علي</option>
             <option value="estate">العقار</option>
           </select>

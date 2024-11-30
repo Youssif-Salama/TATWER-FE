@@ -37,7 +37,7 @@ const Contract = ({contract,startDate,endDate,Estate,EstateAddress}:any) => {
         </div>
         <div className="flex items-center  justify-center shadow-md">
           <div className="bg-[#0077bc] px-4 py-1 text-white h-full w-[40%]">العنوان</div>
-          <div className="bg-gray-100 px-4 py-1 w-[60%] h-full ">{contract?.AddressId?.City || "-"}</div>
+          <div className="bg-gray-100 px-4 py-1 w-[60%] h-full ">{contract?.AddressId?.Town || "-"}</div>
         </div>
         <div className="flex items-center  justify-center shadow-md">
           <div className="bg-[#0077bc] px-4 py-1 text-white h-full w-[40%]">رقم الوثيقه</div>
@@ -89,7 +89,7 @@ const Contract = ({contract,startDate,endDate,Estate,EstateAddress}:any) => {
         </div>
         <div className="flex items-center  justify-center shadow-md">
           <div className="bg-[#0077bc] px-4 py-1 text-white h-full w-[40%]">مدينه العقار</div>
-          <div className="bg-gray-100 px-4 py-1 w-[60%] h-full ">{EstateAddress?.City || "-"}</div>
+          <div className="bg-gray-100 px-4 py-1 w-[60%] h-full ">{EstateAddress?.Town || "-"}</div>
         </div>
         <div className="flex items-center  justify-center shadow-md">
           <div className="bg-[#0077bc] px-4 py-1 text-white h-full w-[40%]">مسجل علي</div>

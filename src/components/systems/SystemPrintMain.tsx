@@ -73,7 +73,7 @@ const SystemPrintMain = ({ applied }: { applied: any }) => {
                 { text: " اشهر" + system?.PaymentWay, style: 'tableCell' },
                 { text: system?.ContractId?.Name, style: 'tableCell' },
                 { text: system?.estateName, style: 'tableCell' },
-                { text: system?.ContractId?.AddressId?.City || "_", style: 'tableCell' },
+                { text: system?.ContractId?.AddressId?.Town || "_", style: 'tableCell' },
               ]),
             ],
           },
@@ -122,7 +122,7 @@ const SystemPrintMain = ({ applied }: { applied: any }) => {
       "طريقة السداد": `${system?.PaymentWay} اشهر`,
       "العقد": system?.ContractId?.Name,
       "المشروع": system?.estateName,
-      "المدينة": system?.ContractId?.AddressId?.City || "_"
+      "المدينة": system?.ContractId?.AddressId?.Town || "_"
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(worksheetData);
@@ -211,7 +211,7 @@ const SystemPrintMain = ({ applied }: { applied: any }) => {
                   <div className="px-1">{system?.PaymentWay} اشهر</div>
                   <div className="px-1">{system?.ContractId?.Name}</div>
                   <div className="px-1">{system?.estateName}</div>
-                  <div className="px-1">{system?.ContractId?.AddressId?.City || "_"}</div>
+                  <div className="px-1">{system?.ContractId?.AddressId?.Town || "_"}</div>
                 </div>
               ))}
             </div>

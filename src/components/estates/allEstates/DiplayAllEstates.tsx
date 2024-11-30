@@ -7,6 +7,7 @@ import NestedTableFeatures from "./NestedTableFeatures";
 import { GetAllEstatesApi } from "@/api/estate/GetAllEstatesApi";
 import { AllEstatesTypes } from "@/types/GetAllEstatesTypes";
 import CommonTooltip from "@/common/CommonTooltip";
+import EstateNestedTable from "./EstateNestedTable";
 
 const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:string |null,searchValue:string|null,showWay:string|null}) => {
   const { refreshONDeleteContracts} = useSelector(
@@ -42,7 +43,7 @@ const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:str
     },
     {
       name: "المدينه",
-      selector: (row: any) =><CommonTooltip field={row?.AddressId?.City || row?.AddressData?.City || "-" }/>,
+      selector: (row: any) =><CommonTooltip field={row?.AddressId?.Town || row?.AddressData?.Town || "-" }/>,
     },
     {
       name: "الحي",
@@ -111,6 +112,9 @@ const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:str
         }}
         // @ts-ignore
         customStyles={customStyles}
+        expandableRows
+        // @ts-ignore
+        expandableRowsComponent={EstateNestedTable}
         noDataComponent="لا يوجد بيانات"
       />
     </div>

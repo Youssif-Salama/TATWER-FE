@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { GetSpecificContractAutoSystemsCount } from "./GetSpecificContractAutoSystemsCount";
 
 export const GetSpecifiContractApi = async (id:any) => {
   try {
@@ -11,6 +12,8 @@ export const GetSpecifiContractApi = async (id:any) => {
         },
       }
     );
+    const Times:any=await GetSpecificContractAutoSystemsCount(id) || 0;
+    response.data.data[0].AutoSystemCount=Times.data.data
     return response;
   } catch (error: any) {
     return error;

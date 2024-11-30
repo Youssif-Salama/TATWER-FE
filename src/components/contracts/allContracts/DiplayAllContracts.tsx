@@ -46,7 +46,6 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
       else{
         getAllContractsDependingOnType();
       }
-      console.log(searchKeyWord);
 
   }, [getContractType, page,searchKeyWord,searchValue,showWay,startDate,endDate,refreshONDeleteContracts,rowPerPage]);
 
@@ -81,7 +80,7 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
     {
       name: "المدينه",
       // @ts-ignore
-      selector: (row: AllContractTypes) => <CommonTooltip field={row?.AddressId?.City   || "-"}/>,
+      selector: (row: AllContractTypes) => <CommonTooltip field={row?.AddressId?.Town   || "-"}/>,
       minWidth:"150px"
     },
     {

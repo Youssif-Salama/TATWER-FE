@@ -1,6 +1,7 @@
 import { Button } from "@/componentsShadcn/ui/button";
 import { setRefreshContractFiles } from "@/store/slices/GlobalSlice";
 import { AppDispatch } from "@/store/store";
+import Cookies from "js-cookie";
 import { FaEye } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useDispatch } from "react-redux";
@@ -71,6 +72,8 @@ const AddedFileList = ({
           catchAllNames([]);
           setSelectedFileToShow(null);
           dispatch(setRefreshContractFiles(Math.random()));
+        Cookies.remove("estateFileId");
+        Cookies.remove("fileId");
         }}
       >
         حذف جميع الملفات

@@ -59,7 +59,6 @@ const TodoAdd = () => {
       MainFormik.setFieldValue("StartDate",currentTask.StartDate);
       MainFormik.setFieldValue("DueDate",currentTask.DueDate);
     }
-    console.log(currentTask);
 
   },[currentTask])
 
@@ -146,7 +145,6 @@ const TodoAdd = () => {
         <Button type="button" className="w-full mt-6 bg-[#0077bc] hover:bg-[#0077bcd7] rounded-none"
           onClick={()=>{
             submitTask()
-            console.log(MainFormik.values,FilesFormik.values);
 
           }}
         >

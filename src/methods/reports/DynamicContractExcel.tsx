@@ -38,7 +38,7 @@ const DynamicContractExcel = () => {
       "رقم العقد": contract?.ContractNumber || "-",
       "جوال الممثل": contract?.MobileNumber || "-",
       "الممثل": contract?.Agent || "-",
-      "المدينه": contract?.AddressId?.City || "-",
+      "المدينه": contract?.AddressId?.Town || "-",
       "الحساب البنكي": contract?.BankAccount || "-",
       "العقار المرتبط": contract?.estate?.EstateName || "-",
       "الصفه": contract?.Type === "Tenant" ? "مؤجر" : "مستأجر",
@@ -59,7 +59,7 @@ const DynamicContractExcel = () => {
     { value: contract?.Type === "tenant" ? "مؤجر" : "مستأجر",readOnly:true },
     { value: contract?.estate?.EstateName || "-",readOnly:true },
     { value: contract?.BankAccount || "-",readOnly:true },
-    { value: contract?.AddressId?.City || "-",readOnly:true },
+    { value: contract?.AddressId?.Town || "-",readOnly:true },
     { value: contract?.MobileNumber || "-",readOnly:true },
     { value: contract?.ContractNumber || "-",readOnly:true },
     { value: contract?.DocumentNumber || "-",readOnly:true },
@@ -96,7 +96,6 @@ const DynamicContractExcel = () => {
                <button
               onClick={() => {
                 setDisplayExcel(true);
-                console.log(decryptedData);
               }}
               className="p-2 px-4 bg-[#0077bc] text-white hover:bg-[#0077bcc1]"
             >

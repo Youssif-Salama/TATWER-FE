@@ -32,6 +32,7 @@ const UpdateContractSystemDialog = ({
   const dispatch:AppDispatch=useDispatch();
 
   const formik = useFormik<UpdateContractSystemDialogProps>({
+    // @ts-ignore
     initialValues: {
       RentValue: "",
       FixedPrice: "",
@@ -44,6 +45,7 @@ const UpdateContractSystemDialog = ({
 
 
   useEffect(()=>{
+    // @ts-ignore
     formik.setValues({RentValue:row.RentValue,FixedPrice:row.FixedPrice})
   },[row])
   return (

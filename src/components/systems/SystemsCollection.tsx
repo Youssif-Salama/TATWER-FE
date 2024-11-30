@@ -35,16 +35,17 @@ const SystemsCollection = () => {
 
   const {refreshOnApplyOrSetSystemMessage}=useSelector((state:RootState)=>state.GlobalReducer)
   const [rowsPerPage,   setRowsPerPage] = useState<number>(10);
+  const currentContractForSystems=Cookies.get("currentContractForSystems");
 
   const getAllSystems=async()=>{
-    const result = await GetAllSystemsApi(isApplied,setLoading,page,showWay,searchKeyWord,searchValue,startDate,endDate,no,rowsPerPage);
+    const result = await GetAllSystemsApi(isApplied,setLoading,page,showWay,searchKeyWord,searchValue,startDate,endDate,no,rowsPerPage,currentContractForSystems);
     result && setTotalRows(result?.data?.meta?.numberOfRows);
     result && setAllSystems(result?.data?.data);
   }
 
   useEffect(()=>{
     getAllSystems();
-  },[page,searchKeyWord,searchValue,showWay,startDate,endDate,refreshOnApplyOrSetSystemMessage,isApplied,no,rowsPerPage])
+  },[page,searchKeyWord,searchValue,showWay,startDate,endDate,refreshOnApplyOrSetSystemMessage,isApplied,no,rowsPerPage,currentContractForSystems])
 
   const token=Cookies.get("token");
   const [decodedToken,setDecodedToken]=useState<any>(null);

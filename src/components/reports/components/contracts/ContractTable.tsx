@@ -39,7 +39,7 @@ const ContractTable = ({ allContracts,fullView }: any) => {
               <td className={`px-2 py-2 whitespace-nowrap ${!fullView && "hidden"}`}>{contract?.estate?.EstateName || "-"}</td>
               <td className="px-2 py-2 whitespace-nowrap">{contract?.estate?.PieceNumber || "-"}</td>
               <td className={`${!fullView && "hidden"} px-2 py-2 whitespace-nowrap`}>{contract?.BankAccount || "-"}</td>
-              <td className={`${!fullView && "hidden"} px-2 py-2 whitespace-nowrap`}>{contract?.AddressId?.City || "-"}</td>
+              <td className={`${!fullView && "hidden"} px-2 py-2 whitespace-nowrap`}>{contract?.AddressId?.Town || "-"}</td>
               <td className="px-2 py-2 whitespace-nowrap">{contract?.Agent || "-"}</td>
               <td className="px-2 py-2 whitespace-nowrap">{contract?.MobileNumber || "-"}</td>
               <td className="px-2 py-2 whitespace-nowrap">{contract?.DocumentNumber || "-"}</td>

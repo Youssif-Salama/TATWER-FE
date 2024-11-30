@@ -29,11 +29,11 @@ export const GetAllContractsApi = async (setLoading:any,contractsType:any,page:a
 
 
 
-export const GetAllContractsApiForUnite = async (page:any,contractsType:any,setLoading:any,searchKeyWord:any,searchValue:any,type:string) => {
+export const GetAllContractsApiForUnite = async (page:any,contractsType:any,setLoading:any,searchKeyWord:any,searchValue:any,type:string,currentEstateId?:any) => {
   let queries=`?page=${page}`;
   searchKeyWord ? (queries+=`&keyWord=${searchKeyWord}`):(queries+=`&keyWord=Name`);
   searchValue && (queries+=`&value=${searchValue}`);
-
+  currentEstateId && (queries+=`&currentEstateId=${currentEstateId}`);
 
   try {
     setLoading(true);

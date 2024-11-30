@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingSpinner from "@/common/LoadingSpinner";
 import { ResetPasswordApi } from "@/api/password/ResetPasswordApi";
@@ -18,10 +18,7 @@ const NewPasswordForm = () => {
     result && navigate("/login");
   };
 
-  useEffect(()=>{
-    console.log(location);
 
-  },[])
 
   return (
     <div className="flex items-center justify-center h-screen" dir="rtl">

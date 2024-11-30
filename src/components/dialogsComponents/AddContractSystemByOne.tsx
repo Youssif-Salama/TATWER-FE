@@ -37,7 +37,8 @@ const AddContractSystemByOne = ({taxes}:any) => {
       FixedPrice: "",
       CurrentPaymentWay: "",
       CurrentReleaseDate: "",
-      TaxValue:""
+      TaxValue:"",
+      IsHanded:true
     },
     onSubmit: async (values: UpdateContractSystemDialogProps) => {
       const result = await AddContractSystemApi(values, setLoading, contractId);

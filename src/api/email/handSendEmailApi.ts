@@ -16,7 +16,6 @@ export const handSendEmailApi = async (data:any, setLoading: any) => {
   );
 
   if (response) {
-    console.log(response);
     successToaster(response?.data?.message);
     setLoading(false);
   }

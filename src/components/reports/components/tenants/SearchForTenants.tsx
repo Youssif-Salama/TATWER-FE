@@ -99,7 +99,7 @@ const SearchForTenants = ({setTenantId}: {setTenantId: any}) => {
             >
               <option className="hover:bg-[#0077bc] p-1 cursor-pointer">اختر كلمه البحث</option>
               <option className="hover:bg-[#0077bc] p-1 cursor-pointer" value="Name">الاسم</option>
-              <option className="hover:bg-[#0077bc] p-1 cursor-pointer" value="AddressId.City">المدينه</option>
+              <option className="hover:bg-[#0077bc] p-1 cursor-pointer" value="AddressId.Town">المدينه</option>
               <option className="hover:bg-[#0077bc] p-1 cursor-pointer" value="RelyOn">مسجل علي</option>
               <option className="hover:bg-[#0077bc] p-1 cursor-pointer" value="ContractNumber">رقم العقد</option>
             </select>

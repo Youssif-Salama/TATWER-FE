@@ -152,7 +152,7 @@ const Lanlords = ({
                  مدينه العقار
               </p>
               <p className="p-1 min-w-[100px]">
-                {currentEstate?.AddressId?.City}
+                {currentEstate?.AddressId?.Town}
               </p>
             </div>
             <div className="flex items-center bg-gray-100 gap-2 shadow-md">

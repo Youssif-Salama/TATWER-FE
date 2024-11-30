@@ -14,7 +14,6 @@ export const autoEmailSenderApi = async () => {
       });
 
       if (response) {
-        console.log(response);
         localStorage.setItem("sendAutoEmail", "true");
         successToaster(response?.data?.message);
       }

@@ -14,6 +14,8 @@ import clsx from "clsx";
 import AddSystemMessageDialog from "@/componentsShadcn/dialogs/AddSystemMessageDialog";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import AddSystemWarningDialog from "@/componentsShadcn/dialogs/AddSystemWarningDialog";
+import { MdArrowBackIos } from "react-icons/md";
+import DisplayCurrentSystemEstate from "@/components/systems/DisplayCurrentSystemEstate";
 
 
 const SystemCommonDiv = ({ system }: { system: any }) => {
@@ -21,8 +23,7 @@ const SystemCommonDiv = ({ system }: { system: any }) => {
   const remainingDays = dueDateGregorian
     ? countResetDaysAndColors(dueDateGregorian)
     : null;
-
-
+    
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
 
@@ -48,19 +49,21 @@ const SystemCommonDiv = ({ system }: { system: any }) => {
   const items = [
     { id: 1, label: "رقم القسط", value: system?.SystemNumber },
     { id: 2, label: "الصفه", value: system?.ContractId?.Type === "tenant" ? "مؤجر" : "مستأجر" },
-    { id: 3, label: "المدينه", value: system?.ContractId?.AddressId?.City || "-" },
+    { id: 3, label: "المدينه", value: system?.ContractId?.AddressId?.Town || "-" },
     { id: 4, label: "الاسم/الشركه", value: system?.ContractId?.Name || system?.contractData?.Name },
     { id: 5, label: "مسجل علي", value: system?.ContractId?.RelyOn || system?.ContractData?.RelyOn },
     { id: 6, label: "نظام العقد ", value: system?.PaymentWay + " اشهر" },
     { id: 7, label: "المبلغ ", value: Number(system?.TotalPrice) },
     { id: 8, label: "رقم العقد", value: system?.ContractId?.ContractNumber || system?.contractData?.ContractNumber },
-    { id: 9, label: "المشروع", value: system?.Estate?.EstateName || "_" },
+    { id: 9, label: "تاريخ البداية", value: system?.ReleaseDate?.slice(0, 10) || "_" },
     { id: 10, label: "تاريخه (م)", value: system?.LastAskDate?.slice(0, 10) },
     { id: 11, label: "تاريخه (ه)", value: system?.LastAskDateH?.slice(0, 10) },
     { id: 12, label: system.Applied ? "كان متبقي له" : "متبقي له", value: remainingFormatted(remainingDays?.days), color: remainingDays?.color },
     { id: 13, label: "الحاله", value: remainingDays?.situation, color: remainingDays?.color },
     { id: 15, label: "تذكير / تأكيد", dropdown: true }
   ].filter(item => !(system?.Applied && (item.id === 12 || item.id === 15 || item.id === 13)));
+
+  const [showMoreDetails, setShowMoreDetails] = useState(false);
 
   return (
     <div className="relative w-full">
@@ -119,6 +122,20 @@ const SystemCommonDiv = ({ system }: { system: any }) => {
           </div>
         </div>
       )}
+
+      <div className="bg-gray-100 p-1">
+        <div className="text-[12px] text-[#0077bc] flex justify-between items-center gap-2"
+        onClick={()=>{
+          setShowMoreDetails(!showMoreDetails)
+        }}
+        >
+        <MdArrowBackIos className={`cursor-pointer ${showMoreDetails?"transform -rotate-90":""}`}/>
+        <p>اضغط ع السهم {showMoreDetails?"لغلق":"لاظهار"} العقار</p>
+        </div>
+        <div className={`${showMoreDetails?"":"hidden"}`}>
+          <DisplayCurrentSystemEstate system={system} showMoreDetails={showMoreDetails}/>
+        </div>
+      </div>
     </div>
   );
 };

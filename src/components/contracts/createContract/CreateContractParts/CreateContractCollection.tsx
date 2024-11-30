@@ -79,7 +79,6 @@ const CreateContractCollection = () => {
         result && dispatch(setRefreshOnAddNewContractSystem(Math.random()))
         result && setLoading(false);
         !result && setLoading(false);
-        console.log(result);
 
       }
     },
@@ -96,6 +95,7 @@ const CreateContractCollection = () => {
   const getOneContract = async (id: any) => {
     const result = await GetSpecifiContractApi(id);
     result?.data?.data.length>0 && formik.setValues(result?.data?.data[0]);
+    result?.data?.data.length>0 && formik.setFieldValue("Times",result?.data?.data[0].AutoSystemCount)
     result?.data?.data.length>0 && formik.setFieldValue("PaymentWay",result?.data?.data[0]?.PaymentWay[0]);
     result?.data?.data.length>0 && (
       result?.data?.data[0]?.HasTax ? setHasTax(true) : setHasTax(false)

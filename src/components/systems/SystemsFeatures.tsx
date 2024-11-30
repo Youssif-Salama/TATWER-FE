@@ -1,5 +1,6 @@
 import NormalDateComponent from "@/common/NormalDateComponent";
 import { Input } from "@/componentsShadcn/ui/input";
+import Cookies from "js-cookie";
 import { IoReload } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
@@ -62,6 +63,7 @@ const SystemsFeatures: React.FC<SystemsFeaturesProps> = ({
       no
     },
   ]
+  const currentContractForSystems=Cookies.get("currentContractForSystems");
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center bg-[#0077bc]">
@@ -75,7 +77,7 @@ const SystemsFeatures: React.FC<SystemsFeaturesProps> = ({
             <option value="">اختر حقل البحث</option>
             <option value="ContractId.ContractNumber">رقم العقد</option>
             <option value="ContractId.Name">الاسم</option>
-            <option value="ContractId.AddressId.City">المدينه</option>
+            <option value="ContractId.AddressId.Town">المدينه</option>
             <option value="ContractId.RelyOn">مسجل علي</option>
             <option value="ContractId.Type">الصفه</option>
           </select>
@@ -139,19 +141,38 @@ const SystemsFeatures: React.FC<SystemsFeaturesProps> = ({
           <p> اختر مجموعه</p>
           <p>    <Link to="/systems/print" className="bg-[#0077bc] text-[12px] text-white p-1 mb-4">طباعه</Link></p>
         </p>
-        <p className=" grid grid-cols-6 gap-1 max-sm:grid-cols-3">
-            {
-              cases.map((item,index)=>{
-                return <span
-                className={`cursor-pointer ${no==item?.case? "text-[#0077bc]":"text-[#1f1f1f]"} cursor-pointer hover:text-[#005fa3] transition-colors duration-300`}
-                key={index}
-                onClick={() => setNo(item.case)}
-              >
-                 *{item.show}
-              </span>
-              })
-            }
-        </p>
+        <select
+  className="w-full border p-2 text-[#1f1f1f] hover:border-[#005fa3] transition-colors duration-300 max-sm:w-auto"
+  value={no}
+  onChange={(e:any) => setNo(e.target.value)}
+>
+  {cases.map((item, index) => (
+    <option
+      key={index}
+      value={item.case}
+      className={no === item?.case ? "text-[#0077bc]" : "text-[#1f1f1f]"}
+    >
+      *{item.show}
+    </option>
+  ))}
+</select>
+    <div>
+  {currentContractForSystems&&(
+    <div>
+      <p>هذه الصفحه تعرض الدفعات الخاصه بعقار {Cookies.get("estateNameForSystems")} </p>
+      <p>مع ال {Cookies.get("ContractObjForSystems")}</p>
+      <p>لعرض جميع العقارات مجددا اضغط هنا
+        {" "}
+        <span className="text-red-500 underline cursor-pointer"
+        onClick={()=>{
+          Cookies.remove("currentContractForSystems");
+          window.location.reload()
+        }}
+        >اعاده تهيئه</span>
+      </p>
+      </div>
+  )}
+    </div>
       </div>
     </div>
   );

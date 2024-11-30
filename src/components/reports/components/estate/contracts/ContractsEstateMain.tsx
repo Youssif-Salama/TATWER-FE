@@ -168,7 +168,7 @@ const ContractsEstateMain = ({
     "رقم الوثيقه": currentEstate?.TitleDeedNumber,
     "مساحه العقار": currentEstate?.EstateSpace,
     "تاريخها": currentEstate?.createdAt?.slice(0, 10),
-    "العنوان": currentEstate?.AddressId?.City,
+    "العنوان": currentEstate?.AddressId?.Town,
     "رقم القطعه": currentEstate?.PieceNumber,
     "رقم المخطط": currentEstate?.PlanNumber
   }
@@ -192,7 +192,7 @@ const ContractsEstateMain = ({
         "رقم الضريبه": temp?.ContractId?.TaxNumber || "-",
         "م.التمثيل": temp?.ContractId?.DocumentNumber || "-",
         "طرق الدفع": temp?.ContractId?.PaymentWay[temp?.ContractId?.PaymentWay?.length - 1] || "-" + " اشهر",
-        "مدينه العقار": currentEstate?.AddressId?.City,
+        "مدينه العقار": currentEstate?.AddressId?.Town,
         "الوحده": temp?.UniteId?.UniteName || "-",
         "المساحه": temp?.UniteId?.UnitSpace || "-"
       })
@@ -220,7 +220,7 @@ const ContractsEstateMain = ({
           "رقم الضريبه": temp?.ContractId?.TaxNumber || "-",
           "م.التمثيل": temp?.ContractId?.DocumentNumber || "-",
           "طرق الدفع": temp?.ContractId?.PaymentWay[temp?.ContractId?.PaymentWay?.length - 1] || "-" + " اشهر",
-          "مدينه العقار": currentEstate?.AddressId?.City,
+          "مدينه العقار": currentEstate?.AddressId?.Town,
           "الوحده": temp?.UniteId?.UniteName || "-",
           "المساحه": temp?.UniteId?.UnitSpace || "-"
         })

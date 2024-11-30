@@ -31,7 +31,6 @@ const redMapPin = new L.DivIcon({
     useEffect(() => {
         setTimeout(() => {
             window.dispatchEvent(new Event('resize'));
-            console.log("resize");
         }, 1000);
     }, []);
 
@@ -48,7 +47,6 @@ const redMapPin = new L.DivIcon({
                 style={{ height: '500px', width: '100%' }}
                 // @ts-ignore
                 whenReady={(map: any) => {
-                    console.log('Map created');
                     map.target.on('click', handleMapClick);
                 }}
             >

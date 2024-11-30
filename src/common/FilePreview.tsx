@@ -1,4 +1,5 @@
 import React from 'react';
+import { BsDownload } from 'react-icons/bs';
 
 interface FilePreviewProps {
   path: string;
@@ -51,11 +52,19 @@ const FilePreview: React.FC<FilePreviewProps> = ({ path }) => {
           className="object-cover w-full"
         />
       )}
-      {
-        path && !isImage(path) && !isPdf(path) && !isDocument(path) && !isVideo(path) && (
-          <p className=' bg-white p-2 text-red-500'>نوع الملف غير مدعوم</p>
-        )
-      }
+      {path &&
+        !isImage(path) &&
+        !isPdf(path) &&
+        !isDocument(path) &&
+        !isVideo(path) && (
+          <div className="bg-white p-2 flex flex-row gap-1 justify-between">
+          <p className="  text-red-500">نوع الملف غير مدعوم</p>
+          <a className="cursor-pointer" href={path} download
+          >
+            <BsDownload className="text-[#0077bc] font-bold text-[14px]"/>
+          </a>
+          </div>
+        )}
     </div>
   );
 };

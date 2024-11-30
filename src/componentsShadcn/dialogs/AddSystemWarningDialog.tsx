@@ -41,15 +41,25 @@ const AddSystemWarningDialog = ({ system }: any) => {
     رساله تنويه بتسديد الدفعه رقم ${system?.SystemNumber}
     تاريخ اليوم: ${new Date().toLocaleDateString()}
 
+    -> رقم الدفعه: ${system?.SystemNumber}
+
+    -> السعر الكلي: ${system?.RentValue + system?.FixedPrice}
+
+    -> تاريخ التسجيل: ${system?.ReleaseDate?.slice(0, 10)}
+
+    -> تاريخ السداد: ${system?.LastAskDate?.slice(0, 10)}
+
 ${message}
 
     اخر موعد للتسديد: ${system?.LastAskDate?.slice(0, 10)}
 
 ${messageTail}
 `;
-    const encodedMessage = encodeURIComponent(modifiedMessage);
-    const url = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-    window.open(url, "_blank"); // Open in a new tab
+    setTimeout(() => {
+      const encodedMessage = encodeURIComponent(modifiedMessage);
+      const url = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+      window.open(url, "_blank"); // Open in a new tab
+    }, 1500);
   };
 
   const today = new Date();

@@ -39,7 +39,7 @@ const EstateMeta = ({estate,startDate,endDate}:any) => {
             </div>
             <div className="flex items-center bg-gray-100 gap-2 shadow-md">
               <p className="bg-[#0077bc] text-white w-[100px] break-words p-1">العنوان</p>
-              <p className="p-1 min-w-[100px]">{estate?.AddressId?.City}</p>
+              <p className="p-1 min-w-[100px]">{estate?.AddressId?.Town}</p>
             </div>
             <div className="flex items-center bg-gray-100 gap-2 shadow-md">
               <p className="bg-[#0077bc] text-white w-[100px] break-words p-1">رقم القطعه</p>

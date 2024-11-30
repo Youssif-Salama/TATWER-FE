@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ContractUnitesLandlords from "./ContractUnitesTypes/ContractUnitesLandlords/ContractUnitesLandlords";
 import ContractUnitesTenants from "./ContractUnitesTypes/ContractUnitesTenants/ContractUnitesTenants";
 import UnitesForLandlords from "./ContractUnitesTypes/ContractUnitesLandlords/UnitesForLandlords";
@@ -96,11 +96,6 @@ const ContractUnites = () => {
     }
   }
   };
-
-  useEffect(() => {
-    console.log(landlordFiles,landlordNames);
-
-  }, [tenantUnit, tenantId,landlordFiles,landlordNames]);
 
   return (
     <div>

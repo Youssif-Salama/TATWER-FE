@@ -19,6 +19,8 @@ import { IoClose } from "react-icons/io5";
 import { successToaster } from "@/utils/ReactToatify";
 import { DeleteMultipleContractUnites } from "@/api/contractUnites/DeleteMultipleContractUnites";
 import { setRefreshOnDeleteContractUnites } from "@/store/slices/GlobalSlice";
+// import axios from "axios";
+// import Cookies from "js-cookie";
 
 const DeleteContractUnite2Dialog = ({row,setCatchSelectedRows}:{row:any,setCatchSelectedRows:any}) => {
   const [loading, setLoading] = useState(false);
@@ -28,6 +30,15 @@ const DeleteContractUnite2Dialog = ({row,setCatchSelectedRows}:{row:any,setCatch
    result && dispatch(setRefreshOnDeleteContractUnites(Math.random()));
    result && successToaster("تم الحذف بنجاح");
    result && setCatchSelectedRows([]);
+  //  if(result){
+  //   await axios.post(`${import.meta.env.VITE_BASE_URL}contract-unites/checkForEstateValidity`,{
+  //     uniteId:row[0].UniteId
+  //   },{
+  //     headers:{
+  //       token:Cookies.get("token")
+  //     }
+  //   });
+  //  }
   }
 
   return (

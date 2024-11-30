@@ -82,13 +82,9 @@ const TodoAddMain = ({ formik, currentMaintask }: any) => {
         setEmpId([]);
       }
     }
-    console.log(currentMaintask);
 
   }, [currentMaintask]);
 
-  useEffect(() => {
-    console.log(empsToDisplay);
-  }, [empsToDisplay]);
 
 
 

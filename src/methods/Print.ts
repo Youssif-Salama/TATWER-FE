@@ -233,7 +233,6 @@ export const generatePdfFromArrayForEstate =async (systems: any,headers: any, ke
 
   let tableMaped;
   if(extraContent && !contracts){
-    console.log("extra");
 
     tableMaped= systems.map((system: any, index: number) =>{
       const lastAlert = system?.Alerts && system.Alerts.length > 0 ? system.Alerts[system.Alerts.length - 1] : "-";
@@ -252,7 +251,6 @@ export const generatePdfFromArrayForEstate =async (systems: any,headers: any, ke
     })
   }
   else if(contracts){
-    console.log("contracts");
 
     tableMaped= systems.map((system: any, index: number) =>{
       const situation = system?.Situation == "active" ? "مكتمل" : "مكتمل غير"
@@ -270,7 +268,6 @@ export const generatePdfFromArrayForEstate =async (systems: any,headers: any, ke
     })
   }
   else{
-    console.log("else");
 
     tableMaped = systems.map((system: any, index: number) =>[
         { text: (index + 1).toString(), style: 'tableCell' },

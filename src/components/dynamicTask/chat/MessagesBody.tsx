@@ -3,7 +3,7 @@ import { AppDispatch } from "@/store/store";
 import { IoIosCloseCircle } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import Message from "./Message";
-import {   useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import AdminMessage from "./AdminMessage";
 
 const MessagesBody = ({
@@ -28,11 +28,7 @@ const MessagesBody = ({
     }
   };
 
-  useEffect(()=>{
-    if (messageBodyRef.current) {
-        console.log(messageBodyRef.current.scrollHeight,  messageBodyRef.current.scrollTop,  messageBodyRef.current.offsetHeight);
-    }
-  },[])
+
 
 
 

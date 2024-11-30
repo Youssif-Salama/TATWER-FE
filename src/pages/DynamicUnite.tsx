@@ -34,9 +34,7 @@ const DynamicUnite = () => {
     getUniteFiles();
   },[])
 
-  useEffect(()=>{
-    console.log({Names});
-  },[Names])
+
 
  const handleClick=async()=>{
   if(!currentFiles || currentFiles?.length==0){

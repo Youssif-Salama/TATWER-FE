@@ -16,10 +16,7 @@ const Pages = ({setPages,pages,disabled}:{setPages:any,pages:any,disabled?:any})
     setPages(temp);
   },[temp])
 
-  useEffect(()=>{
-    console.log(pages);
-    
-  },[pages])
+
 
   const [onChnageAllContracts,setOnChnageAllContracts] = useState(0);
   const [onChnageAllEstates,setOnChnageAllEstates] = useState(0);

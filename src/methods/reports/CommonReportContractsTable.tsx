@@ -121,7 +121,7 @@ const CommonReportContractsTable = ({ allContracts }: any) => {
               </View>
               {/* Second row of data (Green) */}
               <View style={[styles.row, styles.greenRow]}>
-                <Text style={styles.tableDataCell}>{contract?.AddressId?.City || "-"}</Text>
+                <Text style={styles.tableDataCell}>{contract?.AddressId?.Town || "-"}</Text>
                 <Text style={styles.tableDataCell}>{contract?.Agent || "-"}</Text>
                 <Text style={styles.tableDataCell}>{contract?.MobileNumber || "-"}</Text>
                 <Text style={styles.tableDataCell}>{contract?.DocumentNumber || "-"}</Text>

@@ -49,7 +49,6 @@ const redMapPin = new L.DivIcon({
                 style={{ height: '500px', width: '100%' }}
                 // @ts-ignore
                 whenReady={(map: any) => {
-                    console.log('Map created');
                     map.target.on('click', handleMapClick);
                 }}
             >

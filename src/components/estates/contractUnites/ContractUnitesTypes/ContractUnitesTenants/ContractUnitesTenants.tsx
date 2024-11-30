@@ -1,5 +1,6 @@
 import { GetAllContractsApiForUnite } from "@/api/contract/GetAllContractsApi";
 import LoadingSpinner from "@/common/LoadingSpinner";
+import Cookies from "js-cookie";
 import { useRef, useState, ChangeEvent, useEffect } from "react";
 import { IoMdMore } from "react-icons/io";
 
@@ -27,6 +28,7 @@ const ContractUnitesTenants = ({setTenantId}: {setTenantId: any}) => {
   const [searchKeyWord, setSearchKeyWord] = useState<string | null>(null);
   const [searchValue, setSearchValue] = useState<string | null>(null);
   const [meta, setMeta] = useState<PaginationMeta | null>(null);
+  const [refreshOnClickReset, setRefreshOnClickReset] = useState<boolean>(false);
 
   const onChangeInput = (value: string) => {
     setSearchValue(value);
@@ -55,7 +57,8 @@ const ContractUnitesTenants = ({setTenantId}: {setTenantId: any}) => {
       setLoading,
       searchKeyWord,
       searchValue,
-      "tenant"
+      "tenant",
+      Cookies.get("estateId")
     );
     if (result) {
       setResults(result.data?.data || []);
@@ -66,7 +69,7 @@ const ContractUnitesTenants = ({setTenantId}: {setTenantId: any}) => {
 
   useEffect(() => {
     getAllTenants();
-  }, [page, searchValue]);
+  }, [page, searchValue, refreshOnClickReset]);
 
 
   useEffect(()=>{
@@ -100,7 +103,7 @@ const ContractUnitesTenants = ({setTenantId}: {setTenantId: any}) => {
             >
               <option className="hover:bg-[#0077bc] p-1 cursor-pointer">اختر كلمه البحث</option>
               <option className="hover:bg-[#0077bc] p-1 cursor-pointer" value="Name">الاسم</option>
-              <option className="hover:bg-[#0077bc] p-1 cursor-pointer" value="AddressId.City">المدينه</option>
+              <option className="hover:bg-[#0077bc] p-1 cursor-pointer" value="AddressId.Town">المدينه</option>
               <option className="hover:bg-[#0077bc] p-1 cursor-pointer" value="RelyOn">مسجل علي</option>
               <option className="hover:bg-[#0077bc] p-1 cursor-pointer" value="ContractNumber">رقم العقد</option>
             </select>
@@ -123,6 +126,7 @@ const ContractUnitesTenants = ({setTenantId}: {setTenantId: any}) => {
       onClick={() => {
         setPage(1);
         setSearchValue("");
+        setRefreshOnClickReset(!refreshOnClickReset);
         if (inputRef.current) {
           inputRef.current.value = "";
           inputRef.current.focus();

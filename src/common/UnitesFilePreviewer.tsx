@@ -1,3 +1,4 @@
+import { BsDownload } from "react-icons/bs";
 import { FaEye, FaTrash } from "react-icons/fa6";
 
 const UnitesFilePreviewer = ({ file,setFixedFiles,index }: any) => {
@@ -178,7 +179,13 @@ const UnitesFilePreviewer = ({ file,setFixedFiles,index }: any) => {
         !isPdf(path) &&
         !isDocument(path) &&
         !isVideo(path) && (
-          <p className=" bg-white p-2 text-red-500">نوع الملف غير مدعوم</p>
+          <div className="bg-white p-2 flex flex-row gap-1 justify-between">
+          <p className="  text-red-500">نوع الملف غير مدعوم</p>
+          <a className="cursor-pointer" href={path} download
+          >
+            <BsDownload className="text-[#0077bc] font-bold text-[14px]"/>
+          </a>
+          </div>
         )}
     </div>
   );
