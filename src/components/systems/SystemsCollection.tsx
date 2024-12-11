@@ -36,9 +36,10 @@ const SystemsCollection = () => {
   const {refreshOnApplyOrSetSystemMessage}=useSelector((state:RootState)=>state.GlobalReducer)
   const [rowsPerPage,   setRowsPerPage] = useState<number>(10);
   const currentContractForSystems=Cookies.get("currentContractForSystems");
+  const contractIds=Cookies.get("contractIds");
 
   const getAllSystems=async()=>{
-    const result = await GetAllSystemsApi(isApplied,setLoading,page,showWay,searchKeyWord,searchValue,startDate,endDate,no,rowsPerPage,currentContractForSystems);
+    const result = await GetAllSystemsApi(isApplied,setLoading,page,showWay,searchKeyWord,searchValue,startDate,endDate,no,rowsPerPage,currentContractForSystems,contractIds);
     result && setTotalRows(result?.data?.meta?.numberOfRows);
     result && setAllSystems(result?.data?.data);
   }

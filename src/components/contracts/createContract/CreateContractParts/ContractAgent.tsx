@@ -1,7 +1,24 @@
+import { UpdateContractPartTwoApi } from "@/api/contract/updateContractParts/UpdateContractPartTwoApi";
 import InputCommon from "@/common/InputCommon";
 import InputDateCommon from "@/common/InputDateCommon";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 
 const ContractAgent = ({ formik }: { formik: any }) => {
+  const [values, setValues] = useState({});
+  const updateContractPartTwo=async(data:any)=>{
+     await UpdateContractPartTwoApi(data);
+  };
+  useEffect(() => {
+    setValues({
+      Agent: formik.values.Agent,
+      IdNumber: formik.values.IdNumber,
+      MobileNumber: formik.values.MobileNumber,
+      RepresentationDocument: formik.values.RepresentationDocument,
+      DocumentDate: formik.values.DocumentDate,
+      DocumentNumber: formik.values.DocumentNumber,
+    });
+  }, [formik]);
   return (
     <div className="w-full flex flex-col gap-4">
       <div className="flex items-center flex-wrap w-full gap-4 justify-between">
@@ -105,6 +122,16 @@ const ContractAgent = ({ formik }: { formik: any }) => {
           />
         </div>
       </div>
+      {
+        Cookies.get("contractId") &&
+        <div className="w-full mt-4 bg-[#0077bc] text-center text-white text-sm p-2 cursor-pointer
+      hover:bg-[#0077bcc4]"
+      onClick={()=>{
+        updateContractPartTwo(values);
+      }}
+      >
+        تعديل هذا الجزء
+      </div>}
     </div>
   );
 };

@@ -96,6 +96,11 @@ const OrdersTable = ({ setRefreshOrders, headRef, data, setPage, setLimit, setTo
                               </div>
                             )
                           }
+                          <p className='text-[10px]'>{
+                            new Date(note?.createdAt).toLocaleDateString()
+                            + " ---- " +
+                            new Date(note?.createdAt).toLocaleTimeString()
+                            }</p>
                         </div>
                       );
                     })}

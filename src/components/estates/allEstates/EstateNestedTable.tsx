@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 const EstateNestedTable = ({data}:any) => {
   const [contracts,setContracts]=useState<any>(null);
+  const [contractIds,setContractIds]=useState<any>(null);
   const [page,setPage]=useState<any>(1);
   const [limit,setLimit]=useState<any>(1);
   const [meta,setMeta]=useState<any>(null);
@@ -14,6 +15,7 @@ const EstateNestedTable = ({data}:any) => {
     const result=await GetEstateContracts(id,page,limit);
     result && setContracts(result?.data?.data);
     result && setMeta(result?.data?.meta);
+    result && setContractIds(result?.data?.contractsIds);
   }
 
   useEffect(()=>{
@@ -21,6 +23,19 @@ const EstateNestedTable = ({data}:any) => {
   },[data,page,limit])
   return (
     <div className="p-4">
+      <div className="text-[12px] flex items-center mb-4 gap-2">
+        <p className="font-bold ">عرض جميع الدفعات المرتبطه مع العقار</p>
+        <Link to="/systems" className="underline text-[#0077bc] cursor-pointer"
+        onClick={()=>{
+          Cookies.set("contractIds",contractIds);
+          Cookies.remove("currentContractForSystems");
+              Cookies.remove("ContractObjForSystems");
+              Cookies.set("estateNameForSystems",data?.EstateName);
+           }}
+        >
+          اضفط هنا
+        </Link>
+      </div>
       <div className="flex items-center gap-4">
       {
         contracts?.map((contract:any)=>{
@@ -68,6 +83,7 @@ const EstateNestedTable = ({data}:any) => {
               Cookies.set("currentContractForSystems",currentContract?._id);
               Cookies.set("ContractObjForSystems",(currentContract?.Name+" - "+currentContract?.NickName+"-"+(currentContract?.Type=="tenant"?"مؤجر":"مستأجر") ));
               Cookies.set("estateNameForSystems",data?.EstateName);
+          Cookies.remove("contractIds");
             }}
             >
               الانتقال الي الدفعات الخاصه بهذا العقد مع هذا العقار

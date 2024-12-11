@@ -60,7 +60,7 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
       minWidth:"70px"
     },{
       name: "المؤجر - المستأجر",
-      selector: (row: AllContractTypes) => <CommonTooltip field={row?.Name + row?.NickName || "-"}/>,
+      selector: (row: AllContractTypes) => <CommonTooltip field={row?.Name + " "+row?.NickName || "-"}/>,
       minWidth:"120px"
     },
     {

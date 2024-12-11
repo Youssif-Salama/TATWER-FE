@@ -39,15 +39,13 @@ const AddSystemWarningDialog = ({ system }: any) => {
 
     شركه تطوير البوادي العقاريه
     رساله تنويه بتسديد الدفعه رقم ${system?.SystemNumber}
-    تاريخ اليوم: ${new Date().toLocaleDateString()}
 
-    -> رقم الدفعه: ${system?.SystemNumber}
+    Contract Number (رقم العقد): ${system?.ContractId?.ContractNumber}
+    Description (الوصف): ${system?.Message}
+    From (من): ${new Date(system?.ReleaseDate).toLocaleDateString()}
+    To (إلى): ${new Date(system?.DueDate).toLocaleDateString()}1
+    Amount (المبلغ): ${system?.TotalPrice}
 
-    -> السعر الكلي: ${system?.RentValue + system?.FixedPrice}
-
-    -> تاريخ التسجيل: ${system?.ReleaseDate?.slice(0, 10)}
-
-    -> تاريخ السداد: ${system?.LastAskDate?.slice(0, 10)}
 
 ${message}
 

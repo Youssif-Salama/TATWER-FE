@@ -34,17 +34,17 @@ const SystemsFeatures: React.FC<SystemsFeaturesProps> = ({
   const cases=[
     {
       case:1,
-      show:"متبقي له 40 يوم او اقل",
+      show:"متبقي له 40 يوم او اقل | مرحله المطالبه",
       no
     },
     {
       case:2,
-      show:"متبقي له 15 يوم او اقل",
+      show:"متبقي له 15 يوم او اقل | قريبه الاستحقاق",
       no
     },
     {
       case:3,
-      show:"متبقي له 5 ايام او اقل",
+      show:"متبقي له 5 ايام او اقل | مستحقه",
       no
     },
     {
@@ -64,6 +64,7 @@ const SystemsFeatures: React.FC<SystemsFeaturesProps> = ({
     },
   ]
   const currentContractForSystems=Cookies.get("currentContractForSystems");
+  const contractIds=Cookies.get("contractIds");
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center bg-[#0077bc]">
@@ -161,10 +162,26 @@ const SystemsFeatures: React.FC<SystemsFeaturesProps> = ({
     <div>
       <p>هذه الصفحه تعرض الدفعات الخاصه بعقار {Cookies.get("estateNameForSystems")} </p>
       <p>مع ال {Cookies.get("ContractObjForSystems")}</p>
-      <p>لعرض جميع العقارات مجددا اضغط هنا
+      <p>لعرض جميع الدفعات مجددا اضغط هنا
         {" "}
         <span className="text-red-500 underline cursor-pointer"
         onClick={()=>{
+          Cookies.remove("currentContractForSystems");
+          Cookies.remove("contractIds");
+          window.location.reload()
+        }}
+        >اعاده تهيئه</span>
+      </p>
+      </div>
+  )}
+  {contractIds&&(
+    <div>
+      <p>هذه الصفحه تعرض الدفعات الخاصه بعقار {Cookies.get("estateNameForSystems")} </p>
+      <p>لعرض جميع الدفعات مجددا اضغط هنا
+        {" "}
+        <span className="text-red-500 underline cursor-pointer"
+        onClick={()=>{
+          Cookies.remove("contractIds");
           Cookies.remove("currentContractForSystems");
           window.location.reload()
         }}

@@ -1,3 +1,5 @@
+import { UpdateContractPartOneApi } from "@/api/contract/updateContractParts/UpdateContractPartOneApi";
+import Cookies from "js-cookie";
 import { useEffect, useRef, useState } from "react"
 import { FaTrash } from "react-icons/fa6";
 
@@ -28,6 +30,26 @@ const ContractMoreEmails = ({formik,currentMoreEmail}:{formik:any,currentMoreEma
   useEffect(() => {
       setEmails(currentMoreEmail );
   }, [currentMoreEmail]);
+
+
+  const [values, setValues] = useState({});
+  const updateContractPartOne=async(data:any)=>{
+     await UpdateContractPartOneApi(data);
+  };
+  useEffect(() => {
+    setValues({
+      MoreEmails: formik.values.MoreEmails,
+      Identity: formik.values.Identity,
+      AdditionalName: formik.values.AdditionalName,
+      Name:formik.values.Name,
+      Phone: formik.values.Phone,
+      Mobile: formik.values.Mobile,
+      AdditionalPhone: formik.values.AdditionalPhone,
+      TaxNumber: formik.values.TaxNumber,
+      Email: formik.values.Email,
+      BankAccount: formik.values.BankAccount
+    });
+  }, [formik]);
 
   return (
     <div>
@@ -67,6 +89,16 @@ const ContractMoreEmails = ({formik,currentMoreEmail}:{formik:any,currentMoreEma
           })
         }
       </div>
+      {
+        Cookies.get("contractId") &&
+        <div className="w-full mt-4 bg-[#0077bc] text-center text-white text-sm p-2 cursor-pointer
+      hover:bg-[#0077bcc4]"
+      onClick={()=>{
+        updateContractPartOne(values);
+      }}
+      >
+        تعديل هذا الجزء
+      </div>}
     </div>
   )
 }
