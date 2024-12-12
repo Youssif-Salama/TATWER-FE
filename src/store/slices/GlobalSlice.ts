@@ -13,6 +13,7 @@ interface InitialState {
   refreshOnApplyOrSetSystemMessage:any,
   refreshTax:any,
   paymentWay:any,
+  orderType:any,
   catchEstateIdChange: any;
   refreshEstateFiles: any;
   refrehEstateUnites:any;
@@ -50,6 +51,7 @@ const initialState: InitialState = {
   refreshOnApplyOrSetSystemMessage:null,
   refreshTax:null,
   paymentWay:null,
+  orderType:null,
   catchEstateIdChange: null,
   refreshEstateFiles: null,
   refrehEstateUnites:null,
@@ -113,6 +115,9 @@ const GlobalReducer = createSlice({
     },
     setRefrehPaymentWay:(state,action)=>{
       state.paymentWay=action.payload
+    },
+    setRefrehOrderType:(state,action)=>{
+      state.orderType=action.payload
     },
     setCatchEstateIdChange: (state, action) => {
       state.catchEstateIdChange = action.payload;
@@ -197,6 +202,7 @@ export const {
   setRefreshOnApplyOrSetSystemMessage,
   setRefrehTax,
   setRefrehPaymentWay,
+  setRefrehOrderType,
   setCatchEstateIdChange,
   setRefrehEstateUnites,
   setUniteAddonsLength,

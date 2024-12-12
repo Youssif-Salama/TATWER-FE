@@ -49,6 +49,7 @@ import Employees from "./components/settings/employees/Employees";
 import DynamicContractPdf from "./methods/reports/DynamicContractPdf";
 import DynamicContractExcel from "./methods/reports/DynamicContractExcel";
 import TasksOrders from "./components/tasks/tasksOrder/TasksOrders";
+import OrderTypes from "./components/settings/orderTypes/OrderTypes";
 
 function App() {
   return (
@@ -88,6 +89,7 @@ function App() {
                 <Route path="profile" element={<ProfileCollection />} />
                 <Route path="remindings" element={<RemindingsCollection />} />
                 <Route path="employees" element={<Employees />} />
+                <Route path="orderTypes" element={<OrderTypes />} />
               </Route>
               <Route path="contracts" element={<Contract />}>
                 <Route index element={<AllContracts />} />

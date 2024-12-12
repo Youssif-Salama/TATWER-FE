@@ -1,3 +1,4 @@
+import { GetAllOrderTypes } from '@/api/orderTypes/GetAllOrderTypes';
 import { AddOrderApi } from '@/api/tasks/orders/AddOrderApi';
 import { UpdateOrderApi } from '@/api/tasks/orders/UpdateOrderApi';
 import InputCommon from '@/common/InputCommon';
@@ -8,6 +9,9 @@ import { CgSpinner } from 'react-icons/cg';
 
 const OrderForm = ({setToUpdateOrder, setRefreshOrders, toUpdateOrder }: {setToUpdateOrder:any ,setRefreshOrders: (refreshOrders: any) => void ,toUpdateOrder:any}) => {
   const [loading,setLoading]=useState<boolean>(false);
+  // @ts-ignore
+  const [loadForOrderTypes,setLoadForOrderTypes]=useState<boolean>(false);
+  const [orderTypes,setOrderTypes]=useState<any>([]);
   const formik = useFormik({
     initialValues: {
       OrderNumber: '',
@@ -41,6 +45,16 @@ const OrderForm = ({setToUpdateOrder, setRefreshOrders, toUpdateOrder }: {setToU
     formik.resetForm();
    }
   },[toUpdateOrder])
+
+
+  useEffect(()=>{
+    const getAllOrderTypes=async()=>{
+      const res=await GetAllOrderTypes(setLoadForOrderTypes);
+      res&&setOrderTypes(res?.data?.data);
+    }
+
+    getAllOrderTypes();
+  },[])
 
   return (
     <div>
@@ -102,8 +116,13 @@ const OrderForm = ({setToUpdateOrder, setRefreshOrders, toUpdateOrder }: {setToU
             value={formik.values.OrderType}
             className=" p-2 rounded-none w-[83%]"
           >
-            <option value="elec">كهرباء</option>
-            <option value="water">ماء</option>
+            {
+              orderTypes?.map((orderType:any)=>{
+                return(
+                  <option key={orderType._id} value={orderType.Name}>{orderType.Name}</option>
+                )
+              })
+            }
           </select>
         </div>
 

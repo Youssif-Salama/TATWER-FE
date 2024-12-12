@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { MdEmail, MdOutlinePermIdentity, MdPayments } from "react-icons/md";
 import { RiProfileLine } from "react-icons/ri";
+import { FaOpencart } from "react-icons/fa6";
 
 
 interface asideRoutesTypes {
@@ -45,6 +46,11 @@ const nestedRoutes: asideRoutesTypes[] = [
     name:"التذكيرات",
     path: ["/settings/remindings"],
     icon: MdEmail,
+  },
+  {
+    name:"انواع الطلبات",
+    path: ["/settings/orderTypes"],
+    icon: FaOpencart,
   }
 ];
 

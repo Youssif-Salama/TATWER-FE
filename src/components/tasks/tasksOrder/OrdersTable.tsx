@@ -64,7 +64,7 @@ const OrdersTable = ({ setRefreshOrders, headRef, data, setPage, setLimit, setTo
                   <td className="px-4 py-2">{order.OrderNumber ?? "-"}</td>
                   <td className="px-4 py-2">{order.OrderLocation ?? "-"}</td>
                   <td className="px-4 py-2">{order.OrderName ?? "-"}</td>
-                  <td className="px-4 py-2">{order.OrderType == "elec" ? "الكهرباء" : "المياه"}</td>
+                  <td className="px-4 py-2">{order.OrderType}</td>
                   <td className="px-4 py-2">{order.UserName ?? "-"}</td>
                   <td className="px-4 py-2">{order.UserPassword ?? "-"}</td>
                   <td className="px-4 py-2">{order.OrderPhone ?? "-"}</td>
