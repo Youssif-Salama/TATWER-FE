@@ -14,6 +14,7 @@ const AllContracts = () => {
   const [showWay, setShowWay] = useState<string | null>(null);
   const [startDate, setStartDate] = useState<string | null>(null);
   const [endDate, setEndDate] = useState<string | null>(null);
+  const [displayOnlyNearToEndedContracts, setDisplayOnlyNearToEndedContracts] = useState<boolean | null>(false);
    // @ts-ignore
   const {contractType} = useSelector((state: RootState) => state.GlobalReducer);
 
@@ -60,6 +61,8 @@ const AllContracts = () => {
           setEndDate={setEndDate}
           startDate={startDate}
           endDate={endDate}
+          setDisplayOnlyNearToEndedContracts={setDisplayOnlyNearToEndedContracts}
+          displayOnlyNearToEndedContracts={displayOnlyNearToEndedContracts}
           />
       </div>
       <div className="shadow-md">
@@ -69,6 +72,7 @@ const AllContracts = () => {
           showWay={showWay}
           startDate={startDate}
           endDate={endDate}
+          displayOnlyNearToEndedContracts={displayOnlyNearToEndedContracts}
           />
 
       </div>

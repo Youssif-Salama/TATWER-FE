@@ -16,16 +16,16 @@ import {  setRefreshOnDeleteContractSystems } from "@/store/slices/GlobalSlice"
 import { AppDispatch } from "@/store/store"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { DeleteMultipleContractSystemsApi } from "@/api/systems/DeleteMultipleContractSystemsApi";
 import Cookies from "js-cookie";
 import { IoClose } from "react-icons/io5";
+import { DeleteSomeSystemsApi } from "@/api/systems/DeleteSomeSystemsApi";
 
 const DeleteContractSystemDialog = ({row,setCatchSelectedRows}:{row:any,setCatchSelectedRows:any}) => {
   const [loading, setLoading] = useState(false);
   const dispatch:AppDispatch=useDispatch();
   const ContractId=Cookies.get("contractId");
   const deleteCurrentContractSystem=async()=>{
-   let result=await DeleteMultipleContractSystemsApi(row,ContractId,setLoading);
+   let result=await DeleteSomeSystemsApi(row,ContractId,setLoading);
    result && dispatch(setRefreshOnDeleteContractSystems(Math.random()));
    result && setCatchSelectedRows([]);
   }

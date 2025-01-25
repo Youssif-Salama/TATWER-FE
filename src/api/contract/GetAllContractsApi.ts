@@ -1,15 +1,15 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-export const GetAllContractsApi = async (setLoading:any,contractsType:any,page:any,showWay:any,searchKeyWord:any,searchValue:any,startDate:any,endDate:any,rowsPerPage?:any) => {
+export const GetAllContractsApi = async (setLoading:any,contractsType:any,page:any,showWay:any,searchKeyWord:any,searchValue:any,startDate:any,endDate:any,displayOnlyNearToEndedContracts?:any,rowsPerPage?:any) => {
   let queries=`?page=${page}`;
-  showWay && (queries+=`&sort=updatedAt&dir=${showWay}`);
+  showWay && (queries+=`&sort=ContractEndsDate&dir=${showWay}`);
   searchKeyWord && (queries+=`&keyWord=${searchKeyWord}`);
   searchValue && (queries+=`&value=${searchValue}`);
   startDate && (queries+=`&startDate=${startDate}`);
   endDate && (queries+=`&endDate=${endDate}`);
   rowsPerPage && (queries+=`&limit=${rowsPerPage}`);
-
+  displayOnlyNearToEndedContracts && (queries+=`&displayOnlyNearToEndedContracts=${displayOnlyNearToEndedContracts}`);
   try {
     setLoading(true);
     const response = await axios.get(

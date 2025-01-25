@@ -10,8 +10,9 @@ import { StopContractApi } from "@/api/contract/StopContractApi";
 import CommonTooltip from "@/common/CommonTooltip";
 import ExpandedRowForContract from "./ExpandedRowForContract";
 
-const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate}:{searchKeyWord:string |null,searchValue:string|null,showWay:string|null,startDate:string|null,endDate:string|null}) => {
-
+const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate,displayOnlyNearToEndedContracts}:{searchKeyWord:string |null,searchValue:string|null,showWay:string|null,startDate:string|null,endDate:string|null,displayOnlyNearToEndedContracts?:any}) => {
+  const today = new Date();
+  const dateAfter40Days = new Date(today.getTime() + 40 * 24 * 60 * 60 * 1000);
   const { getContractType ,refreshONDeleteContracts} = useSelector(
     (state: RootState) => state.GlobalReducer
   );
@@ -24,7 +25,7 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
   const [rowPerPage, setRowPerPage] = useState<number>(10);
 
   const getAllContractsDependingOnType = async () => {
-    const result = await GetAllContractsApi(setLoading, getContractType, page,showWay,searchKeyWord,searchValue,startDate,endDate,rowPerPage);
+    const result = await GetAllContractsApi(setLoading, getContractType, page,showWay,searchKeyWord,searchValue,startDate,endDate,displayOnlyNearToEndedContracts,rowPerPage);
     result && setTotalRows(result?.data?.meta?.numberOfRows);
     result && setAllContracts(result?.data?.data);
     !result && setAllContracts([]);
@@ -42,12 +43,14 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
   useEffect(() => {
       if(searchKeyWord=="estate"){
         getAllContractsDependingOnTypePerEstate();
+        console.log("getAllContractsDependingOnTypePerEstate");
+
       }
       else{
         getAllContractsDependingOnType();
       }
 
-  }, [getContractType, page,searchKeyWord,searchValue,showWay,startDate,endDate,refreshONDeleteContracts,rowPerPage]);
+  }, [getContractType, page,searchKeyWord,searchValue,showWay,startDate,endDate,refreshONDeleteContracts,rowPerPage,displayOnlyNearToEndedContracts]);
 
 
 
@@ -55,9 +58,24 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
   const columns = [
     {
       name: "الرمز",
-      // @ts-ignore
-      selector: (row: AllContractTypes, index: number) => index + 1,
-      minWidth:"70px"
+      selector: (row: AllContractTypes, index: number) => {
+        const isContractEndingSoon = row?.ContractEndsDate
+          && new Date(row.ContractEndsDate) < dateAfter40Days
+          && new Date(row.ContractEndsDate) > today;
+        const isContractEnded = row?.ContractEndsDate && new Date(row.ContractEndsDate) < today;
+
+        return (
+          <div
+            className={`${isContractEndingSoon ? "bg-yellow-500 px-2 py-1 text-white rounded-full" : ""}
+            ${isContractEnded ? "bg-red-500 px-2 py-1 text-white rounded-full" : ""}
+            `}
+          >
+            {index + 1}
+          </div>
+        );
+      }
+      ,
+      minWidth:"50px"
     },{
       name: "المؤجر - المستأجر",
       selector: (row: AllContractTypes) => <CommonTooltip field={row?.Name + " "+row?.NickName || "-"}/>,
@@ -81,17 +99,17 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
       name: "المدينه",
       // @ts-ignore
       selector: (row: AllContractTypes) => <CommonTooltip field={row?.AddressId?.Town   || "-"}/>,
-      minWidth:"150px"
+      minWidth:"70px"
     },
     {
       name: "رقم العقد",
       selector: (row: AllContractTypes) => < CommonTooltip field={row?.ContractNumber || "-"}/>,
-      minWidth:"150px"
+      minWidth:"200px"
     },
     {
       name: "طريقه الدفع",
       selector: (row: AllContractTypes) =>< CommonTooltip field={`كل ${row?.PaymentWay} اشهر` || "-"}/>,
-      minWidth:"150px"
+      minWidth:"50px"
     },
     {
       name: "عدد الدفعات",
@@ -101,23 +119,12 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
     {
       name: "تاريخ البدء",
       selector: (row: AllContractTypes) =>
-        row?.ContractReleaseDate?.split("T")[0],
-      minWidth:"100px"
-    },
-    {
-      name: "تاريخ  البدء الهجري",
-      selector: (row: AllContractTypes) =>
-        row?.ContractReleaseDateH?.split("T")[0],
+        row?.ContractSigningDate?.split("T")[0],
       minWidth:"100px"
     },
     {
       name: "تاريخ الانتهاء",
-      selector: (row: AllContractTypes) => row?.ContractEndDate?.split("T")[0],
-      minWidth:"100px"
-    },
-    {
-      name: "تاريخ  الانتهاء الهجري",
-      selector: (row: AllContractTypes) => row?.ContractEndDateH?.split("T")[0],
+      selector: (row: AllContractTypes) => row?.ContractEndsDate?.split("T")[0],
       minWidth:"100px"
     },
     {
@@ -182,7 +189,18 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
           setPage(value);
         }}
         // @ts-ignore
-        customStyles={customStyles}
+        customStyles={
+          displayOnlyNearToEndedContracts?{
+            ...customStyles,
+            rows: {
+              ...customStyles.rows,
+              style: {
+                ...customStyles.rows.style,
+                backgroundColor: '#0077bc25',
+              }
+            }
+          }:customStyles
+        }
         noDataComponent="لا يوجد بيانات"
       />
           </>

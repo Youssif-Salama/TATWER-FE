@@ -53,11 +53,11 @@ export const GetAllSystemsApi = async (isApplied:any,setLoading:any,page:any,sho
 
 
 
-export const GetAllSystemsApiForReports = async (setLoading:any) => {
+export const GetAllSystemsApiForReports = async (setLoading:any,type:any) => {
   try {
     setLoading(true);
     const response = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}contract-systems/reports/min`,
+      `${import.meta.env.VITE_BASE_URL}contract-systems/reports/min/${type}`,
       {
         headers: {
           token:Cookies.get("token")

@@ -48,10 +48,10 @@ const Calendar: React.FC<CalendarProps> = ({ year, month }) => {
   };
 
   return (
-    <div className="mx-auto border rounded-lg shadow-lg overflow-hidden">
+    <div className="mx-auto border rounded-lg shadow-lg overflow-hidden text-[12px]">
       <div className="bg-[#0077bc] text-white flex justify-between items-center p-4">
         <button className="hover:bg-gray-300 hover:text-gray-800 px-2 py-1 rounded" onClick={handlePrevMonth}>السابق</button>
-        <h2 className="text-xl font-semibold">{`${currentYear} - ${new Intl.DateTimeFormat('ar-US', { month: 'long' }).format(new Date(currentYear, currentMonth))}`}</h2>
+        <h2 className=" font-semibold">{`${currentYear} - ${new Intl.DateTimeFormat('ar-US', { month: 'long' }).format(new Date(currentYear, currentMonth))}`}</h2>
         <button className="hover:bg-gray-300 hover:text-gray-800 px-2 py-1 rounded" onClick={handleNextMonth}>التالي</button>
       </div>
 
@@ -65,7 +65,7 @@ const Calendar: React.FC<CalendarProps> = ({ year, month }) => {
         {daysInMonth.map((date) => (
           <div
             key={date.toISOString()}
-            className={`p-4 border border-gray-300 ${isToday(date) ? 'bg-blue-500 text-white' : 'hover:bg-gray-300'}`}
+            className={`p-4 border border-gray-300 ${isToday(date) ? 'bg-[#0077bc] text-white' : 'hover:bg-gray-300'}`}
           >
             {date.getDate()}
           </div>

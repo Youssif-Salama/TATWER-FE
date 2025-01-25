@@ -1,8 +1,12 @@
 import CalendarComponent from "@/components/home/Calender";
 import ClockNow from "@/components/home/ClockNow";
-import EmployeesReports from "@/components/home/EmployeesReports";
+import DiplayAllContractsSimple from "@/components/home/DiplayAllContractsSimple";
+import DisplayAllContractsLandlordsSimple from "@/components/home/DisplayAllContractsLandlordsSimple";
+// import EmployeesReports from "@/components/home/EmployeesReports";
 import MinSystemInfo from "@/components/home/MinSystemInfo";
+import MinSystemInfoLandlord from "@/components/home/MinSystemInfoLandlord";
 import Reports from "@/components/home/Reports";
+import TaskOrderTable from "@/components/home/TaskOrderTable";
 import TasksReports from "@/components/home/TasksReports";
 import { Helmet } from "react-helmet";
 
@@ -15,8 +19,15 @@ const Home = () => {
            <div className="w-full">
            <Reports/>
             <div className="grid grid-cols-2  gap-2 my-2 mt-6">
+
                 <div className='shadow-md border border-[#0077bc] p-2 rounded-md bg-gray-100'>
-                <EmployeesReports/>
+                    <DiplayAllContractsSimple/>
+                </div>
+                <div className='shadow-md border border-[#0077bc] p-2 rounded-md bg-gray-100'>
+                    <DisplayAllContractsLandlordsSimple/>
+                </div>
+                <div className='shadow-md border border-[#0077bc] p-2 rounded-md bg-gray-100'>
+                {/* <EmployeesReports/>
                 <div className="text-[12px] text-[#0077bc]">
                     <div className="flex gap-2">
                     <p className="bg-[#0077bc] w-[5px] h-[5px]"></p>
@@ -26,13 +37,17 @@ const Home = () => {
                     <p className="bg-[#8eaccd] w-[5px] h-[5px]"></p>
                     <p>الموظفون الغير نشطون</p>
                     </div>
-                </div>
+                </div> */}
+                <TaskOrderTable/>
                 </div>
                 <div className='shadow-md border border-[#0077bc] p-2 rounded-md bg-gray-100'>
                 <TasksReports/>
                 </div>
                 <div className="shadow-md border border-[#0077bc] p-2 rounded-md bg-gray-100">
                     <MinSystemInfo/>
+                </div>
+                <div className="shadow-md border border-[#0077bc] p-2 rounded-md bg-gray-100">
+                    <MinSystemInfoLandlord/>
                 </div>
                 <div className="shadow-md border border-[#0077bc] bg-gray-100 text-[#0077bc] p-2 rounded-md text-[5vw] flex flex-col"
                 style={{ fontFamily: 'Cairo, sans-serif',textShadow: '2px 2px 4px rgba(0, 0, 0, 0.4)' }}

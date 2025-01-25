@@ -4,6 +4,7 @@ import { GetAllOrdersApi } from "@/api/tasks/orders/GetAllOrdersApi";
 import OrdersTable from "./OrdersTable";
 import SystemsPagination from "@/components/systems/SystemsPagination";
 import OrderFilteration from "./OrderFilteration";
+import Reports from "@/components/home/Reports";
 
 const TasksOrders = () => {
   const [refreshOrders,setRefreshOrders]=useState<any>(1);
@@ -28,6 +29,9 @@ const TasksOrders = () => {
 
   return (
     <div className="py-8 px-4 flex flex-col gap-4">
+         <div className="mb-4">
+            <Reports/>
+            </div>
       {/* order head */}
       <div className="bg-[#0077bc] text-white text-center w-full p-2" ref={headRef}>اداره الطلبات</div>
       {/* form to add new order */}

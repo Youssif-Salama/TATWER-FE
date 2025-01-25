@@ -5,8 +5,6 @@ import { JsonToExcel } from "react-json-to-excel";
 import { decryptValue } from "@/utils/encrypt";
 import Spreadsheet from "react-spreadsheet";
 
-
-
 const DynamicContractExcel = () => {
   const [preparing, setPreparing] = useState(true);
   const [fileName, setFileName] = useState("ملف العقود من تطوير البوادي");
@@ -60,15 +58,15 @@ const DynamicContractExcel = () => {
     { value: contract?.estate?.EstateName || "-",readOnly:true },
     { value: contract?.BankAccount || "-",readOnly:true },
     { value: contract?.AddressId?.Town || "-",readOnly:true },
+    { value: contract?.Agent || "-",readOnly:true },
     { value: contract?.MobileNumber || "-",readOnly:true },
     { value: contract?.ContractNumber || "-",readOnly:true },
     { value: contract?.DocumentNumber || "-",readOnly:true },
-    { value: contract?.ContractReleaseDate ? contract?.ContractReleaseDate.slice(0, 10) : "-",readOnly:true },
     { value: contract?.RelyOn || "-",readOnly:true },
-    { value: contract?.Agent || "-",readOnly:true },
+    { value: contract?.ContractReleaseDate ? contract?.ContractReleaseDate.slice(0, 10) : "-",readOnly:true },
     { value: contract?.ContractEndDate ? contract?.ContractEndDate.slice(0, 10) : "-",readOnly:true },
   ]);
-  const columnLabels = ["الرمز", "الاسم","الهويه","الجوال","جوال اخر","الصفه","العقار المرتبط","الحساب البنكي","المدينه","الممثل","جوال الممثل","رقم العقد","رقم الوكاله","بدايه العقد","نهايه العقد","مسجل علي"];
+  const columnLabels = ["الرمز", "الاسم","الهويه","الجوال","جوال اخر","الصفه","العقار المرتبط","الحساب البنكي","المدينه","الممثل","جوال الممثل","رقم العقد","رقم الوكاله","الكيان","تاريخ البدأ","تاريخ الانتهاء"];
 
 
   return (

@@ -39,6 +39,8 @@ const TasksReports = () => {
     getAllTasks();
   }, []);
 
+
+  // @ts-ignore
   const priorityOfTask=(priority:any)=>{
     if(priority==="low"){
       return "قليله"
@@ -90,9 +92,7 @@ const TasksReports = () => {
                   <th className="font-semibold w-[50px] px-2 py-2">الرمز</th>
                   <th className="font-semibold w-[50px] px-2 py-2">العنوان</th>
                   <th className="font-semibold w-[50px] px-2 py-2">الوصف</th>
-                  <th className="font-semibold w-[50px] px-2 py-2">الاهميه</th>
                   <th className="font-semibold w-[50px] px-2 py-2">الحاله</th>
-                  <th className="font-semibold w-[50px] px-2 py-2">تاريخ المطالبه</th>
                 </tr>
               </thead>
               <tbody className="font-normal text-[8px]">
@@ -106,9 +106,7 @@ const TasksReports = () => {
                       <td className="px-2 py-2 whitespace-nowrap text-center">{index + 1}</td>
                       <td className="px-2 py-2 whitespace-nowrap text-center">{system?.Title}</td>
                       <td className="px-2 py-2 whitespace-nowrap text-center">{system?.Description?.length>50?system?.Description?.slice(0,50)+"...":system?.Description}</td>
-                      <td className="px-2 py-2 whitespace-nowrap text-center">{priorityOfTask(system?.Priority)}</td>
                       <td className="px-2 py-2 whitespace-nowrap text-center">{statusOfTask(system?.Status)}</td>
-                      <td className="px-2 py-2 whitespace-nowrap text-center">{new Date(system?.LastAskDate).toLocaleDateString()}</td>
                     </tr>
                   );
                 })}

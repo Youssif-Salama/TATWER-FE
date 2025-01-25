@@ -33,10 +33,10 @@ const Reports = () => {
     return (Icons as any)[iconName] || BiUnite;
   };
 
-  const links=["/settings/emp","/todo/tasks","/contracts","/estates"]
+  const links=["/todo/tasks","/contracts","/estates","/tasks/orders"]
 
   return (
-    <div className="grid grid-cols-5 max-md:grid-cols-3 max-sm:grid-cols-2 gap-2">
+    <div className="grid grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-2 gap-2">
       {reports.map((report,index) => {
         const IconComponent = getIconComponent(report.icon);
 

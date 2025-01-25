@@ -21,6 +21,8 @@ export interface AllContractTypes {
   RelyOn: string
   ContractReleaseDate: string
   ContractEndDate: string
+  ContractEndsDate: string
+  ContractSigningDate: string
   ContractDate: string
   PaymentWay: string
   TotalPrice: number

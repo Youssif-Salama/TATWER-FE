@@ -5,7 +5,7 @@ import SystemCommonDiv from "@/common/SystemCommonDiv";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const MinSystemInfo = () => {
+const MinSystemInfoLandlord = () => {
   const [allSystems,setAllSystems] = useState<any>([]);
   const [loading,setLoading] = useState<boolean>(true);
   // @ts-ignore
@@ -14,7 +14,7 @@ const MinSystemInfo = () => {
   const [totalFixeds, setTotalFixeds] = useState<number>(0); // Store total fixed prices
 
   const getAllSystems=async()=>{
-    const result = await GetAllSystemsApiForReports(setLoading,"tenant");
+    const result = await GetAllSystemsApiForReports(setLoading,"landlord");
     result && setAllSystems(result?.data?.data);
   }
 
@@ -49,7 +49,7 @@ const MinSystemInfo = () => {
       }
       {
         <div className="text-[12px] flex items-center justify-between">
-          <p className="text-[#0077bc]">دفعات المؤجر</p>
+          <p className="text-[#0077bc]">دفعات المستأحر</p>
           <Link to="/systems" className="bg-[#0077bc] px-4 py-1 rounded-md text-white">انتقل</Link>
         </div>
       }
@@ -111,4 +111,4 @@ const MinSystemInfo = () => {
   )
 }
 
-export default MinSystemInfo
+export default MinSystemInfoLandlord

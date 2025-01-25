@@ -84,7 +84,7 @@ const CreateContractCollection = () => {
     },
   });
 
-  const { contractType,resetForm } = useSelector(
+  const { contractType,resetForm,refreshOnAddNewContractSystem,refreshOnDeleteContractSystems } = useSelector(
     (state: RootState) => state.GlobalReducer
   );
   useEffect(() => {
@@ -95,7 +95,7 @@ const CreateContractCollection = () => {
   const getOneContract = async (id: any) => {
     const result = await GetSpecifiContractApi(id);
     result?.data?.data.length>0 && formik.setValues(result?.data?.data[0]);
-    result?.data?.data.length>0 && formik.setFieldValue("Times",result?.data?.data[0].AutoSystemCount)
+    result?.data?.data.length>0 && formik.setFieldValue("Times",result?.data?.data[0].Times);
     result?.data?.data.length>0 && formik.setFieldValue("PaymentWay",result?.data?.data[0]?.PaymentWay[0]);
     result?.data?.data.length>0 && (
       result?.data?.data[0]?.HasTax ? setHasTax(true) : setHasTax(false)
@@ -108,7 +108,7 @@ const CreateContractCollection = () => {
     if(contractId){
       getOneContract(contractId)
     }
-  },[contractId])
+  },[contractId,refreshOnAddNewContractSystem,refreshOnDeleteContractSystems])
 
   useEffect(() => {
     formik.resetForm();
