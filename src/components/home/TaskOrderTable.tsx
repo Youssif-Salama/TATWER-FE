@@ -4,7 +4,7 @@ import { IoImagesOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const SimpleOrdersTable = () => {
-  // @ts-ignore
+  // @ts-ignore"
   const [loading, setLoading] = useState<boolean>(false);
   const [allOrders, setAllOrders] = useState<any[]>([]);
   const [expandedNotes, setExpandedNotes] = useState<Record<number, boolean>>({});
@@ -56,7 +56,7 @@ const SimpleOrdersTable = () => {
                     <td className="px-4 py-2">{order.OrderLocation ?? "-"}</td>
                     <td className="px-4 py-2">{order.UserName ?? "-"}</td>
                     <td className="px-4 py-2">{order.UserPassword ?? "-"}</td>
-                    <td className="px-4 py-2 break-words max-w-10">
+                    <td className="px-4 py-2 break-words max-w-40">
                       <p>
                         {isLongNote && !expandedNotes[index]
                           ? note.slice(0, 150) + "..."
