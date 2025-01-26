@@ -48,14 +48,14 @@ const MinSystemInfoLandlord = () => {
         loading && <div className="min-h-[30vh] flex items-center justify-center"><LoadingSpinner/></div>
       }
       {
-        <div className="text-[12px] flex items-center justify-between">
+        <div className="text-[16px] flex items-center justify-between">
           <p className="text-[#0077bc]">دفعات المستأحر</p>
           <Link to="/systems" className="bg-[#0077bc] px-4 py-1 rounded-md text-white">انتقل</Link>
         </div>
       }
 {
   allSystems && allSystems.length>0 ?(<div className="overflow-x-auto rounded-md ">
-    <table className="table-auto border border-[#0077bc] text-[10px] min-w-full rounded-md overflow-hidden">
+    <table className="table-auto border border-[#0077bc] text-[14px] min-w-full rounded-md overflow-hidden">
       <thead>
         <tr className="bg-[#0077bc] text-white">
           <th className="font-semibold w-[50px] px-2 py-2">العقد باسم</th>
@@ -66,7 +66,7 @@ const MinSystemInfoLandlord = () => {
           <th className={`font-semibold w-[150px] px-2 py-2 `}>الحاله</th>
         </tr>
       </thead>
-      <tbody className="font-normal text-[8px]">
+      <tbody className="font-normal text-[14px]">
         {allSystems?.map((system: any, index: number) => {
           let situation: any = "متأخره";
           let today = new Date();

@@ -79,7 +79,7 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
     },{
       name: "المؤجر - المستأجر",
       selector: (row: AllContractTypes) => <CommonTooltip field={row?.Name + " "+row?.NickName || "-"}/>,
-      minWidth:"120px"
+      minWidth:"200px"
     },
     {
       name: "الهويه",
@@ -125,6 +125,11 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
     {
       name: "تاريخ الانتهاء",
       selector: (row: AllContractTypes) => row?.ContractEndsDate?.split("T")[0],
+      minWidth:"100px"
+    },
+    {
+      name: "مسحل علي",
+      selector: (row: AllContractTypes) => row?.RelyOn,
       minWidth:"100px"
     },
     {

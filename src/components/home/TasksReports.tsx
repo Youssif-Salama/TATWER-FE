@@ -16,7 +16,7 @@ const TasksReports = () => {
         console.error("No data returned from API");
       }
     } catch (error) {
-      console.error("Error fetching employee reports:", error);
+      console.error("Error fetching task reports:", error);
     }
   };
 
@@ -64,7 +64,7 @@ const TasksReports = () => {
 
 
   return (
-    <div className='flex flex-col gap-1 text-[12px]'>
+    <div className='flex flex-col gap-1 text-[16px]'>
       <div className='flex gap-6'>
         <div className='flex items-start gap-1'>
           <p className='w-[5px] h-[5px] bg-[#1f1f1f]'></p>
@@ -86,7 +86,7 @@ const TasksReports = () => {
           <p className="text-[#0077bc]">المهام</p>
           <Link to="/todo/tasks" className="bg-[#0077bc] px-4 py-1 rounded-md text-white">انتقل</Link>
         </div>
-            <table className="table-auto border border-[#0077bc] text-[10px] min-w-full rounded-md overflow-hidden">
+            <table className="table-auto border border-[#0077bc] text-[14px] min-w-full rounded-md overflow-hidden">
               <thead>
                 <tr className="bg-[#0077bc] text-white">
                   <th className="font-semibold w-[50px] px-2 py-2">الرمز</th>
@@ -95,7 +95,7 @@ const TasksReports = () => {
                   <th className="font-semibold w-[50px] px-2 py-2">الحاله</th>
                 </tr>
               </thead>
-              <tbody className="font-normal text-[8px]">
+              <tbody className="font-normal text-[12px]">
                 {allTasks?.map((system: any, index: number) => {
                   return (
                     <tr key={index} className={`cursor-pointer ${(index%2===0)?"bg-[#0077bc17]":"bg-white"}`}

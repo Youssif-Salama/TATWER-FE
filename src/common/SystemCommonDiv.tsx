@@ -23,7 +23,7 @@ const SystemCommonDiv = ({ system }: { system: any }) => {
   const remainingDays = dueDateGregorian
     ? countResetDaysAndColors(dueDateGregorian)
     : null;
-    
+
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
 
@@ -44,14 +44,18 @@ const SystemCommonDiv = ({ system }: { system: any }) => {
     setDropdownOpen(prev => !prev);
   };
 
+  console.log(system);
+
 
 
   const items = [
     { id: 1, label: "رقم القسط", value: system?.SystemNumber },
-    { id: 2, label: "الصفه", value: system?.ContractId?.Type === "tenant" ? "مؤجر" : "مستأجر" },
+    { id: 2, label: "الصفه", value: system?.ContractId?.Type ==
+      // @ts-ignore
+      "tenant" ? "مؤجر" : "مستأجر" || system?.contractData?.Type == "tenant" ? "مؤجر" : "مستأجر" },
     { id: 3, label: "المدينه", value: system?.ContractId?.AddressId?.Town || "-" },
     { id: 4, label: "الاسم/الشركه", value: system?.ContractId?.Name || system?.contractData?.Name },
-    { id: 5, label: "مسجل علي", value: system?.ContractId?.RelyOn || system?.ContractData?.RelyOn },
+    { id: 5, label: "مسجل علي", value: system?.ContractId?.RelyOn || system?.contractData?.RelyOn },
     { id: 6, label: "نظام العقد ", value: system?.PaymentWay + " اشهر" },
     { id: 7, label: "المبلغ ", value: Number(system?.TotalPrice) },
     { id: 8, label: "رقم العقد", value: system?.ContractId?.ContractNumber || system?.contractData?.ContractNumber },

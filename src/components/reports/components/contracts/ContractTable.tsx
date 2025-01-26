@@ -45,7 +45,7 @@ const ContractTable = ({ allContracts,fullView }: any) => {
               <td className="px-2 py-2 whitespace-nowrap">{contract?.DocumentNumber || "-"}</td>
               <td className="px-2 py-2 whitespace-nowrap">{contract?.ContractNumber || "-"}</td>
               <td className="px-2 py-2 whitespace-nowrap">{contract?.ContractReleaseDate?.slice(0, 10) || "-"}</td>
-              <td className="px-2 py-2 whitespace-nowrap">{contract?.ContractEndDate?.slice(0, 10) || "-"}</td>
+              <td className="px-2 py-2 whitespace-nowrap">{contract?.ContractEndsDate?.slice(0, 10) || "-"}</td>
               <td className="px-2 py-2 whitespace-nowrap">{contract?.RelyOn || "-"}</td>
             </tr>
           ))}

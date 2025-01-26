@@ -11,7 +11,27 @@ export const GetAllSystemsApi = async (isApplied:any,setLoading:any,page:any,sho
   no && (queries+=`&no=${no}`);
   rowsPerPage && (queries+=`&limit=${rowsPerPage}`);
   currentContractForSystems && (queries+=`&currentContractSystemId=${currentContractForSystems}`)
-  contractIds && (queries+=`&contractIds=${contractIds}`)
+  contractIds && (queries+=`&contractIds=${contractIds}`);
+
+
+  if (searchKeyWord === "ContractId.Type") {
+    let searchValueReplacement;
+
+    // Partial match for "مستأجر" or "مؤجر"
+    if (searchValue.includes("مستأجر")) {
+      searchValueReplacement = "landlord";
+    } else if (searchValue.includes("مؤجر")) {
+      searchValueReplacement = "tenant";
+    }
+
+    // Replace the searchValue part of the query if a replacement was determined
+    if (searchValueReplacement) {
+      const regex = /(&keyWord=ContractId\.Type&value=)[^&]*/;
+      queries = queries.replace(regex, `$1${searchValueReplacement}`);
+    }
+  }
+
+
   try {
    if(isApplied !=="stop")
    {

@@ -52,11 +52,6 @@ const DiplayAllContractsSimple = () => {
 
   const columns = [
     {
-      name: "الرمز",
-      selector: (_row: any, index: number) => index + 1,
-      minWidth: "70px",
-    },
-    {
       name: "المؤجر - المستأجر",
       selector: (row: any) => <CommonTooltip field={row?.Name + " " + row?.NickName || "-"} />,
       minWidth: "120px",
@@ -64,22 +59,7 @@ const DiplayAllContractsSimple = () => {
     {
       name: "الهويه",
       selector: (row: any) => <CommonTooltip field={row?.Identity || "-"} />,
-      minWidth: "150px",
-    },
-    {
-      name: "الجوال",
-      selector: (row: any) => <CommonTooltip field={row?.Phone || "-"} />,
-      minWidth: "150px",
-    },
-    {
-      name: "الايميل",
-      selector: (row: any) => <CommonTooltip field={row?.Email || "-"} />,
-      minWidth: "150px",
-    },
-    {
-      name: "المدينه",
-      selector: (row: any) => <CommonTooltip field={row?.AddressId?.Town || "-"} />,
-      minWidth: "150px",
+      minWidth: "100px",
     },
     {
       name: "رقم العقد",
@@ -87,18 +67,8 @@ const DiplayAllContractsSimple = () => {
       minWidth: "150px",
     },
     {
-      name: "عدد الدفعات",
-      selector: (row: any) => <CommonTooltip field={row?.Times || "-"} />,
-      minWidth: "70px",
-    },
-    {
-      name: "تاريخ البدء",
-      selector: (row: any) => row?.ContractReleaseDate?.split("T")[0],
-      minWidth: "100px",
-    },
-    {
       name: "تاريخ الانتهاء",
-      selector: (row: any) => row?.ContractEndDate?.split("T")[0],
+      selector: (row: any) => row?.ContractEndsDate?.split("T")[0],
       minWidth: "100px",
     },
   ];
