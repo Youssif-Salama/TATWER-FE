@@ -1,5 +1,6 @@
 export interface CreateContractCollectionTypes {
   Type: "tenant" | "landlord";
+  DateType?:"G" | "H";
   Name: string;
   AdditionalName?: string;
   Phone: string;

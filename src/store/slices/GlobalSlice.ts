@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface InitialState {
+  contractDateType:string;
   contractType: string;
   getContractType:string;
   catchContractIdChange: any;
@@ -39,6 +40,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
+  contractDateType:"G",
   contractType: "tenant",
   catchContractIdChange: null,
   refreshOnAddNewContractSystem: null,
@@ -80,6 +82,9 @@ const GlobalReducer = createSlice({
   name: "global",
   initialState,
   reducers: {
+    setContractDateType: (state, action) => {
+      state.contractDateType = action.payload;
+    },
     setContractType: (state, action) => {
       state.contractType = action.payload;
     },
@@ -223,7 +228,8 @@ export const {
   setRefreshOnDeleteMessage,
   setCurrentEstateTenantId,
   setCurrentEstateLandlordId,
-  setRefreshAllRoles
+  setRefreshAllRoles,
+  setContractDateType
 } = GlobalReducer.actions;
 
 export default GlobalReducer.reducer;

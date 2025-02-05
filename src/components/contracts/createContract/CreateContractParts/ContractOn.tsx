@@ -33,6 +33,7 @@ const ContractOn = ({ formik,setHasTax,hasTax }: { formik: any,setHasTax:any,has
             >
               <option value="identity">الهويه الوطنيه</option>
               <option value="uniCode">الرقم الموحد</option>
+              <option value="uniCode">رقم السجل التجاري</option>
               <option value="others">معرف اخر</option>
             </select>
 

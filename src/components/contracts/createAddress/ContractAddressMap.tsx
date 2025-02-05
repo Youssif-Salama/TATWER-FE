@@ -51,8 +51,8 @@ const redMapPin = new L.DivIcon({
                 }}
             >
                 <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='© OpenStreetMap contributors'
+                    url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+    attribution='&copy; Esri contributors'
                 />
                 {mapLocation && (
                     <Marker position={[mapLocation.lat, mapLocation.lng]} icon={redMapPin}>

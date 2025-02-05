@@ -42,6 +42,7 @@ const ContractMoreEmails = ({formik,currentMoreEmail}:{formik:any,currentMoreEma
       Identity: formik.values.Identity,
       AdditionalName: formik.values.AdditionalName,
       Name:formik.values.Name,
+      NickName: formik.values.NickName,
       Phone: formik.values.Phone,
       Mobile: formik.values.Mobile,
       AdditionalPhone: formik.values.AdditionalPhone,

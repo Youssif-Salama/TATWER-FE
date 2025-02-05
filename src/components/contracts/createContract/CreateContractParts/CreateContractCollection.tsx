@@ -28,6 +28,7 @@ const CreateContractCollection = () => {
   const formik = useFormik<CreateContractCollectionTypes>({
     initialValues: {
       Type: "tenant",
+      DateType:"G",
       Identity: "",
       Name: "",
       AdditionalName: "",
@@ -69,12 +70,14 @@ const CreateContractCollection = () => {
         result && setLoading(false);
         !result && setLoading(false);
         result && Cookies.set("contractType", result?.data?.data?.Type);
+        result && Cookies.set("DateType", result?.data?.data?.DateType);
         result && dispatch(setRefreshOnAddNewContractSystem(Math.random()))
       } else {
         const result: any = await AddContractApi(values,values?.Type);
         result && successToaster(result?.data?.message);
         result && Cookies.set("contractId", result?.data?.data?._id);
         result && Cookies.set("contractType", result?.data?.data?.Type);
+        result && Cookies.set("DateType", result?.data?.data?.DateType);
         result && dispatch(setCatchContractIdChange(Math.random()));
         result && dispatch(setRefreshOnAddNewContractSystem(Math.random()))
         result && setLoading(false);
@@ -84,12 +87,16 @@ const CreateContractCollection = () => {
     },
   });
 
-  const { contractType,resetForm,refreshOnAddNewContractSystem,refreshOnDeleteContractSystems } = useSelector(
+  const { contractType,contractDateType,resetForm,refreshOnAddNewContractSystem,refreshOnDeleteContractSystems } = useSelector(
     (state: RootState) => state.GlobalReducer
   );
   useEffect(() => {
     formik.setFieldValue("Type", contractType);
   }, [contractType]);
+
+  useEffect(() => {
+    formik.setFieldValue("DateType", contractDateType);
+  }, [contractDateType]);
 
 
   const getOneContract = async (id: any) => {

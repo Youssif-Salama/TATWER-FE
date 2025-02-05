@@ -8,7 +8,7 @@ const Create = () => {
         <div>
             <Helmet title="شركه تطوير البوادي | صفحه العقود| تسجيل عقد" />
             <div className="flex flex-col gap-4">
-                <div className="w-[20%] max-sm:w-full max-md:w-[50%]">
+                <div>
                     <ContractTypeSwitch />
                 </div>
                 <div className="w-full">

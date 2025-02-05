@@ -77,7 +77,7 @@ export const GetAllSystemsApiForReports = async (setLoading:any,type:any) => {
   try {
     setLoading(true);
     const response = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}contract-systems/reports/min/${type}`,
+      `${import.meta.env.VITE_BASE_URL}contract-systems/reports/min/${type}?sortKey=DueDate&sortDir=asc`,
       {
         headers: {
           token:Cookies.get("token")
