@@ -1,7 +1,7 @@
 import { GetAllPaymentWaysApi } from "@/api/paymentWay/GetAllPaymentWaysApi";
 import { AddContractMultipleSystemsAPi } from "@/api/systems/AddContractMultipleSystemsAPi";
+import DateTypeSwitcher from "@/common/DateTypeSwitcher";
 import InputCommon from "@/common/InputCommon";
-import InputDateCommon from "@/common/InputDateCommon";
 import LoadingSpinner from "@/common/LoadingSpinner";
 import { Button } from "@/componentsShadcn/ui/button";
 import { DialogFooter } from "@/componentsShadcn/ui/dialog";
@@ -41,7 +41,8 @@ const AddContractSystemMultiple = ({taxes}:any) => {
       ContractReleaseDate: "",
       PaymentWay: "",
       TaxValue:"",
-      IsHanded:true
+      IsHanded:true,
+      DateType:"G"
     },
     onSubmit: async (values: any) => {
       const result = await AddContractMultipleSystemsAPi(values, setLoading);
@@ -204,17 +205,23 @@ const AddContractSystemMultiple = ({taxes}:any) => {
           </div>
 
           {
-            takeDate && (<InputDateCommon
+            takeDate && (
+              <div className="flex items-center justify-between gap-2">
+            <InputCommon
+              type="text"
               required={true}
               id="ContractReleaseDate"
               name="ContractReleaseDate"
               label="تاريخ البدء"
               placeholder="ادخل تاريخ البدء هنا"
-              formik={formik}
+              onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.ContractReleaseDate}
               error={null}
-            />)
+            />
+            <DateTypeSwitcher formik={formik}/>
+          </div>
+          )
           }
         </div>
         <Button

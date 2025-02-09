@@ -1,5 +1,5 @@
 import { GetEstateFileApi } from "@/api/estateFile/GetEstateFileApi";
-import DeleteContracts from "@/componentsShadcn/dialogs/DeleteContracts";
+import DeleteEstate from "@/componentsShadcn/dialogs/DeleteEstate";
 import Cookies from "js-cookie"
 import { FaEdit } from "react-icons/fa";
 
@@ -25,7 +25,7 @@ const NestedTableFeatures = ({selectedRows,setCatchSelectedRows}:{selectedRows:a
           </span>
         </div>
         <div className="flex gap-2">
-<DeleteContracts row={selectedRows} setCatchSelectedRows={setCatchSelectedRows}/>
+<DeleteEstate row={selectedRows} setCatchSelectedRows={setCatchSelectedRows}/>
           {
             selectedRows.length >=2 ?null:<button className="bg-green-500 border-0 outline-0 rounded-md p-2 text-sm text-white"
             onClick={()=>{

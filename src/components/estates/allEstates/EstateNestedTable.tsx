@@ -39,7 +39,9 @@ const EstateNestedTable = ({data}:any) => {
       <div className="flex items-center gap-4">
       {
         contracts?.map((contract:any)=>{
-          return <div className="bg-[#0077bc] text-white p-1 px-4 cursor-pointer"
+          return <div className={`bg-[#0077bc] text-white p-1 px-4 cursor-pointer
+            ${contract?.ContractId == null && "hidden"}
+            `}
           onClick={()=>{
             setCurrentContract(contract?.ContractId)
           }}

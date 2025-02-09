@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 const ContractTypeSwitch = () => {
     const { contractType,contractDateType } = useSelector((state: RootState) => state.GlobalReducer);
     const [type, setType] = useState<string>("tenant");
-    const [dateType, setDateType] = useState<string>("tenant");
+    const [dateType, setDateType] = useState<string>("G");
     const dispatch: AppDispatch = useDispatch();
 
 

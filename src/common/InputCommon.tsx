@@ -5,7 +5,7 @@ interface InputCommonProps {
     type: string;
     required?: boolean;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    value: string;
+    value: string |any;
     onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
     id: string;
     name: string;

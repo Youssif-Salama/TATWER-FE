@@ -1,6 +1,6 @@
 import { UpdateContractPartTwoApi } from "@/api/contract/updateContractParts/UpdateContractPartTwoApi";
 import InputCommon from "@/common/InputCommon";
-import InputDateCommon from "@/common/InputDateCommon";
+import InputDateCommonG from "@/common/InputDateCommonG";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 
@@ -109,7 +109,7 @@ const ContractAgent = ({ formik }: { formik: any }) => {
           />
         </div>
         <div className="w-[30%] max-md:w-[45%] max-sm:w-full">
-          <InputDateCommon
+          <InputDateCommonG
             required={true}
             id="DocumentDate"
             name="DocumentDate"

@@ -8,7 +8,7 @@ export const GetEstateOnASpecificSystem = async (id:any,page:any,limit:any) => {
     const response = await axios.post(
       `${import.meta.env.VITE_BASE_URL}contract-systems/findCurrentSystemEstate?page=${page}&limit=${limit}`,
       {
-        contractId:id
+        contractId:id || id?._id
       },
       {
         headers:{

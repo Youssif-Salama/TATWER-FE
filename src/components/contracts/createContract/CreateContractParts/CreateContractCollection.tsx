@@ -12,7 +12,7 @@ import { AppDispatch, RootState } from "@/store/store";
 import { successToaster } from "@/utils/ReactToatify";
 import LoadingSpinner from "@/common/LoadingSpinner";
 import Cookies from "js-cookie";
-import { setCatchContractIdChange, setContractType, setRefreshOnAddNewContractSystem } from "@/store/slices/GlobalSlice";
+import { setCatchContractIdChange, setContractDateType, setContractType, setRefreshOnAddNewContractSystem } from "@/store/slices/GlobalSlice";
 import CreateContractPayments from "../CreateContractPayments/CreateContractPayments";
 import { UpdateContractApi } from "@/api/contract/UpdateContractApi";
 import { GetSpecifiContractApi } from "@/api/contract/GetSpecificContractApi";
@@ -47,7 +47,7 @@ const CreateContractCollection = () => {
       ContractNumber: "",
       ContractCopy: "",
       RelyOn: "",
-      ContractReleaseDate: new Date(),
+      ContractReleaseDate: "",
       ContractDate: new Date(),
       PaymentWay: "",
       Price: 1,
@@ -103,12 +103,17 @@ const CreateContractCollection = () => {
     const result = await GetSpecifiContractApi(id);
     result?.data?.data.length>0 && formik.setValues(result?.data?.data[0]);
     result?.data?.data.length>0 && formik.setFieldValue("Times",result?.data?.data[0].Times);
+    formik.setFieldValue("ContractReleaseDate",result?.data?.data[0]?.ContractReleaseDate?.split("T")[0])
     result?.data?.data.length>0 && formik.setFieldValue("PaymentWay",result?.data?.data[0]?.PaymentWay[0]);
     result?.data?.data.length>0 && (
       result?.data?.data[0]?.HasTax ? setHasTax(true) : setHasTax(false)
     )
     result?.data?.data.length>0 && setCurrentMoreEmails(result?.data?.data[0]?.MoreEmails);
+    if(result?.date?.data[0]?.DateType=="H"){
+      formik.setFieldValue("ContractReleaseDate",result?.data?.data[0]?.ContractReleaseDateH?.split("T")[0])
+    }
     dispatch(setContractType(result?.data?.data[0]?.Type));
+    dispatch(setContractDateType(result?.data?.data[0]?.DateType))
   };
 
   useEffect(()=>{

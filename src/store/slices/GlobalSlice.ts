@@ -9,6 +9,7 @@ interface InitialState {
   mapLocation: any;
   refreshContractFiles:any,
   refreshONDeleteContracts:any,
+  refreshOnDeleteEstate:any,
   refreshOnDeleteContractSystems:any,
   resetForm:any,
   refreshOnApplyOrSetSystemMessage:any,
@@ -49,6 +50,7 @@ const initialState: InitialState = {
   getContractType:"tenant",
   refreshONDeleteContracts:null,
   refreshOnDeleteContractSystems:null,
+  refreshOnDeleteEstate:null,
   resetForm:null,
   refreshOnApplyOrSetSystemMessage:null,
   refreshTax:null,
@@ -108,6 +110,9 @@ const GlobalReducer = createSlice({
     },
     setRefreshOnDeleteContractSystems:(state,action)=>{
       state.refreshOnDeleteContractSystems=action.payload
+    },
+    setRefreshOnDeleteEstate:(state,action)=>{
+      state.refreshOnDeleteEstate=action.payload
     },
     setResetForm:(state,action)=>{
       state.resetForm=action.payload
@@ -229,7 +234,8 @@ export const {
   setCurrentEstateTenantId,
   setCurrentEstateLandlordId,
   setRefreshAllRoles,
-  setContractDateType
+  setContractDateType,
+  setRefreshOnDeleteEstate
 } = GlobalReducer.actions;
 
 export default GlobalReducer.reducer;

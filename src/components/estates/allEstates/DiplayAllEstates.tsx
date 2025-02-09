@@ -10,7 +10,7 @@ import CommonTooltip from "@/common/CommonTooltip";
 import EstateNestedTable from "./EstateNestedTable";
 
 const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:string |null,searchValue:string|null,showWay:string|null}) => {
-  const { refreshONDeleteContracts} = useSelector(
+  const { refreshOnDeleteEstate} = useSelector(
     (state: RootState) => state.GlobalReducer
   );
   // @ts-ignore
@@ -21,15 +21,15 @@ const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:str
   const [catchSelectedRows, setCatchSelectedRows] = useState<any[]>([]);
   const [rowsPerPage,   setRowsPerPage] = useState<number>(10);
 
-  const getAllContractsDependingOnType = async () => {
+  const getAllEstates = async () => {
     const result = await GetAllEstatesApi(setLoading, page,showWay,searchKeyWord,searchValue,rowsPerPage);
     result && setTotalRows(result?.data?.meta?.numberOfRows);
     result && setAllContracts(result?.data?.data);
   };
 
   useEffect(() => {
-    getAllContractsDependingOnType();
-  }, [ page,searchKeyWord,searchValue,showWay,refreshONDeleteContracts,rowsPerPage]);
+    getAllEstates();
+  }, [ page,searchKeyWord,searchValue,showWay,refreshOnDeleteEstate,rowsPerPage]);
 
   const columns = [
     {

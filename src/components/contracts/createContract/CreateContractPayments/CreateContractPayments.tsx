@@ -1,7 +1,6 @@
 import { GetAllPaymentWaysApi } from "@/api/paymentWay/GetAllPaymentWaysApi";
 import { GetAllTaxApi } from "@/api/tax/GetAllTaxApi";
 import InputCommon from "@/common/InputCommon";
-import InputDateCommon from "@/common/InputDateCommon";
 import { useEffect, useState } from "react";
 
 
@@ -43,21 +42,7 @@ const CreateContractPayments = ({formik,hasTax}:{formik:any,hasTax:boolean}) => 
                 </div>
                 <div className="flex items-center flex-wrap w-full gap-[45px] max-md:gap-4">
         <div className="w-[30%] max-md:w-[45%] max-sm:w-full">
-          <InputDateCommon
-            required={true}
-            id="ContractReleaseDate"
-            name="ContractReleaseDate"
-            label="تاريخ البدء"
-            placeholder="ادخل تاريخ البدء هنا"
-            formik={formik}
-            onBlur={formik.handleBlur}
-            value={formik.values.ContractReleaseDate}
-            error={
-              formik.errors &&
-              formik.touched.ContractReleaseDate &&
-              formik.errors.ContractReleaseDate
-            }
-          />
+        <InputCommon type="text" required id="ContractReleaseDate" name="ContractReleaseDate" placeholder="ادخل تاريخ البدء" label=" تاريخ البدأ " onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.ContractReleaseDate} error={formik.errors && formik.touched.ContractReleaseDate && formik.errors.ContractReleaseDate} />
         </div>
 
         <div className="w-[30%] max-md:w-[45%] max-sm:w-full">

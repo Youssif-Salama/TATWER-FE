@@ -119,12 +119,12 @@ const DiplayAllContracts = ({searchKeyWord,searchValue,showWay,startDate,endDate
     {
       name: "تاريخ البدء",
       selector: (row: AllContractTypes) =>
-        row?.ContractSigningDate?.split("T")[0],
+        new Date(row?.ContractSigningDate).toLocaleDateString(),
       minWidth:"100px"
     },
     {
       name: "تاريخ الانتهاء",
-      selector: (row: AllContractTypes) => row?.ContractEndsDate?.split("T")[0],
+      selector: (row: AllContractTypes) => new Date(row?.ContractEndsDate).toLocaleDateString(),
       minWidth:"100px"
     },
     {

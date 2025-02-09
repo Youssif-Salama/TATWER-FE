@@ -1,7 +1,7 @@
 import { GetAllPaymentWaysApi } from "@/api/paymentWay/GetAllPaymentWaysApi";
 import { AddContractSystemApi } from "@/api/systems/AddContractSystemApi";
+import DateTypeSwitcher from "@/common/DateTypeSwitcher";
 import InputCommon from "@/common/InputCommon";
-import InputDateCommon from "@/common/InputDateCommon";
 import LoadingSpinner from "@/common/LoadingSpinner";
 import { Button } from "@/componentsShadcn/ui/button";
 import { DialogFooter } from "@/componentsShadcn/ui/dialog";
@@ -38,7 +38,8 @@ const AddContractSystemByOne = ({taxes}:any) => {
       CurrentPaymentWay: "",
       CurrentReleaseDate: "",
       TaxValue:"",
-      IsHanded:true
+      IsHanded:true,
+      DateType:"G"
     },
     onSubmit: async (values: UpdateContractSystemDialogProps) => {
       const result = await AddContractSystemApi(values, setLoading, contractId);
@@ -183,18 +184,11 @@ const AddContractSystemByOne = ({taxes}:any) => {
           </div>
 
           {takeDate && (
-            <InputDateCommon
-              required={true}
-              id="CurrentReleaseDate"
-              name="CurrentReleaseDate"
-              label="تاريخ البدء"
-              placeholder="ادخل تاريخ البدء هنا"
-              formik={formik}
-              onBlur={formik.handleBlur}
-              // @ts-ignore
-              value={formik.values.CurrentReleaseDate}
-              error={null}
-            />
+            <div className="flex items-center justify-between gap-2 ">
+                        <InputCommon type="text" required id="CurrentReleaseDate" name="CurrentReleaseDate" placeholder="ادخل تاريخ البدء" label=" تاريخ البدأ " onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.CurrentReleaseDate} error={formik.errors && formik.touched.CurrentReleaseDate && formik.errors.CurrentReleaseDate} />
+
+                <DateTypeSwitcher formik={formik}/>
+            </div>
           )}
         </div>
         <Button
