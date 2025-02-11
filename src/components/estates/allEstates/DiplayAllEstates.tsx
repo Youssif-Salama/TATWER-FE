@@ -71,7 +71,7 @@ const DiplayAllEstates = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:str
     },
     {
       name: "تاريخ التسجيل",
-      selector: (row: AllEstatesTypes) =><CommonTooltip field={row?.EstateDate.slice(0,10)}/> ,
+      selector: (row: AllEstatesTypes) =><CommonTooltip field={row?.EstateDate?.slice(0,10)}/> ,
     },
     {
       name: "الحاله",

@@ -237,7 +237,7 @@ const Message = ({
           </div>
         </div>
         <div className="text-gray-700 text-[10px]">
-          {message?.createdAt?.split("T").join(" ").slice(0, 19)}
+          {message?.createdAt?.split("T").join(" ")?.slice(0, 19)}
         </div>
       </div>
     </div>

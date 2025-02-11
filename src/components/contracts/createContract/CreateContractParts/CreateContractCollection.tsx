@@ -70,14 +70,15 @@ const CreateContractCollection = () => {
         result && setLoading(false);
         !result && setLoading(false);
         result && Cookies.set("contractType", result?.data?.data?.Type);
-        result && Cookies.set("DateType", result?.data?.data?.DateType);
-        result && dispatch(setRefreshOnAddNewContractSystem(Math.random()))
+        result && dispatch(setRefreshOnAddNewContractSystem(Math.random()));
+        if(result?.date?.data?.DateType=="H"){
+          formik.setFieldValue("ContractReleaseDate",result?.data?.data[0]?.ContractReleaseDateH?.split("T")[0])
+        }
       } else {
         const result: any = await AddContractApi(values,values?.Type);
         result && successToaster(result?.data?.message);
         result && Cookies.set("contractId", result?.data?.data?._id);
         result && Cookies.set("contractType", result?.data?.data?.Type);
-        result && Cookies.set("DateType", result?.data?.data?.DateType);
         result && dispatch(setCatchContractIdChange(Math.random()));
         result && dispatch(setRefreshOnAddNewContractSystem(Math.random()))
         result && setLoading(false);

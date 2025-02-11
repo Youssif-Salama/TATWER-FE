@@ -90,7 +90,7 @@ const DiplayAllEmployees = ({searchKeyWord,searchValue,showWay}:{searchKeyWord:s
     },
     {
       name: "تاريخ التسجيل",
-      selector: (row: AllEmployeesTypes) => row?.createdAt.slice(0,10),
+      selector: (row: AllEmployeesTypes) => row?.createdAt?.slice(0,10),
       maxWidth: "100px",
     },
     {

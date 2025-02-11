@@ -42,7 +42,7 @@ const AdminMessage = ({
     }
   }, []);
 
-  const formattedDate = message?.createdAt?.split("T").join(" ").slice(0, 19);
+  const formattedDate = message?.createdAt?.split("T").join(" ")?.slice(0, 19);
 
   // Determine the alignment and styles based on role
   const isAdmin = currentEmpData?.Role === "super_admin";

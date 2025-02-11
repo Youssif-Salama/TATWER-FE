@@ -170,12 +170,12 @@ const EstateCurrentFiles = ({
                     className="p-1 px-2 text-white bg-red-500"
                     onClick={() => {
                       catchAllFiles([
-                        ...allFiles.slice(0, index),
-                        ...allFiles.slice(index + 1),
+                        ...allFiles?.slice(0, index),
+                        ...allFiles?.slice(index + 1),
                       ]);
                       catchAllNames([
-                        ...names.slice(0, index),
-                        ...names.slice(index + 1),
+                        ...names?.slice(0, index),
+                        ...names?.slice(index + 1),
                       ]);
                       if (file == selectedFileToShow)
                         setSelectedFileToShow(null);

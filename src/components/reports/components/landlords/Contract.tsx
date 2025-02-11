@@ -69,7 +69,7 @@ const Contract = ({contract,startDate,endDate,Estate,EstateAddress}:any) => {
         </div>
         <div className="flex items-center  justify-center shadow-md">
           <div className="bg-[#0077bc] px-4 py-1 text-white h-full w-[40%]">تاريخه</div>
-          <div className="bg-gray-100 px-4 py-1 w-[60%] h-full ">{contract?.createdAt.slice(0,10) || "-"}</div>
+          <div className="bg-gray-100 px-4 py-1 w-[60%] h-full ">{contract?.createdAt?.slice(0,10) || "-"}</div>
         </div>
         <div className="flex items-center  justify-center shadow-md">
           <div className="bg-[#0077bc] px-4 py-1 text-white h-full w-[40%]">رقم العقد</div>
@@ -77,7 +77,7 @@ const Contract = ({contract,startDate,endDate,Estate,EstateAddress}:any) => {
         </div>
         <div className="flex items-center  justify-center shadow-md">
           <div className="bg-[#0077bc] px-4 py-1 text-white h-full w-[40%]">يدايه العقد</div>
-          <div className="bg-gray-100 px-4 py-1 w-[60%] h-full ">{contract?.ContractReleaseDate.slice(0,10) || "-"}</div>
+          <div className="bg-gray-100 px-4 py-1 w-[60%] h-full ">{contract?.ContractReleaseDate?.slice(0,10) || "-"}</div>
         </div>
         <div className="flex items-center  justify-center shadow-md">
           <div className="bg-[#0077bc] px-4 py-1 text-white h-full w-[40%]">نهايه العقد</div>
