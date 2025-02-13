@@ -61,8 +61,8 @@ const TenantsSystems = ({ allSystems }: any) => {
             let situation: any = "متأخره";
             let today = new Date();
 
-            if (system && system.LastAskDate && !system.Applied) {
-              situation = new Date(system.LastAskDate) > today ? "قادمه" : "متأخره";
+            if (system && system.ReleaseDate && !system.Applied) {
+              situation = new Date(system.ReleaseDate) > today ? "قادمه" : "متأخره";
             } else {
               situation = "مدفوعه"; // Paid
             }

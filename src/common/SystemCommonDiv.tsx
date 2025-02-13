@@ -19,7 +19,7 @@ import DisplayCurrentSystemEstate from "@/components/systems/DisplayCurrentSyste
 
 
 const SystemCommonDiv = ({ system }: { system: any }) => {
-  const dueDateGregorian = system?.LastAskDate ? new Date(system?.LastAskDate) : null;
+  const dueDateGregorian = system?.ReleaseDate ? new Date(system?.ReleaseDate) : null;
   const remainingDays = dueDateGregorian
     ? countResetDaysAndColors(dueDateGregorian)
     : null;
@@ -44,7 +44,6 @@ const SystemCommonDiv = ({ system }: { system: any }) => {
     setDropdownOpen(prev => !prev);
   };
 
-  console.log(system);
 
 
 

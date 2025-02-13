@@ -74,14 +74,14 @@ const MinSystemInfoLandlord = () => {
             </thead>
             <tbody className="font-normal text-[14px]">
               {allSystems?.map((system: any, index: number) => {
-                const dueDateGregorian = system?.LastAskDate ? new Date(system?.LastAskDate) : null;
+                const dueDateGregorian = system?.ReleaseDate ? new Date(system?.ReleaseDate) : null;
                 const remainingDays = dueDateGregorian ? countResetDaysAndColors(dueDateGregorian) : null;
 
                 let situation = "متأخره";
                 let today = new Date();
 
-                if (system && system.LastAskDate && !system.Applied) {
-                  situation = new Date(system.LastAskDate) > today ? "قادمه" : "متأخره";
+                if (system && system.ReleaseDate && !system.Applied) {
+                  situation = new Date(system.ReleaseDate) > today ? "قادمه" : "متأخره";
                 } else {
                   situation = "مدفوعه"; // Paid
                 }
