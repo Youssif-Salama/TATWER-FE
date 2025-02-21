@@ -25,7 +25,7 @@ const SystemsCollection = () => {
 
   const [searchKeyWord, setSearchKeyWord] = useState<string | null>(null);
   const [searchValue, setSearchValue] = useState<string | null>(null);
-  const [showWay, setShowWay] = useState<string | null>(null);
+  const [showWay, setShowWay] = useState<string | null>("asc");
   const [startDate, setStartDate] = useState<string | null>(null);
   const [endDate, setEndDate] = useState<string | null>(null);
   const [isApplied, setIsApplied] = useState<any>("unpaid");

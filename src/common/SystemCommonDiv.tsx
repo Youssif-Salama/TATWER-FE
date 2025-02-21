@@ -19,7 +19,7 @@ import DisplayCurrentSystemEstate from "@/components/systems/DisplayCurrentSyste
 
 
 const SystemCommonDiv = ({ system }: { system: any }) => {
-  const dueDateGregorian = system?.ReleaseDate ? new Date(system?.ReleaseDate) : null;
+  const dueDateGregorian = system?.LastAskDate ? new Date(system?.LastAskDate) : null;
   const remainingDays = dueDateGregorian
     ? countResetDaysAndColors(dueDateGregorian)
     : null;
