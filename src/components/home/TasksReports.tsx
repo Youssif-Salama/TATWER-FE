@@ -112,7 +112,7 @@ const TasksReports = () => {
                 })}
               </tbody>
             </table>
-          </div>):( <div className="text-[#0077bc] flex items-center justify-center h-[30vh] w-full">لا يوجد دفعات</div>)
+          </div>):( <div className="text-[#0077bc] flex items-center justify-center h-[30vh] w-full">لا يوجد بيانات</div>)
         }
       </div>
     </div>

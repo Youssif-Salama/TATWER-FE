@@ -36,6 +36,7 @@ const UpdateContractSystemDialog = ({
     initialValues: {
       RentValue: "",
       FixedPrice: "",
+      SystemNumber:""
     },
     onSubmit: async(values: UpdateContractSystemDialogProps) => {
       const result=await UpdateContractSystemApi(values, row.ContractId,row._id, setLoading);
@@ -46,7 +47,7 @@ const UpdateContractSystemDialog = ({
 
   useEffect(()=>{
     // @ts-ignore
-    formik.setValues({RentValue:row.RentValue,FixedPrice:row.FixedPrice})
+    formik.setValues({RentValue:row.RentValue,FixedPrice:row.FixedPrice,SystemNumber:row.SystemNumber})
   },[row])
   return (
     <Dialog>
@@ -104,6 +105,19 @@ const UpdateContractSystemDialog = ({
                 onBlur={formik.handleBlur}
                 // @ts-ignore
                 value={formik.values.FixedPrice}
+                error={null}
+              />
+              <InputCommon
+                type="number"
+                required={false}
+                id="SystemNumber"
+                name="SystemNumber"
+                placeholder="ادخل رقم الدفعه هنا"
+                label="رقم الدفعه"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                // @ts-ignore
+                value={formik.values.SystemNumber}
                 error={null}
               />
             </div>

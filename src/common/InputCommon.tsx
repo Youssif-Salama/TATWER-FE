@@ -74,7 +74,7 @@ const InputCommon: React.FC<InputCommonProps> = ({ type, required = false, onCha
                     placeholder={placeholder}
                     className="rounded-none w-full px-2 py-3 mx-auto placeholder:text-gray-400 text-[14px] border-2"
                     dir="rtl"
-                    min={type === "number" ? 1 : undefined}
+                    min={type === "number" ? 0 : undefined}
                     disabled={disabled}
                 />
             </div>

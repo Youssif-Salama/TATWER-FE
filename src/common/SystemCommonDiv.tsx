@@ -16,10 +16,13 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import AddSystemWarningDialog from "@/componentsShadcn/dialogs/AddSystemWarningDialog";
 import { MdArrowBackIos } from "react-icons/md";
 import DisplayCurrentSystemEstate from "@/components/systems/DisplayCurrentSystemEstate";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 
 const SystemCommonDiv = ({ system }: { system: any }) => {
-  const dueDateGregorian = system?.LastAskDate ? new Date(system?.LastAskDate) : null;
+  const navigate = useNavigate();
+  const dueDateGregorian = system?.ReleaseDate ? new Date(system?.ReleaseDate) : null;
   const remainingDays = dueDateGregorian
     ? countResetDaysAndColors(dueDateGregorian)
     : null;
@@ -49,11 +52,17 @@ const SystemCommonDiv = ({ system }: { system: any }) => {
 
   const items = [
     { id: 1, label: "رقم القسط", value: system?.SystemNumber },
-    { id: 2, label: "الصفه", value: system?.ContractId?.Type ==
-      // @ts-ignore
-      "tenant" ? "مؤجر" : "مستأجر" || system?.contractData?.Type == "tenant" ? "مؤجر" : "مستأجر" },
+    {
+      id: 2,
+      label: "الصفه",
+      value:
+        system?.ContractId?.Type === "tenant" || system?.contractData?.Type === "tenant"
+          ? "مؤجر"
+          : "مستأجر",
+    }
+    ,
     { id: 3, label: "المدينه", value: system?.ContractId?.AddressId?.Town || "-" },
-    { id: 4, label: "الاسم/الشركه", value: system?.ContractId?.Name || system?.contractData?.Name },
+    { id: 4, label: "الاسم/الشركه", value: system?.ContractId?.Name + " " + system?.ContractId?.NickName || system?.contractData?.Name + " " + system?.contractData?.NickName },
     { id: 5, label: "مسجل علي", value: system?.ContractId?.RelyOn || system?.contractData?.RelyOn },
     { id: 6, label: "نظام العقد ", value: system?.PaymentWay + " اشهر" },
     { id: 7, label: "المبلغ ", value: Number(system?.TotalPrice) },
@@ -69,7 +78,19 @@ const SystemCommonDiv = ({ system }: { system: any }) => {
   const [showMoreDetails, setShowMoreDetails] = useState(false);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full"
+    >
+    <button
+  className="text-white bg-[#0077bc] px-4 py-1"
+  onClick={() => {
+    Cookies.set("contractId", system?.ContractId?._id || system?.contractData?._id);
+    Cookies.set("contractType", system?.ContractId?.Type || system?.contractData?.Type);
+    navigate(`/contracts/create`);
+  }}
+>
+  فتح العقد
+</button>
+
       <TooltipProvider>
         <div className={clsx("w-full border-2 flex overflow-x-auto text-[12px]", system?.Applied ? "border-slate-500 bg-slate-500" : "border shadow-md bg-white")}>
           {items.map((item, index) => (

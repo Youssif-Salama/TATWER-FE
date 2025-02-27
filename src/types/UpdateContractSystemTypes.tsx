@@ -6,7 +6,8 @@ export interface UpdateContractSystemDialogProps {
   Applied?:boolean
   TaxValue?:string
   IsHanded:boolean
-  DateType:"H"|"G"
+  DateType:"H"|"G",
+  SystemNumber?:string | number
 }
 export interface UpdateContractMultipleSystemDialogProps {
   Id: string;
