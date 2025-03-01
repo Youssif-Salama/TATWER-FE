@@ -18,6 +18,8 @@ import { MdArrowBackIos } from "react-icons/md";
 import DisplayCurrentSystemEstate from "@/components/systems/DisplayCurrentSystemEstate";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { setRefreshOnApplyOrSetSystemMessage } from "@/store/slices/GlobalSlice";
+import { ApplyContractSystemApi } from "@/api/systems/ApplyContractSystemApi";
 
 
 const SystemCommonDiv = ({ system }: { system: any }) => {
@@ -76,12 +78,16 @@ const SystemCommonDiv = ({ system }: { system: any }) => {
   ].filter(item => !(system?.Applied && (item.id === 12 || item.id === 15 || item.id === 13)));
 
   const [showMoreDetails, setShowMoreDetails] = useState(false);
-
+  const [loading, setLoading] = useState<boolean>(false);
+  const dispatch:AppDispatch=useDispatch();
   return (
     <div className="relative w-full"
     >
+    <div className="flex justify-between">
     <button
-  className="text-white bg-[#0077bc] px-4 py-1"
+  className={`text-white px-4 py-1 border
+    ${system?.Applied ? "bg-gray-500" : "bg-[#0077bc]"}
+    `}
   onClick={() => {
     Cookies.set("contractId", system?.ContractId?._id || system?.contractData?._id);
     Cookies.set("contractType", system?.ContractId?.Type || system?.contractData?.Type);
@@ -90,6 +96,23 @@ const SystemCommonDiv = ({ system }: { system: any }) => {
 >
   فتح العقد
 </button>
+{
+  system?.Applied && <button
+  className={`text-white px-4 py-1 border
+   bg-gray-500
+    `}
+  onClick={async() => {
+    const data = { Applied: false };
+        const result: any = await ApplyContractSystemApi(data, setLoading, system?._id);
+        if (result) {
+          dispatch(setRefreshOnApplyOrSetSystemMessage(Math.random()));
+        }
+  }}
+>
+  {loading ? "جاري التحميل" : "الغاء التاءكيد"}
+</button>
+}
+    </div>
 
       <TooltipProvider>
         <div className={clsx("w-full border-2 flex overflow-x-auto text-[12px]", system?.Applied ? "border-slate-500 bg-slate-500" : "border shadow-md bg-white")}>
