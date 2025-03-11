@@ -39,16 +39,17 @@ const Home = () => {
     // @ts-ignore
     const [openNotes,setOpenNotes] = useState<boolean>(false);
     // @ts-ignore
-    const [no,setNo]=useState<number>(6);
-    // @ts-ignore
     const {refreshOnApplyOrSetSystemMessage}=useSelector((state:RootState)=>state.GlobalReducer)
     // @ts-ignore
-    const [rowsPerPage,   setRowsPerPage] = useState<number>(10);
+    const [rowsPerPage,   setRowsPerPage] = useState<number>(30);
     const currentContractForSystems=Cookies.get("currentContractForSystems");
     const contractIds=Cookies.get("contractIds");      const getAllSystems=async()=>{
-        const result = await GetAllSystemsApi(isApplied,setLoading,page,showWay,searchKeyWord,searchValue,startDate,endDate,no,rowsPerPage,currentContractForSystems,contractIds);
+        const result = await GetAllSystemsApi(isApplied,setLoading,page,showWay,searchKeyWord,searchValue,startDate,endDate,1,rowsPerPage,currentContractForSystems,contractIds);
+        const result2 = await GetAllSystemsApi(isApplied,setLoading,page,showWay,searchKeyWord,searchValue,startDate,endDate,2,rowsPerPage,currentContractForSystems,contractIds);
+        const result3 = await GetAllSystemsApi(isApplied,setLoading,page,showWay,searchKeyWord,searchValue,startDate,endDate,3,rowsPerPage,currentContractForSystems,contractIds);
+        const result4 = await GetAllSystemsApi(isApplied,setLoading,page,showWay,searchKeyWord,searchValue,startDate,endDate,4,rowsPerPage,currentContractForSystems,contractIds);
         result && setTotalRows(result?.data?.meta?.numberOfRows);
-        result && setAllSystems(result?.data?.data);
+        result && setAllSystems([...result4?.data?.data,...result3?.data?.data,...result2?.data?.data,...result?.data?.data]);
       }
     useEffect(()=>{
         getAllSystems();
