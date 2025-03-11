@@ -39,7 +39,7 @@ const Home = () => {
     // @ts-ignore
     const [openNotes,setOpenNotes] = useState<boolean>(false);
     // @ts-ignore
-    const [no,setNo]=useState<number>(1);
+    const [no,setNo]=useState<number>(6);
     // @ts-ignore
     const {refreshOnApplyOrSetSystemMessage}=useSelector((state:RootState)=>state.GlobalReducer)
     // @ts-ignore

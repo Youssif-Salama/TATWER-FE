@@ -64,8 +64,13 @@ const SystemCommonDiv = ({ system }: { system: any }) => {
     }
     ,
     { id: 3, label: "المدينه", value: system?.ContractId?.AddressId?.Town || "-" },
-    { id: 4, label: "الاسم/الشركه", value: system?.ContractId?.Name + " " + system?.ContractId?.NickName || system?.contractData?.Name + " " + system?.contractData?.NickName },
-    { id: 5, label: "مسجل علي", value: system?.ContractId?.RelyOn || system?.contractData?.RelyOn },
+    {
+      id: 4,
+      label: "الاسم/الشركه",
+      value: (system?.ContractId?.Name && system?.ContractId?.NickName)
+        ? system?.ContractId?.Name + " " + system?.ContractId?.NickName
+        : system?.contractData?.Name + " " + system?.contractData?.NickName
+    },        { id: 5, label: "مسجل علي", value: system?.ContractId?.RelyOn || system?.contractData?.RelyOn },
     { id: 6, label: "نظام العقد ", value: system?.PaymentWay + " اشهر" },
     { id: 7, label: "المبلغ ", value: Number(system?.TotalPrice) },
     { id: 8, label: "رقم العقد", value: system?.ContractId?.ContractNumber || system?.contractData?.ContractNumber },
